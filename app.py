@@ -76,6 +76,5 @@ class StreamlitApp:
     def run(self):
         """애플리케이션 실행"""
         self.setup_page()
-        st.write("test")
-        #self.render_react_component()
+        self.render_react_component()
         self.show_additional_info()
