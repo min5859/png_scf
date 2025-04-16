@@ -69,6 +69,13 @@ class PGFinancialComponentGenerator:
                     text-align: center;
                     margin-bottom: 15px;
                 }
+                .chart-note {
+                    text-align: center;
+                    font-size: 14px;
+                    color: #666;
+                    font-style: italic;
+                    margin-top: 10px;
+                }
                 .grid {
                     display: grid;
                     grid-template-columns: 1fr 1fr;
@@ -124,8 +131,51 @@ class PGFinancialComponentGenerator:
                 ul.strategy-list li strong {
                     color: #e65100;
                 }
+                .timeline-container {
+                    background-color: #f5f5f5;
+                    border-radius: 8px;
+                    padding: 20px;
+                    margin-top: 30px;
+                }
+                .timeline-title {
+                    font-weight: bold;
+                    color: #333;
+                    font-size: 18px;
+                    margin-bottom: 15px;
+                    text-align: center;
+                }
+                .timeline-event {
+                    background-color: #e3f2fd;
+                    border-radius: 6px;
+                    padding: 10px 15px;
+                    display: inline-block;
+                    margin: 0 auto;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #0d47a1;
+                }
+                .effect-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 15px;
+                    margin-top: 20px;
+                }
+                .effect-box {
+                    background-color: white;
+                    border-radius: 6px;
+                    padding: 15px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+                }
+                .effect-title {
+                    font-weight: bold;
+                    color: #333;
+                    margin-bottom: 10px;
+                }
                 @media (max-width: 768px) {
                     .grid {
+                        grid-template-columns: 1fr;
+                    }
+                    .effect-grid {
                         grid-template-columns: 1fr;
                     }
                 }
@@ -144,6 +194,9 @@ class PGFinancialComponentGenerator:
                     <div style="height: 500px; width: 100%;">
                         <canvas id="financialMetricsChart"></canvas>
                     </div>
+                    <div class="chart-note">
+                        * 2015년 순이익 급감은 베네수엘라 사업 회계방식 변경으로 인한 21억 달러 일회성 비용 때문
+                    </div>
                 </div>
                 
                 <!-- 차트 컨테이너 2: 수익성 비율 추이 -->
@@ -152,11 +205,36 @@ class PGFinancialComponentGenerator:
                     <div style="height: 500px; width: 100%;">
                         <canvas id="profitabilityRatiosChart"></canvas>
                     </div>
+                    <div class="chart-note">
+                        * 2015년 순이익률 하락은 일회성 비용 때문이며, 매출총이익률과 영업이익률은 비교적 안정적으로 유지됨
+                    </div>
                 </div>
                 
-                <!-- 차트 컨테이너 3: 주요 인사이트 -->
+                <!-- 차트 컨테이너 3: 임직원 수 추이 -->
                 <div class="chart-container">
-                    <div class="chart-title">3. 주요 인사이트</div>
+                    <div class="chart-title">3. 임직원 수 및 매출 추이</div>
+                    <div style="height: 450px; width: 100%;">
+                        <canvas id="employeesChart"></canvas>
+                    </div>
+                    <div class="chart-note">
+                        * 2011-2015년 사이 임직원 수 15% 감소 (129,000명 → 110,000명)
+                    </div>
+                </div>
+
+                <!-- 차트 컨테이너 4: 주주 가치 지표 -->
+                <div class="chart-container">
+                    <div class="chart-title">4. 주주 가치 지표</div>
+                    <div style="height: 450px; width: 100%;">
+                        <canvas id="shareholderValueChart"></canvas>
+                    </div>
+                    <div class="chart-note">
+                        * 순이익 감소에도 불구하고 배당금은 꾸준히 증가 (주주 가치 유지 노력)
+                    </div>
+                </div>
+                
+                <!-- 차트 컨테이너 5: 주요 인사이트 -->
+                <div class="chart-container">
+                    <div class="chart-title">5. 주요 인사이트</div>
                     <div class="grid">
                         <div class="insight-box">
                             <div class="insight-title">매출 정체 및 하락</div>
@@ -181,9 +259,9 @@ class PGFinancialComponentGenerator:
                     </div>
                 </div>
                 
-                <!-- 차트 컨테이너 4: SCF 프로그램의 전략적 중요성 -->
+                <!-- 차트 컨테이너 6: SCF 프로그램의 전략적 중요성 -->
                 <div class="chart-container">
-                    <div class="chart-title">4. SCF 프로그램의 전략적 중요성</div>
+                    <div class="chart-title">6. SCF 프로그램의 전략적 중요성</div>
                     <div class="strategy-box">
                         <div class="strategy-title">P&G의 SCF 프로그램 추진 필요성</div>
                         <ul class="strategy-list">
@@ -195,6 +273,36 @@ class PGFinancialComponentGenerator:
                         </ul>
                     </div>
                 </div>
+                
+                <!-- 차트 컨테이너 7: SCF 프로그램 도입 시점 및 효과 -->
+                <div class="chart-container">
+                    <div class="chart-title">7. SCF 프로그램 도입 및 효과</div>
+                    <div class="timeline-container">
+                        <div style="text-align: center; margin-bottom: 20px;">
+                            <div class="timeline-event">2013년 4월: P&G SCF 프로그램 도입 시점</div>
+                        </div>
+                        
+                        <div class="timeline-title">주요 재무적 효과</div>
+                        <div class="effect-grid">
+                            <div class="effect-box">
+                                <div class="effect-title">단기 효과</div>
+                                <ul>
+                                    <li>손익계산서에는 직접적인 영향이 즉시 나타나지 않음</li>
+                                    <li>공급업체 지불 조건: 45일 → 75일 연장</li>
+                                    <li>운전자본 개선 및 현금흐름 효율화</li>
+                                </ul>
+                            </div>
+                            <div class="effect-box">
+                                <div class="effect-title">장기 효과</div>
+                                <ul>
+                                    <li>공급업체 관계 강화 (윈-윈-윈 솔루션)</li>
+                                    <li>운영 효율성 개선 (인보이스 처리 등)</li>
+                                    <li>공급망 안정성 및 지속가능성 개선</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <script>
@@ -204,6 +312,8 @@ class PGFinancialComponentGenerator:
                 // Canvas 요소 가져오기
                 const financialMetricsCtx = document.getElementById('financialMetricsChart').getContext('2d');
                 const profitabilityRatiosCtx = document.getElementById('profitabilityRatiosChart').getContext('2d');
+                const employeesCtx = document.getElementById('employeesChart').getContext('2d');
+                const shareholderValueCtx = document.getElementById('shareholderValueChart').getContext('2d');
                 
                 // 데이터 추출
                 const years = pgFinancialData.map(item => item.year);
@@ -215,6 +325,10 @@ class PGFinancialComponentGenerator:
                 const grossMargins = pgFinancialData.map(item => item.grossMargin);
                 const operatingMargins = pgFinancialData.map(item => item.operatingMargin);
                 const netMargins = pgFinancialData.map(item => item.netMargin);
+                
+                const employees = pgFinancialData.map(item => item.employees);
+                const eps = pgFinancialData.map(item => item.eps);
+                const dividends = pgFinancialData.map(item => item.dividend);
                 
                 // 금액 포맷팅 함수
                 function formatCurrency(value) {
@@ -413,6 +527,236 @@ class PGFinancialComponentGenerator:
                                 ticks: {
                                     callback: function(value) {
                                         return value + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+                
+                // 3. 임직원 수 차트
+                new Chart(employeesCtx, {
+                    type: 'line',
+                    data: {
+                        labels: years,
+                        datasets: [
+                            {
+                                type: 'bar',
+                                label: '매출',
+                                data: revenues,
+                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                borderWidth: 1,
+                                yAxisID: 'revenue'
+                            },
+                            {
+                                type: 'line',
+                                label: '임직원 수',
+                                data: employees,
+                                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                                borderColor: 'rgba(153, 102, 255, 1)',
+                                borderWidth: 3,
+                                pointRadius: 6,
+                                pointHoverRadius: 8,
+                                tension: 0.1,
+                                fill: false,
+                                yAxisID: 'employees'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    font: {
+                                        size: 14
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.dataset.label === '임직원 수') {
+                                            label += context.raw.toLocaleString() + '명';
+                                        } else {
+                                            label += '$' + context.raw.toLocaleString() + ' 백만';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: '연도',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold'
+                                    }
+                                }
+                            },
+                            revenue: {
+                                type: 'linear',
+                                position: 'left',
+                                title: {
+                                    display: true,
+                                    text: '매출 (백만 달러)',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold'
+                                    }
+                                },
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    callback: function(value) {
+                                        return formatCurrency(value);
+                                    }
+                                }
+                            },
+                            employees: {
+                                type: 'linear',
+                                position: 'right',
+                                title: {
+                                    display: true,
+                                    text: '임직원 수 (명)',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold'
+                                    }
+                                },
+                                min: 100000,
+                                max: 140000,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value.toLocaleString() + '명';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+                
+                // 4. 주주 가치 지표 차트
+                new Chart(shareholderValueCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: years,
+                        datasets: [
+                            {
+                                type: 'bar',
+                                label: '주당순이익(EPS)',
+                                data: eps,
+                                backgroundColor: 'rgba(255, 159, 64, 0.7)',
+                                borderColor: 'rgba(255, 159, 64, 1)',
+                                borderWidth: 1,
+                                yAxisID: 'eps'
+                            },
+                            {
+                                type: 'line',
+                                label: '주당배당금(DPS)',
+                                data: dividends,
+                                backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderWidth: 3,
+                                pointRadius: 6,
+                                pointHoverRadius: 8,
+                                tension: 0.1,
+                                fill: false,
+                                yAxisID: 'dps'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    font: {
+                                        size: 14
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        label += '$' + context.raw.toFixed(2);
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: '연도',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold'
+                                    }
+                                }
+                            },
+                            eps: {
+                                type: 'linear',
+                                position: 'left',
+                                title: {
+                                    display: true,
+                                    text: '주당순이익 ($)',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold'
+                                    }
+                                },
+                                min: 0,
+                                max: 5,
+                                ticks: {
+                                    callback: function(value) {
+                                        return '$' + value.toFixed(2);
+                                    }
+                                }
+                            },
+                            dps: {
+                                type: 'linear',
+                                position: 'right',
+                                title: {
+                                    display: true,
+                                    text: '주당배당금 ($)',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold'
+                                    }
+                                },
+                                min: 1.5,
+                                max: 3,
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    callback: function(value) {
+                                        return '$' + value.toFixed(2);
                                     }
                                 }
                             }
