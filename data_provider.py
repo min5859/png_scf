@@ -208,6 +208,130 @@ class MarketDataProvider:
         
         # 기존 데이터 구조 호환성을 위해 pg_working_capital_data를 그대로 유지
         self.pg_working_capital_data = self.pg_working_capital_data_old
+        
+        # Fibria 재무 분석 데이터 (단위: 백만 레알)
+        self.fibria_financial_data = [
+            { 
+                "year": "2012", 
+                "revenue": 6174, 
+                "cogs": 5237, 
+                "grossProfit": 937, 
+                "sgaExpense": 579, 
+                "operatingIncome": 345, 
+                "netIncome": -705,
+                "grossMargin": 15.2,
+                "operatingMargin": 5.6,
+                "netMargin": -11.4,
+                "exchangeRate": 1.955,
+                "revenueUSD": 3159,
+                "pulpSales": 5357,
+                "pulpPrice": 780
+            },
+            { 
+                "year": "2013", 
+                "revenue": 6317, 
+                "cogs": 5302, 
+                "grossProfit": 1535, 
+                "sgaExpense": 642, 
+                "operatingIncome": 914, 
+                "netIncome": -706,
+                "grossMargin": 22.2,
+                "operatingMargin": 13.2,
+                "netMargin": -10.2,
+                "exchangeRate": 2.1605,
+                "revenueUSD": 2924,
+                "pulpSales": 5198,
+                "pulpPrice": 770
+            },
+            { 
+                "year": "2014", 
+                "revenue": 7084, 
+                "cogs": 5546, 
+                "grossProfit": 1538, 
+                "sgaExpense": 644, 
+                "operatingIncome": 1660, 
+                "netIncome": 156,
+                "grossMargin": 21.7,
+                "operatingMargin": 23.4,
+                "netMargin": 2.2,
+                "exchangeRate": 2.3547,
+                "revenueUSD": 3009,
+                "pulpSales": 5305,
+                "pulpPrice": 741
+            },
+            { 
+                "year": "2015 (6월까지)", 
+                "revenue": 8054, 
+                "cogs": 5560, 
+                "grossProfit": 2494, 
+                "sgaExpense": 703, 
+                "operatingIncome": 1698, 
+                "netIncome": -449,
+                "grossMargin": 31.0,
+                "operatingMargin": 21.1,
+                "netMargin": -5.6,
+                "exchangeRate": 2.5989,
+                "revenueUSD": 3099,
+                "pulpSales": 5370,
+                "pulpPrice": 793
+            }
+        ]
+
+        # Fibria SCF 프로그램 영향 분석 (2013년 SCF 도입)
+        self.fibria_scf_impact_data = [
+            { 
+                "year": "2012", 
+                "withoutSCF": {
+                    "financingCost": 154.35,  # 가정: 60일 매출채권, 2.5% 금리
+                    "cashFlow": 3004.65
+                },
+                "withSCF": {
+                    "financingCost": 154.35,
+                    "cashFlow": 3004.65
+                }
+            },
+            { 
+                "year": "2013", 
+                "withoutSCF": {
+                    "financingCost": 146.20,  # 60일, 2.5% 금리
+                    "cashFlow": 2777.80
+                },
+                "withSCF": {
+                    "financingCost": 34.02,  # 15일, 0.35% 할인율 (도입 중)
+                    "cashFlow": 2889.98
+                }
+            },
+            { 
+                "year": "2014", 
+                "withoutSCF": {
+                    "financingCost": 150.45,  # 60일, 2.5% 금리
+                    "cashFlow": 2858.55
+                },
+                "withSCF": {
+                    "financingCost": 31.59,  # 15일, 0.35% 할인율
+                    "cashFlow": 2977.41
+                }
+            },
+            { 
+                "year": "2015", 
+                "withoutSCF": {
+                    "financingCost": 154.95,  # 60일, 2.5% 금리
+                    "cashFlow": 2944.05
+                },
+                "withSCF": {
+                    "financingCost": 32.54,  # 15일, 0.35% 할인율
+                    "cashFlow": 3066.46
+                }
+            }
+        ]
+        
+        # 환율 및 펄프 가격 추이
+        self.fibria_market_data = [
+            { "year": "2012", "exchangeRate": 1.955, "pulpPrice": 780 },
+            { "year": "2013", "exchangeRate": 2.1605, "pulpPrice": 770 },
+            { "year": "2014", "exchangeRate": 2.3547, "pulpPrice": 741 },
+            { "year": "2015", "exchangeRate": 2.5989, "pulpPrice": 793 }
+        ]
     
     def get_all_data(self) -> Dict[str, Any]:
         """모든 데이터를 딕셔너리 형태로 반환"""
@@ -221,7 +345,10 @@ class MarketDataProvider:
             'pgFinancialData': self.pg_financial_data,
             'pgBalanceSheetData': self.pg_balance_sheet_data,
             'pgWorkingCapitalData': self.pg_working_capital_data,
-            'pgExtendedWorkingCapitalData': self.pg_extended_working_capital_data
+            'pgExtendedWorkingCapitalData': self.pg_extended_working_capital_data,
+            'fibriaFinancialData': self.fibria_financial_data,
+            'fibriaSCFImpactData': self.fibria_scf_impact_data,
+            'fibriaMarketData': self.fibria_market_data
         }
     
     def get_data_frames(self) -> Dict[str, pd.DataFrame]:
@@ -236,5 +363,8 @@ class MarketDataProvider:
             'pg_financial': pd.DataFrame(self.pg_financial_data),
             'pg_balance_sheet': pd.DataFrame(self.pg_balance_sheet_data),
             'pg_working_capital': pd.DataFrame(self.pg_working_capital_data),
-            'pg_extended_working_capital': pd.DataFrame(self.pg_extended_working_capital_data)
+            'pg_extended_working_capital': pd.DataFrame(self.pg_extended_working_capital_data),
+            'fibria_financial': pd.DataFrame(self.fibria_financial_data),
+            'fibria_scf_impact': pd.DataFrame(self.fibria_scf_impact_data),
+            'fibria_market': pd.DataFrame(self.fibria_market_data)
         }

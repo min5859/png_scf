@@ -8,6 +8,7 @@ from react_component import ReactComponentGenerator
 from pg_financial_component import PGFinancialComponentGenerator
 from pg_balance_sheet_component import PGBalanceSheetComponentGenerator
 from pg_working_capital_component import PGWorkingCapitalComponentGenerator
+from fibria_financial_component import FibriaFinancialComponentGenerator
 
 class StreamlitApp:
     """Streamlit 애플리케이션 클래스"""
@@ -19,6 +20,7 @@ class StreamlitApp:
         self.pg_financial_generator = PGFinancialComponentGenerator(self.data_provider)
         self.pg_balance_sheet_generator = PGBalanceSheetComponentGenerator(self.data_provider)
         self.pg_working_capital_generator = PGWorkingCapitalComponentGenerator(self.data_provider)
+        self.fibria_financial_generator = FibriaFinancialComponentGenerator(self.data_provider)
     
     def setup_page(self):
         """페이지 기본 설정"""
@@ -50,8 +52,18 @@ class StreamlitApp:
             st.header("P&G 운전자본 분석 (Exhibit 3)")
             self.render_exhibit_3()
         
-        # Exhibit 4부터 Exhibit 7까지 (추후 구현 예정)
-        for i in range(3, 7):
+        # Exhibit 4
+        with tabs[3]:
+            st.header(f"시장 금리 현황 분석 ({tab_titles[3]})")
+            st.info(f"{tab_titles[3]} 콘텐츠는 아직 구현되지 않았습니다.")
+        
+        # Exhibit 5 - Fibria 재무 분석
+        with tabs[4]:
+            st.header("Fibria 셀룰로즈 재무 분석 (Exhibit 5)")
+            self.render_exhibit_5()
+        
+        # Exhibit 6, 7
+        for i in range(5, 7):
             with tabs[i]:
                 st.header(f"시장 금리 현황 분석 ({tab_titles[i]})")
                 st.info(f"{tab_titles[i]} 콘텐츠는 아직 구현되지 않았습니다.")
@@ -168,6 +180,45 @@ class StreamlitApp:
                     
         except Exception as e:
             st.error(f"P&G 운전자본 컴포넌트 렌더링 중 오류가 발생했습니다: {str(e)}")
+            st.exception(e)
+    
+    def render_exhibit_5(self):
+        """Exhibit 5 - Fibria 셀룰로즈 재무 분석"""
+        try:
+            # Chart.js를 사용한 HTML 코드 생성
+            html_code = self.fibria_financial_generator.generate_html()
+            
+            # 디버깅 옵션 추가
+            debug_mode = st.sidebar.checkbox("디버깅 모드", value=False, key="debug_mode_exhibit5")
+            
+            if debug_mode:
+                st.sidebar.subheader("디버깅 정보")
+                st.sidebar.json(self.data_provider.fibria_financial_data)
+                st.sidebar.json(self.data_provider.fibria_scf_impact_data)
+                st.sidebar.json(self.data_provider.fibria_market_data)
+                
+                # HTML 코드 길이 표시
+                st.sidebar.text(f"HTML 코드 길이: {len(html_code)} 문자")
+                
+                # HTML 코드 일부 표시
+                with st.sidebar.expander("HTML 코드 미리보기", expanded=False):
+                    st.code(html_code[:1000] + "...", language="html")
+            
+            # HTML 렌더링 높이 설정
+            height = st.sidebar.slider("차트 영역 높이", 2000, 5000, 3000, 100, key="height_slider_exhibit5") if debug_mode else 3000
+            
+            # HTML 렌더링
+            st.components.v1.html(html_code, height=height, scrolling=True)
+            
+            # 데이터 테이블 표시 (디버깅 모드에서만)
+            if debug_mode:
+                with st.expander("Fibria 재무 데이터", expanded=False):
+                    st.dataframe(pd.DataFrame(self.data_provider.fibria_financial_data))
+                with st.expander("Fibria SCF 영향 데이터", expanded=False):
+                    st.dataframe(pd.DataFrame(self.data_provider.fibria_scf_impact_data))
+                    
+        except Exception as e:
+            st.error(f"Fibria 재무 분석 컴포넌트 렌더링 중 오류가 발생했습니다: {str(e)}")
             st.exception(e)
     
     def render_exhibit_8(self):
