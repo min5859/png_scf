@@ -132,8 +132,8 @@ class MarketDataProvider:
             }
         ]
         
-        # P&G 운전자본 데이터
-        self.pg_working_capital_data = [
+        # P&G 운전자본 데이터 (기존 데이터)
+        self.pg_working_capital_data_old = [
             {
                 "year": "2011",
                 "accountsReceivable": 6275,
@@ -185,6 +185,29 @@ class MarketDataProvider:
                 "cashConversionCycle": -3.5
             }
         ]
+        
+        # P&G 확장된 운전자본 데이터 (2000-2015년, Exhibit3 차트용)
+        self.pg_extended_working_capital_data = [
+            {"year": "2000", "dso": 26.6, "dio": 60.6, "dpo": 38.4, "ccc": 48.8, "adjustedDpo": 32.5},
+            {"year": "2001", "dso": 27.3, "dio": 58.9, "dpo": 36.1, "ccc": 50.1, "adjustedDpo": 30.8},
+            {"year": "2002", "dso": 28.0, "dio": 61.6, "dpo": 39.3, "ccc": 50.3, "adjustedDpo": 33.2},
+            {"year": "2003", "dso": 25.6, "dio": 60.0, "dpo": 46.1, "ccc": 39.5, "adjustedDpo": 38.5},
+            {"year": "2004", "dso": 28.8, "dio": 63.9, "dpo": 52.5, "ccc": 40.2, "adjustedDpo": 43.1},
+            {"year": "2005", "dso": 26.9, "dio": 65.6, "dpo": 49.8, "ccc": 42.7, "adjustedDpo": 41.1},
+            {"year": "2006", "dso": 30.6, "dio": 69.3, "dpo": 54.1, "ccc": 45.8, "adjustedDpo": 44.5},
+            {"year": "2007", "dso": 32.3, "dio": 69.8, "dpo": 58.4, "ccc": 43.7, "adjustedDpo": 47.9},
+            {"year": "2008", "dso": 31.1, "dio": 78.2, "dpo": 63.0, "ccc": 46.4, "adjustedDpo": 51.8},
+            {"year": "2009", "dso": 27.8, "dio": 64.9, "dpo": 56.4, "ccc": 36.3, "adjustedDpo": 47.2},
+            {"year": "2010", "dso": 25.1, "dio": 62.9, "dpo": 71.4, "ccc": 16.6, "adjustedDpo": 58.1},
+            {"year": "2011", "dso": 28.2, "dio": 67.6, "dpo": 73.5, "ccc": 22.4, "adjustedDpo": 59.7},
+            {"year": "2012", "dso": 27.0, "dio": 59.2, "dpo": 69.8, "ccc": 16.4, "adjustedDpo": 57.1},
+            {"year": "2013", "dso": 29.6, "dio": 63.1, "dpo": 80.1, "ccc": 12.6, "adjustedDpo": 64.9},
+            {"year": "2014", "dso": 29.0, "dio": 60.7, "dpo": 76.0, "ccc": 13.7, "adjustedDpo": 62.3},
+            {"year": "2015", "dso": 23.3, "dio": 52.0, "dpo": 78.8, "ccc": -3.5, "adjustedDpo": 64.8}
+        ]
+        
+        # 기존 데이터 구조 호환성을 위해 pg_working_capital_data를 그대로 유지
+        self.pg_working_capital_data = self.pg_working_capital_data_old
     
     def get_all_data(self) -> Dict[str, Any]:
         """모든 데이터를 딕셔너리 형태로 반환"""
@@ -197,7 +220,8 @@ class MarketDataProvider:
             'historicalLiborData': self.historical_libor_data,
             'pgFinancialData': self.pg_financial_data,
             'pgBalanceSheetData': self.pg_balance_sheet_data,
-            'pgWorkingCapitalData': self.pg_working_capital_data
+            'pgWorkingCapitalData': self.pg_working_capital_data,
+            'pgExtendedWorkingCapitalData': self.pg_extended_working_capital_data
         }
     
     def get_data_frames(self) -> Dict[str, pd.DataFrame]:
@@ -211,5 +235,6 @@ class MarketDataProvider:
             'historical_libor': pd.DataFrame(self.historical_libor_data),
             'pg_financial': pd.DataFrame(self.pg_financial_data),
             'pg_balance_sheet': pd.DataFrame(self.pg_balance_sheet_data),
-            'pg_working_capital': pd.DataFrame(self.pg_working_capital_data)
+            'pg_working_capital': pd.DataFrame(self.pg_working_capital_data),
+            'pg_extended_working_capital': pd.DataFrame(self.pg_extended_working_capital_data)
         }
