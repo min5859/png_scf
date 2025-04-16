@@ -72,6 +72,119 @@ class MarketDataProvider:
             {"year": "2014", "revenue": 80510, "grossProfit": 39899, "operatingIncome": 15497, "netIncome": 11643, "grossMargin": 49.6, "operatingMargin": 19.2, "netMargin": 14.5, "employees": 118000, "eps": 4.19, "dividend": 2.45},
             {"year": "2015", "revenue": 76279, "grossProfit": 38031, "operatingIncome": 14873, "netIncome": 7036, "grossMargin": 49.9, "operatingMargin": 19.5, "netMargin": 9.2, "employees": 110000, "eps": 2.50, "dividend": 2.59}
         ]
+        
+        # P&G 대차대조표 데이터
+        self.pg_balance_sheet_data = [
+            {
+                "year": "2011",
+                "currentAssets": 21970,
+                "totalAssets": 138354,
+                "currentLiabilities": 27293,
+                "totalLiabilities": 71977,
+                "totalEquity": 66377,
+                "cash": 2768,
+                "totalDebt": 21941,
+                "debtToCapitalRatio": 0.325
+            },
+            {
+                "year": "2012",
+                "currentAssets": 21910,
+                "totalAssets": 132244,
+                "currentLiabilities": 24907,
+                "totalLiabilities": 69041,
+                "totalEquity": 63203,
+                "cash": 4436,
+                "totalDebt": 31536,
+                "debtToCapitalRatio": 0.325
+            },
+            {
+                "year": "2013",
+                "currentAssets": 22096,
+                "totalAssets": 139263,
+                "currentLiabilities": 26982,
+                "totalLiabilities": 73673,
+                "totalEquity": 65590,
+                "cash": 5947,
+                "totalDebt": 31512,
+                "debtToCapitalRatio": 0.324
+            },
+            {
+                "year": "2014",
+                "currentAssets": 22059,
+                "totalAssets": 144266,
+                "currentLiabilities": 25231,
+                "totalLiabilities": 75647,
+                "totalEquity": 68619,
+                "cash": 8548,
+                "totalDebt": 31645,
+                "debtToCapitalRatio": 0.327
+            },
+            {
+                "year": "2015",
+                "currentAssets": 18865,
+                "totalAssets": 129495,
+                "currentLiabilities": 18849,
+                "totalLiabilities": 64756,
+                "totalEquity": 64739,
+                "cash": 11653,
+                "totalDebt": 31110,
+                "debtToCapitalRatio": 0.325
+            }
+        ]
+        
+        # P&G 운전자본 데이터
+        self.pg_working_capital_data = [
+            {
+                "year": "2011",
+                "accountsReceivable": 6275,
+                "inventory": 7379,
+                "accountsPayable": 8022,
+                "daysReceivables": 27.8,
+                "daysInventory": 32.6,
+                "daysPayables": 38.0,
+                "cashConversionCycle": 22.4
+            },
+            {
+                "year": "2012",
+                "accountsReceivable": 6068,
+                "inventory": 6721,
+                "accountsPayable": 7920,
+                "daysReceivables": 26.5,
+                "daysInventory": 29.2,
+                "daysPayables": 37.0,
+                "cashConversionCycle": 18.7
+            },
+            {
+                "year": "2013",
+                "accountsReceivable": 6508,
+                "inventory": 6909,
+                "accountsPayable": 8777,
+                "daysReceivables": 28.2,
+                "daysInventory": 29.9,
+                "daysPayables": 41.0,
+                "cashConversionCycle": 17.1
+            },
+            {
+                "year": "2014",
+                "accountsReceivable": 6386,
+                "inventory": 6759,
+                "accountsPayable": 8461,
+                "daysReceivables": 28.1,
+                "daysInventory": 29.7,
+                "daysPayables": 40.0,
+                "cashConversionCycle": 17.8
+            },
+            {
+                "year": "2015",
+                "accountsReceivable": 4861,
+                "inventory": 5454,
+                "accountsPayable": 8256,
+                "daysReceivables": 23.3,
+                "daysInventory": 26.2,
+                "daysPayables": 53.0,
+                "cashConversionCycle": -3.5
+            }
+        ]
     
     def get_all_data(self) -> Dict[str, Any]:
         """모든 데이터를 딕셔너리 형태로 반환"""
@@ -82,7 +195,9 @@ class MarketDataProvider:
             'scfRateSimulationData': self.scf_rate_simulation_data,
             'ratingsComparisonData': self.ratings_comparison_data,
             'historicalLiborData': self.historical_libor_data,
-            'pgFinancialData': self.pg_financial_data
+            'pgFinancialData': self.pg_financial_data,
+            'pgBalanceSheetData': self.pg_balance_sheet_data,
+            'pgWorkingCapitalData': self.pg_working_capital_data
         }
     
     def get_data_frames(self) -> Dict[str, pd.DataFrame]:
@@ -94,5 +209,7 @@ class MarketDataProvider:
             'scf_rate_simulation': pd.DataFrame(self.scf_rate_simulation_data),
             'ratings_comparison': pd.DataFrame(self.ratings_comparison_data),
             'historical_libor': pd.DataFrame(self.historical_libor_data),
-            'pg_financial': pd.DataFrame(self.pg_financial_data)
+            'pg_financial': pd.DataFrame(self.pg_financial_data),
+            'pg_balance_sheet': pd.DataFrame(self.pg_balance_sheet_data),
+            'pg_working_capital': pd.DataFrame(self.pg_working_capital_data)
         }

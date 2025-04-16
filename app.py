@@ -6,6 +6,7 @@ import plotly.express as px
 from data_provider import MarketDataProvider
 from react_component import ReactComponentGenerator
 from pg_financial_component import PGFinancialComponentGenerator
+from pg_balance_sheet_component import PGBalanceSheetComponentGenerator
 
 class StreamlitApp:
     """Streamlit 애플리케이션 클래스"""
@@ -15,6 +16,7 @@ class StreamlitApp:
         self.data_provider = MarketDataProvider()
         self.react_generator = ReactComponentGenerator(self.data_provider)
         self.pg_financial_generator = PGFinancialComponentGenerator(self.data_provider)
+        self.pg_balance_sheet_generator = PGBalanceSheetComponentGenerator(self.data_provider)
     
     def setup_page(self):
         """페이지 기본 설정"""
@@ -36,8 +38,13 @@ class StreamlitApp:
             st.header("P&G 재무 지표 시각화 (Exhibit 1)")
             self.render_exhibit_1()
         
-        # Exhibit 2부터 Exhibit 7까지 (추후 구현 예정)
-        for i in range(1, 7):
+        # Exhibit 2 - P&G 대차대조표 분석
+        with tabs[1]:
+            st.header("P&G 대차대조표 분석 (Exhibit 2)")
+            self.render_exhibit_2()
+        
+        # Exhibit 3부터 Exhibit 7까지 (추후 구현 예정)
+        for i in range(2, 7):
             with tabs[i]:
                 st.header(f"시장 금리 현황 분석 ({tab_titles[i]})")
                 st.info(f"{tab_titles[i]} 콘텐츠는 아직 구현되지 않았습니다.")
@@ -82,6 +89,44 @@ class StreamlitApp:
         if debug_mode:
             with st.expander("P&G 재무 데이터 표", expanded=False):
                 st.dataframe(pd.DataFrame(self.data_provider.pg_financial_data))
+    
+    def render_exhibit_2(self):
+        """Exhibit 2 - P&G 대차대조표 분석 (Chart.js 사용)"""
+        try:
+            # Chart.js를 사용한 HTML 코드 생성
+            html_code = self.pg_balance_sheet_generator.generate_html()
+            
+            # 디버깅 옵션 추가 - 고유 키 추가
+            debug_mode = st.sidebar.checkbox("디버깅 모드", value=False, key="debug_mode_exhibit2")
+            
+            if debug_mode:
+                st.sidebar.subheader("디버깅 정보")
+                st.sidebar.json(self.data_provider.pg_balance_sheet_data)
+                st.sidebar.json(self.data_provider.pg_working_capital_data)
+                
+                # HTML 코드 길이 표시
+                st.sidebar.text(f"HTML 코드 길이: {len(html_code)} 문자")
+                
+                # HTML 코드 일부 표시
+                with st.sidebar.expander("HTML 코드 미리보기", expanded=False):
+                    st.code(html_code[:1000] + "...", language="html")
+            
+            # HTML 렌더링 높이 설정 - 고유 키 추가
+            height = st.sidebar.slider("차트 영역 높이", 2000, 5000, 3000, 100, key="height_slider_exhibit2") if debug_mode else 3000
+            
+            # Chart.js HTML 렌더링
+            st.components.v1.html(html_code, height=height, scrolling=True)
+            
+            # 데이터 테이블 표시 (디버깅 모드에서만)
+            if debug_mode:
+                with st.expander("P&G 대차대조표 데이터", expanded=False):
+                    st.dataframe(pd.DataFrame(self.data_provider.pg_balance_sheet_data))
+                with st.expander("P&G 운전자본 데이터", expanded=False):
+                    st.dataframe(pd.DataFrame(self.data_provider.pg_working_capital_data))
+                    
+        except Exception as e:
+            st.error(f"P&G 대차대조표 컴포넌트 렌더링 중 오류가 발생했습니다: {str(e)}")
+            st.exception(e)
     
     def render_exhibit_8(self):
         """Exhibit 8 콘텐츠 렌더링"""
