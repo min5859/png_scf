@@ -17,7 +17,29 @@ class StreamlitApp:
             layout="wide",
             initial_sidebar_state="expanded"
         )
-        st.title("시장 금리 현황 분석 (Exhibit 8)")
+        st.title("시장 금리 현황 분석")
+    
+    def render_tabs(self):
+        """탭 렌더링"""
+        # 탭 생성 - Exhibit 1부터 Exhibit 8까지 생성
+        tab_titles = [f"Exhibit {i}" for i in range(1, 9)]
+        tabs = st.tabs(tab_titles)
+        
+        # Exhibit 1부터 Exhibit 7까지 (추후 구현 예정)
+        for i in range(7):
+            with tabs[i]:
+                st.header(f"시장 금리 현황 분석 ({tab_titles[i]})")
+                st.info(f"{tab_titles[i]} 콘텐츠는 아직 구현되지 않았습니다.")
+        
+        # Exhibit 8 탭
+        with tabs[7]:
+            st.header("시장 금리 현황 분석 (Exhibit 8)")
+            self.render_exhibit_8()
+    
+    def render_exhibit_8(self):
+        """Exhibit 8 콘텐츠 렌더링"""
+        self.render_react_component()
+        self.show_additional_info()
     
     def render_react_component(self):
         """React 컴포넌트 렌더링"""
@@ -65,5 +87,4 @@ class StreamlitApp:
     def run(self):
         """애플리케이션 실행"""
         self.setup_page()
-        self.render_react_component()
-        self.show_additional_info()
+        self.render_tabs()
