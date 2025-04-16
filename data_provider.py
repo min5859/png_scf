@@ -332,6 +332,144 @@ class MarketDataProvider:
             { "year": "2014", "exchangeRate": 2.3547, "pulpPrice": 741 },
             { "year": "2015", "exchangeRate": 2.5989, "pulpPrice": 793 }
         ]
+
+        # Fibria 대차대조표 데이터 (단위: 백만 레알)
+        self.fibria_balance_sheet_data = [
+            { 
+                "year": "2012", 
+                "currentAssets": 6246,
+                "cash": 3296,
+                "accountsReceivable": 964,
+                "inventory": 1183,
+                "otherCurrentAssets": 803,
+                "totalAssets": 28145,
+                "currentLiabilities": 2475,
+                "accountsPayable": 436,
+                "shortTermDebt": 1138,
+                "otherCurrentLiabilities": 901,
+                "longTermDebt": 9630,
+                "otherLTLiabilities": 869,
+                "totalLiabilities": 12974,
+                "totalEquity": 15171,
+                "currentRatio": 2.52,
+                "totalDebt": 10768,
+                "debtToCapital": 41.5,
+                "exchangeRate": 1.955
+            },
+            { 
+                "year": "2013", 
+                "currentAssets": 5807,
+                "cash": 2099,
+                "accountsReceivable": 1477,
+                "inventory": 1266,
+                "otherCurrentAssets": 965,
+                "totalAssets": 26750,
+                "currentLiabilities": 4448,
+                "accountsPayable": 587,
+                "shortTermDebt": 2973,
+                "otherCurrentLiabilities": 888,
+                "longTermDebt": 6801,
+                "otherLTLiabilities": 1010,
+                "totalLiabilities": 12259,
+                "totalEquity": 14491,
+                "currentRatio": 1.31,
+                "totalDebt": 9773,
+                "debtToCapital": 40.3,
+                "exchangeRate": 2.1605
+            },
+            { 
+                "year": "2014", 
+                "currentAssets": 3261,
+                "cash": 745,
+                "accountsReceivable": 695,
+                "inventory": 1239,
+                "otherCurrentAssets": 582,
+                "totalAssets": 25594,
+                "currentLiabilities": 2099,
+                "accountsPayable": 593,
+                "shortTermDebt": 966,
+                "otherCurrentLiabilities": 540,
+                "longTermDebt": 7361,
+                "otherLTLiabilities": 1518,
+                "totalLiabilities": 10978,
+                "totalEquity": 14616,
+                "currentRatio": 1.55,
+                "totalDebt": 8327,
+                "debtToCapital": 36.3,
+                "exchangeRate": 2.3547
+            },
+            { 
+                "year": "2015 (6월)", 
+                "currentAssets": 3862,
+                "cash": 1386,
+                "accountsReceivable": 875,
+                "inventory": 1455,
+                "otherCurrentAssets": 146,
+                "totalAssets": 26501,
+                "currentLiabilities": 2086,
+                "accountsPayable": 637,
+                "shortTermDebt": 894,
+                "otherCurrentLiabilities": 555,
+                "longTermDebt": 8121,
+                "otherLTLiabilities": 1730,
+                "totalLiabilities": 11937,
+                "totalEquity": 14563,
+                "currentRatio": 1.85,
+                "totalDebt": 9015,
+                "debtToCapital": 38.2,
+                "exchangeRate": 2.6913
+            }
+        ]
+
+        # Fibria 운전자본 항목 데이터
+        self.fibria_working_capital_data = [
+            {
+                "year": "2012",
+                "accountsReceivable": 964,
+                "inventory": 1183,
+                "accountsPayable": 436,
+                "netWorkingCapital": 1711
+            },
+            {
+                "year": "2013",
+                "accountsReceivable": 1477,
+                "inventory": 1266,
+                "accountsPayable": 587,
+                "netWorkingCapital": 2156
+            },
+            {
+                "year": "2014",
+                "accountsReceivable": 695,
+                "inventory": 1239,
+                "accountsPayable": 593,
+                "netWorkingCapital": 1341
+            },
+            {
+                "year": "2015 (6월)",
+                "accountsReceivable": 875,
+                "inventory": 1455,
+                "accountsPayable": 637,
+                "netWorkingCapital": 1693
+            }
+        ]
+
+        # Fibria SCF 영향 분석 데이터
+        self.fibria_scf_analysis_data = [
+            {
+                "category": "SCF 이전",
+                "daysOutstanding": 60,
+                "arValue": 49.32,  # P&G 매출 3억 달러, 60일 회수
+                "financingCost": 1.23,  # 2.5% 자금조달 비용
+                "liquidityImpact": "Low"
+            },
+            {
+                "category": "SCF 이후",
+                "daysOutstanding": 15,
+                "arValue": 12.33,  # P&G 매출 3억 달러, 15일 회수
+                "financingCost": 0.04,  # 0.35% SCF 할인율
+                "liquidityImpact": "High"
+            }
+        ]
     
     def get_all_data(self) -> Dict[str, Any]:
         """모든 데이터를 딕셔너리 형태로 반환"""
@@ -348,7 +486,10 @@ class MarketDataProvider:
             'pgExtendedWorkingCapitalData': self.pg_extended_working_capital_data,
             'fibriaFinancialData': self.fibria_financial_data,
             'fibriaSCFImpactData': self.fibria_scf_impact_data,
-            'fibriaMarketData': self.fibria_market_data
+            'fibriaMarketData': self.fibria_market_data,
+            'fibriaBalanceSheetData': self.fibria_balance_sheet_data,
+            'fibriaWorkingCapitalData': self.fibria_working_capital_data,
+            'fibriaSCFAnalysisData': self.fibria_scf_analysis_data
         }
     
     def get_data_frames(self) -> Dict[str, pd.DataFrame]:
@@ -366,5 +507,8 @@ class MarketDataProvider:
             'pg_extended_working_capital': pd.DataFrame(self.pg_extended_working_capital_data),
             'fibria_financial': pd.DataFrame(self.fibria_financial_data),
             'fibria_scf_impact': pd.DataFrame(self.fibria_scf_impact_data),
-            'fibria_market': pd.DataFrame(self.fibria_market_data)
+            'fibria_market': pd.DataFrame(self.fibria_market_data),
+            'fibria_balance_sheet': pd.DataFrame(self.fibria_balance_sheet_data),
+            'fibria_working_capital': pd.DataFrame(self.fibria_working_capital_data),
+            'fibria_scf_analysis': pd.DataFrame(self.fibria_scf_analysis_data)
         }

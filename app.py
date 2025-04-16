@@ -9,6 +9,7 @@ from pg_financial_component import PGFinancialComponentGenerator
 from pg_balance_sheet_component import PGBalanceSheetComponentGenerator
 from pg_working_capital_component import PGWorkingCapitalComponentGenerator
 from fibria_financial_component import FibriaFinancialComponentGenerator
+from fibria_balance_sheet_component import FibriaBalanceSheetComponentGenerator
 
 class StreamlitApp:
     """Streamlit 애플리케이션 클래스"""
@@ -21,6 +22,7 @@ class StreamlitApp:
         self.pg_balance_sheet_generator = PGBalanceSheetComponentGenerator(self.data_provider)
         self.pg_working_capital_generator = PGWorkingCapitalComponentGenerator(self.data_provider)
         self.fibria_financial_generator = FibriaFinancialComponentGenerator(self.data_provider)
+        self.fibria_balance_sheet_generator = FibriaBalanceSheetComponentGenerator(self.data_provider)
     
     def setup_page(self):
         """페이지 기본 설정"""
@@ -62,11 +64,15 @@ class StreamlitApp:
             st.header("Fibria 셀룰로즈 재무 분석 (Exhibit 5)")
             self.render_exhibit_5()
         
-        # Exhibit 6, 7
-        for i in range(5, 7):
-            with tabs[i]:
-                st.header(f"시장 금리 현황 분석 ({tab_titles[i]})")
-                st.info(f"{tab_titles[i]} 콘텐츠는 아직 구현되지 않았습니다.")
+        # Exhibit 6 - Fibria 대차대조표 분석
+        with tabs[5]:
+            st.header("Fibria 셀룰로즈 대차대조표 분석 (Exhibit 6)")
+            self.render_exhibit_6()
+        
+        # Exhibit 7
+        with tabs[6]:
+            st.header(f"시장 금리 현황 분석 ({tab_titles[6]})")
+            st.info(f"{tab_titles[6]} 콘텐츠는 아직 구현되지 않았습니다.")
         
         # Exhibit 8 탭
         with tabs[7]:
@@ -219,6 +225,47 @@ class StreamlitApp:
                     
         except Exception as e:
             st.error(f"Fibria 재무 분석 컴포넌트 렌더링 중 오류가 발생했습니다: {str(e)}")
+            st.exception(e)
+    
+    def render_exhibit_6(self):
+        """Exhibit 6 - Fibria 셀룰로즈 대차대조표 분석"""
+        try:
+            # Chart.js를 사용한 HTML 코드 생성
+            html_code = self.fibria_balance_sheet_generator.generate_html()
+            
+            # 디버깅 옵션 추가
+            debug_mode = st.sidebar.checkbox("디버깅 모드", value=False, key="debug_mode_exhibit6")
+            
+            if debug_mode:
+                st.sidebar.subheader("디버깅 정보")
+                st.sidebar.json(self.data_provider.fibria_balance_sheet_data)
+                st.sidebar.json(self.data_provider.fibria_working_capital_data)
+                st.sidebar.json(self.data_provider.fibria_scf_analysis_data)
+                
+                # HTML 코드 길이 표시
+                st.sidebar.text(f"HTML 코드 길이: {len(html_code)} 문자")
+                
+                # HTML 코드 일부 표시
+                with st.sidebar.expander("HTML 코드 미리보기", expanded=False):
+                    st.code(html_code[:1000] + "...", language="html")
+            
+            # HTML 렌더링 높이 설정
+            height = st.sidebar.slider("차트 영역 높이", 2000, 5000, 3000, 100, key="height_slider_exhibit6") if debug_mode else 3000
+            
+            # HTML 렌더링
+            st.components.v1.html(html_code, height=height, scrolling=True)
+            
+            # 데이터 테이블 표시 (디버깅 모드에서만)
+            if debug_mode:
+                with st.expander("Fibria 대차대조표 데이터", expanded=False):
+                    st.dataframe(pd.DataFrame(self.data_provider.fibria_balance_sheet_data))
+                with st.expander("Fibria 운전자본 데이터", expanded=False):
+                    st.dataframe(pd.DataFrame(self.data_provider.fibria_working_capital_data))
+                with st.expander("Fibria SCF 영향 분석 데이터", expanded=False):
+                    st.dataframe(pd.DataFrame(self.data_provider.fibria_scf_analysis_data))
+                    
+        except Exception as e:
+            st.error(f"Fibria 대차대조표 분석 컴포넌트 렌더링 중 오류가 발생했습니다: {str(e)}")
             st.exception(e)
     
     def render_exhibit_8(self):
