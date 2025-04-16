@@ -1,6 +1,11 @@
 import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+import plotly.express as px
 from data_provider import MarketDataProvider
 from react_component import ReactComponentGenerator
+from pg_financial_component import PGFinancialComponentGenerator
 
 class StreamlitApp:
     """Streamlit 애플리케이션 클래스"""
@@ -9,6 +14,7 @@ class StreamlitApp:
         """애플리케이션 초기화"""
         self.data_provider = MarketDataProvider()
         self.react_generator = ReactComponentGenerator(self.data_provider)
+        self.pg_financial_generator = PGFinancialComponentGenerator(self.data_provider)
     
     def setup_page(self):
         """페이지 기본 설정"""
@@ -25,8 +31,13 @@ class StreamlitApp:
         tab_titles = [f"Exhibit {i}" for i in range(1, 9)]
         tabs = st.tabs(tab_titles)
         
-        # Exhibit 1부터 Exhibit 7까지 (추후 구현 예정)
-        for i in range(7):
+        # Exhibit 1 - P&G 재무 지표 시각화
+        with tabs[0]:
+            st.header("P&G 재무 지표 시각화 (Exhibit 1)")
+            self.render_exhibit_1()
+        
+        # Exhibit 2부터 Exhibit 7까지 (추후 구현 예정)
+        for i in range(1, 7):
             with tabs[i]:
                 st.header(f"시장 금리 현황 분석 ({tab_titles[i]})")
                 st.info(f"{tab_titles[i]} 콘텐츠는 아직 구현되지 않았습니다.")
@@ -35,6 +46,42 @@ class StreamlitApp:
         with tabs[7]:
             st.header("시장 금리 현황 분석 (Exhibit 8)")
             self.render_exhibit_8()
+    
+    def render_exhibit_1(self):
+        """Exhibit 1 - P&G 재무 지표 시각화 (Chart.js 사용)"""
+        # Chart.js를 사용한 HTML 코드 생성
+        html_code = self.pg_financial_generator.generate_html()
+        
+        # 디버깅 옵션 추가 - 고유 키 추가
+        debug_mode = st.sidebar.checkbox("디버깅 모드", value=False, key="debug_mode_exhibit1")
+        
+        if debug_mode:
+            st.sidebar.subheader("디버깅 정보")
+            st.sidebar.json(self.data_provider.pg_financial_data)
+            
+            # HTML 코드 길이 표시
+            st.sidebar.text(f"HTML 코드 길이: {len(html_code)} 문자")
+            
+            # HTML 코드 일부 표시
+            with st.sidebar.expander("HTML 코드 미리보기", expanded=False):
+                st.code(html_code[:1000] + "...", language="html")
+        
+        # HTML 렌더링 높이 설정 - 고유 키 추가
+        height = st.sidebar.slider("차트 영역 높이", 2000, 5000, 2500, 100, key="height_slider_exhibit1") if debug_mode else 2500
+        
+        # Chart.js HTML 렌더링 - 오류 처리 추가
+        try:
+            st.components.v1.html(html_code, height=height, scrolling=True)
+        except Exception as e:
+            st.error(f"Chart.js 컴포넌트 렌더링 중 오류가 발생했습니다: {str(e)}")
+            
+            if debug_mode:
+                st.exception(e)
+        
+        # 데이터 테이블 표시 (디버깅 모드에서만)
+        if debug_mode:
+            with st.expander("P&G 재무 데이터 표", expanded=False):
+                st.dataframe(pd.DataFrame(self.data_provider.pg_financial_data))
     
     def render_exhibit_8(self):
         """Exhibit 8 콘텐츠 렌더링"""
@@ -45,8 +92,8 @@ class StreamlitApp:
         """React 컴포넌트 렌더링"""
         html_code = self.react_generator.generate_html()
         
-        # 디버깅 옵션 추가
-        debug_mode = st.sidebar.checkbox("디버깅 모드", value=False)
+        # 디버깅 옵션 추가 - 고유 키 추가
+        debug_mode = st.sidebar.checkbox("디버깅 모드", value=False, key="debug_mode_exhibit8")
         
         if debug_mode:
             st.sidebar.subheader("디버깅 정보")
@@ -56,11 +103,11 @@ class StreamlitApp:
             st.sidebar.text(f"HTML 코드 길이: {len(html_code)} 문자")
             
             # HTML 코드 일부 표시
-            with st.sidebar.expander("HTML 코드 미리보기"):
+            with st.sidebar.expander("HTML 코드 미리보기", expanded=False):
                 st.code(html_code[:1000] + "...", language="html")
         
-        # 높이 및 스크롤링 옵션 조정 가능
-        height = st.sidebar.slider("차트 영역 높이", 2000, 5000, 3000, 100) if debug_mode else 3000
+        # 높이 및 스크롤링 옵션 조정 가능 - 고유 키 추가
+        height = st.sidebar.slider("차트 영역 높이", 2000, 5000, 3000, 100, key="height_slider_exhibit8") if debug_mode else 3000
         
         # React 컴포넌트 렌더링 - 오류 처리 추가
         try:
@@ -79,9 +126,9 @@ class StreamlitApp:
         st.markdown("### 데이터 미리보기")
         data_frames = self.data_provider.get_data_frames()
         
-        # 확장 가능한 섹션으로 각 데이터프레임 표시
-        for name, df in data_frames.items():
-            with st.expander(f"{name} 데이터"):
+        # 확장 가능한 섹션으로 각 데이터프레임 표시 - 고유 키 추가
+        for i, (name, df) in enumerate(data_frames.items()):
+            with st.expander(f"{name} 데이터", expanded=False):
                 st.dataframe(df)
     
     def run(self):
