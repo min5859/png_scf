@@ -52,17 +52,6 @@ class StreamlitApp:
     def show_additional_info(self):
         """추가 정보 표시"""
         st.markdown("---")
-        st.markdown("### 이 대시보드에 대한 정보")
-        st.markdown("""
-        이 대시보드는 Streamlit 내에서 React 컴포넌트를 사용하여 구현되었습니다. 
-        Streamlit의 HTML 컴포넌트 내에서 React와 Recharts를 활용해 동적인 차트를 렌더링합니다.
-
-        **주요 기술:**
-        - Streamlit: 파이썬 기반 웹 애플리케이션 프레임워크
-        - React: 사용자 인터페이스 구축을 위한 JavaScript 라이브러리
-        - Recharts: React 기반 차트 라이브러리
-        - Babel: JSX 코드를 브라우저에서 실행 가능한 JavaScript로 변환
-        """)
         
         # 데이터 미리보기 섹션 추가
         st.markdown("### 데이터 미리보기")
