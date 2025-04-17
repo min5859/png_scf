@@ -582,7 +582,7 @@ class PGSCFEconomicsGenerator:
                 }}
             }});
             
-            // 할인율 파이 차트
+            // 할인율 차트 생성
             const discountRateCtx = document.getElementById('discountRateChart').getContext('2d');
             
             // 할인율 데이터
@@ -607,6 +607,29 @@ class PGSCFEconomicsGenerator:
                     plugins: {{
                         legend: {{
                             position: 'right',
+                            labels: {{
+                                font: {{
+                                    size: 14
+                                }},
+                                generateLabels: function(chart) {{
+                                    const data = chart.data;
+                                    if (data.labels.length && data.datasets.length) {{
+                                        const dataset = data.datasets[0];
+                                        const total = dataset.data.reduce((a, b) => a + b, 0);
+                                        return data.labels.map((label, i) => {{
+                                            const value = dataset.data[i];
+                                            const percentage = Math.round((value / total) * 100);
+                                            return {{
+                                                text: label + ': ' + percentage + '%',
+                                                fillStyle: dataset.backgroundColor[i],
+                                                hidden: false,
+                                                index: i
+                                            }};
+                                        }});
+                                    }}
+                                    return [];
+                                }}
+                            }}
                         }},
                         tooltip: {{
                             callbacks: {{
