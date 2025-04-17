@@ -444,13 +444,13 @@ class PGSCFEconomicsGenerator:
                     datasets: [
                         {{
                             label: 'P&G 지불기한',
-                            backgroundColor: '{self.colors["blue"]}',
+                            backgroundColor: 'rgba(33, 150, 243, 0.7)',
                             data: daysData,
                             yAxisID: 'y-left',
                         }},
                         {{
                             label: '공급업체 수금기한',
-                            backgroundColor: '{self.colors["green"]}',
+                            backgroundColor: 'rgba(76, 175, 80, 0.7)',
                             data: receivableData,
                             yAxisID: 'y-left',
                         }},
@@ -639,7 +639,7 @@ class PGSCFEconomicsGenerator:
                     datasets: [
                         {{
                             label: '대기 일수',
-                            backgroundColor: '{self.colors["blue"]}',
+                            backgroundColor: 'rgba(33, 150, 243, 0.7)',
                             data: supplierDaysData,
                             yAxisID: 'y-days',
                         }},
@@ -724,7 +724,7 @@ class PGSCFEconomicsGenerator:
                     datasets: [
                         {{
                             label: '금융 비용',
-                            backgroundColor: '{self.colors["red"]}',
+                            backgroundColor: 'rgba(244, 67, 54, 0.7)',
                             data: supplierCostData,
                             yAxisID: 'y-cost',
                         }},
@@ -805,13 +805,13 @@ class PGSCFEconomicsGenerator:
                     datasets: [
                         {{
                             label: 'DPO',
-                            backgroundColor: '{self.colors["purple"]}',
+                            backgroundColor: 'rgba(156, 39, 176, 0.7)',
                             data: pgDPOData,
                             yAxisID: 'y-dpo',
                         }},
                         {{
                             label: '운전자본 개선',
-                            backgroundColor: '{self.colors["green"]}',
+                            backgroundColor: 'rgba(76, 175, 80, 0.7)',
                             data: pgWorkingCapitalData,
                             yAxisID: 'y-workingCapital',
                         }}
