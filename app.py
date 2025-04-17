@@ -34,7 +34,7 @@ class StreamlitApp:
             layout="wide",
             initial_sidebar_state="expanded"
         )
-        st.title("시장 금리 현황 분석")
+        #st.title("시장 금리 현황 분석")
     
     def render_tabs(self):
         """탭 렌더링"""
