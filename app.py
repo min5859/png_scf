@@ -11,6 +11,7 @@ from pg_working_capital_component import PGWorkingCapitalComponentGenerator
 from fibria_financial_component import FibriaFinancialComponentGenerator
 from fibria_balance_sheet_component import FibriaBalanceSheetComponentGenerator
 from fibria_working_capital_chart_component import FibriaWorkingCapitalComponentGenerator
+from pg_scf_economics import PGSCFEconomicsGenerator
 
 class StreamlitApp:
     """Streamlit 애플리케이션 클래스"""
@@ -56,10 +57,9 @@ class StreamlitApp:
             st.header("P&G 운전자본 분석 (Exhibit 3)")
             self.render_exhibit_3()
         
-        # Exhibit 4
+        # Exhibit 4 - P&G SCF 경제적 효과 분석
         with tabs[3]:
-            st.header(f"시장 금리 현황 분석 ({tab_titles[3]})")
-            st.info(f"{tab_titles[3]} 콘텐츠는 아직 구현되지 않았습니다.")
+            self.render_exhibit_4()
         
         # Exhibit 5 - Fibria 재무 분석
         with tabs[4]:
@@ -188,6 +188,40 @@ class StreamlitApp:
                     
         except Exception as e:
             st.error(f"P&G 운전자본 컴포넌트 렌더링 중 오류가 발생했습니다: {str(e)}")
+            st.exception(e)
+    
+    def render_exhibit_4(self):
+        """Exhibit 4 - P&G SCF 경제적 효과 분석"""
+        try:
+            st.header("P&G SCF 프로그램의 경제적 효과 분석 (Exhibit 4)")
+            
+            # Generator 객체 생성
+            scf_economics_generator = PGSCFEconomicsGenerator()
+            
+            # Chart.js를 사용한 HTML 코드 생성
+            html_code = scf_economics_generator.generate_html()
+            
+            # 디버깅 옵션 추가
+            debug_mode = st.sidebar.checkbox("디버깅 모드", value=False, key="debug_mode_exhibit4")
+            
+            if debug_mode:
+                st.sidebar.subheader("디버깅 정보")
+                
+                # HTML 코드 길이 표시
+                st.sidebar.text(f"HTML 코드 길이: {len(html_code)} 문자")
+                
+                # HTML 코드 일부 표시
+                with st.sidebar.expander("HTML 코드 미리보기", expanded=False):
+                    st.code(html_code[:1000] + "...", language="html")
+            
+            # HTML 렌더링 높이 설정
+            height = st.sidebar.slider("차트 영역 높이", 2000, 5000, 3000, 100, key="height_slider_exhibit4") if debug_mode else 3000
+            
+            # HTML 렌더링
+            st.components.v1.html(html_code, height=height, scrolling=True)
+                    
+        except Exception as e:
+            st.error(f"P&G SCF 경제적 효과 분석 렌더링 중 오류가 발생했습니다: {str(e)}")
             st.exception(e)
     
     def render_exhibit_5(self):
