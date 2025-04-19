@@ -538,7 +538,7 @@ class PGSCFEconomicsGenerator:
                             borderWidth: 3,
                             pointRadius: 6,
                             pointBackgroundColor: '{self.colors["green"]}',
-                            stepped: 'after'
+                            stepped: 'before'
                         }},
                         {{
                             label: '기존 지불조건',
@@ -548,7 +548,7 @@ class PGSCFEconomicsGenerator:
                             borderWidth: 3,
                             pointRadius: 6,
                             pointBackgroundColor: '{self.colors["blue"]}',
-                            stepped: 'after'
+                            stepped: 'before'
                         }}
                     ]
                 }},
