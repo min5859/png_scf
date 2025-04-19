@@ -30,9 +30,10 @@ class StreamlitApp:
     def setup_page(self):
         """페이지 기본 설정"""
         st.set_page_config(
-            page_title="시장 금리 현황 분석",
+            page_title="P&G Case Analysis",
+            page_icon="📊",
             layout="wide",
-            initial_sidebar_state="expanded"
+            initial_sidebar_state="collapsed"  # 사이드바를 초기에 숨깁니다
         )
         #st.title("시장 금리 현황 분석")
     
