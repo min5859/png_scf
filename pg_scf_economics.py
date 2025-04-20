@@ -512,6 +512,10 @@ class PGSCFEconomicsGenerator:
                                 }}
                             }}
                         }}
+                    }},
+                    interaction: {{
+                        intersect: false,
+                        mode: 'index'
                     }}
                 }}
             }});
@@ -578,6 +582,10 @@ class PGSCFEconomicsGenerator:
                                 }}
                             }}
                         }}
+                    }},
+                    interaction: {{
+                        intersect: false,
+                        mode: 'index'
                     }}
                 }}
             }});

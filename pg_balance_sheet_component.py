@@ -305,6 +305,10 @@ class PGBalanceSheetComponentGenerator:
                             }
                         }
                     }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
                 }
             }
         });
@@ -363,6 +367,10 @@ class PGBalanceSheetComponentGenerator:
                             }
                         }
                     }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
                 }
             }
         });
@@ -428,6 +436,10 @@ class PGBalanceSheetComponentGenerator:
                             }
                         }
                     }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
                 }
             }
         });
@@ -478,6 +490,10 @@ class PGBalanceSheetComponentGenerator:
                             }
                         }
                     }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
                 }
             }
         });
@@ -542,6 +558,10 @@ class PGBalanceSheetComponentGenerator:
                             }
                         }
                     }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
                 }
             }
         });

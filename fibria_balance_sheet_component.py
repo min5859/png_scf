@@ -293,6 +293,10 @@ class FibriaBalanceSheetComponentGenerator:
                                     }
                                 }
                             }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
                         }
                     }
                 });
@@ -353,6 +357,10 @@ class FibriaBalanceSheetComponentGenerator:
                                     }
                                 }
                             }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
                         }
                     }
                 });
@@ -419,6 +427,10 @@ class FibriaBalanceSheetComponentGenerator:
                                     }
                                 }
                             }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
                         }
                     }
                 });
@@ -466,6 +478,10 @@ class FibriaBalanceSheetComponentGenerator:
                                     }
                                 }
                             }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
                         }
                     }
                 });
@@ -513,6 +529,10 @@ class FibriaBalanceSheetComponentGenerator:
                                     }
                                 }
                             }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
                         }
                     }
                 });
@@ -565,6 +585,10 @@ class FibriaBalanceSheetComponentGenerator:
                                     }
                                 }
                             }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
                         }
                     }
                 });
@@ -606,6 +630,10 @@ class FibriaBalanceSheetComponentGenerator:
                                     }
                                 }
                             }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
                         }
                     }
                 });
@@ -647,6 +675,10 @@ class FibriaBalanceSheetComponentGenerator:
                                     }
                                 }
                             }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
                         }
                     }
                 });

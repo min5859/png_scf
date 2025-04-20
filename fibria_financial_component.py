@@ -268,6 +268,10 @@ class FibriaFinancialComponentGenerator:
                                     }
                                 }
                             }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
                         }
                     }
                 });
@@ -329,6 +333,10 @@ class FibriaFinancialComponentGenerator:
                                     }
                                 }
                             }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
                         }
                     }
                 });
@@ -389,6 +397,10 @@ class FibriaFinancialComponentGenerator:
                                     drawOnChartArea: false
                                 }
                             }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
                         }
                     }
                 });
@@ -435,6 +447,10 @@ class FibriaFinancialComponentGenerator:
                                     text: '백만 달러'
                                 }
                             }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
                         }
                     }
                 });
@@ -482,6 +498,10 @@ class FibriaFinancialComponentGenerator:
                                     text: '백만 달러'
                                 }
                             }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
                         }
                     }
                 });

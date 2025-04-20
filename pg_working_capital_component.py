@@ -300,6 +300,10 @@ class PGWorkingCapitalComponentGenerator:
                                 text: '일수'
                             }}
                         }}
+                    }},
+                    interaction: {{
+                        intersect: false,
+                        mode: 'index'
                     }}
                 }}
             }});

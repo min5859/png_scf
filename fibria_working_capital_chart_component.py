@@ -357,6 +357,10 @@ class FibriaWorkingCapitalComponentGenerator:
                         }}
                     }}
                 }},
+                interaction: {{
+                    intersect: false,
+                    mode: 'index'
+                }},
                 responsive: true,
                 maintainAspectRatio: false
             }}
@@ -404,6 +408,10 @@ class FibriaWorkingCapitalComponentGenerator:
                             text: '일수'
                         }}
                     }}
+                }},
+                interaction: {{
+                    intersect: false,
+                    mode: 'index'
                 }},
                 responsive: true,
                 maintainAspectRatio: false
@@ -456,6 +464,10 @@ class FibriaWorkingCapitalComponentGenerator:
                         }}
                     }}
                 }},
+                interaction: {{
+                    intersect: false,
+                    mode: 'index'
+                }},
                 responsive: true,
                 maintainAspectRatio: false
             }}
@@ -493,6 +505,10 @@ class FibriaWorkingCapitalComponentGenerator:
                         }}
                     }}
                 }},
+                interaction: {{
+                    intersect: false,
+                    mode: 'index'
+                }},
                 responsive: true,
                 maintainAspectRatio: false
             }}
@@ -526,6 +542,10 @@ class FibriaWorkingCapitalComponentGenerator:
                         }}
                     }}
                 }},
+                interaction: {{
+                    intersect: false,
+                    mode: 'index'
+                }},
                 responsive: true,
                 maintainAspectRatio: false
             }}
@@ -557,6 +577,10 @@ class FibriaWorkingCapitalComponentGenerator:
                             text: '백만 달러'
                         }}
                     }}
+                }},
+                interaction: {{
+                    intersect: false,
+                    mode: 'index'
                 }},
                 responsive: true,
                 maintainAspectRatio: false
@@ -590,6 +614,10 @@ class FibriaWorkingCapitalComponentGenerator:
                             text: '백만 달러'
                         }}
                     }}
+                }},
+                interaction: {{
+                    intersect: false,
+                    mode: 'index'
                 }},
                 responsive: true,
                 maintainAspectRatio: false

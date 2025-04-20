@@ -429,6 +429,10 @@ class PGFinancialComponentGenerator:
                                     }
                                 }
                             }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
                         }
                     }
                 });
@@ -530,6 +534,10 @@ class PGFinancialComponentGenerator:
                                     }
                                 }
                             }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
                         }
                     }
                 });
@@ -646,6 +654,10 @@ class PGFinancialComponentGenerator:
                                     }
                                 }
                             }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
                         }
                     }
                 });
@@ -760,6 +772,10 @@ class PGFinancialComponentGenerator:
                                     }
                                 }
                             }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
                         }
                     }
                 });
