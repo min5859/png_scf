@@ -231,10 +231,21 @@ class PGFinancialComponentGenerator:
                         * 순이익 감소에도 불구하고 배당금은 꾸준히 증가 (주주 가치 유지 노력)
                     </div>
                 </div>
-                
-                <!-- 차트 컨테이너 5: 주요 인사이트 -->
+
+                <!-- 차트 컨테이너 5: 평균 발행주식수 -->
                 <div class="chart-container">
-                    <div class="chart-title">5. 주요 인사이트</div>
+                    <div class="chart-title">5. 평균 발행주식수 추이</div>
+                    <div style="height: 400px; width: 100%;">
+                        <canvas id="sharesOutstandingChart"></canvas>
+                    </div>
+                    <div class="chart-note">
+                        * 지속적인 자사주 매입으로 발행주식수 감소 (2011년 2,804백만주 → 2015년 2,712백만주)
+                    </div>
+                </div>
+                
+                <!-- 차트 컨테이너 6: 주요 인사이트 -->
+                <div class="chart-container">
+                    <div class="chart-title">6. 주요 인사이트</div>
                     <div class="grid">
                         <div class="insight-box">
                             <div class="insight-title">매출 정체 및 하락</div>
@@ -260,9 +271,9 @@ class PGFinancialComponentGenerator:
                     </div>
                 </div>
                 
-                <!-- 차트 컨테이너 6: SCF 프로그램의 전략적 중요성 -->
+                <!-- 차트 컨테이너 7: SCF 프로그램의 전략적 중요성 -->
                 <div class="chart-container">
-                    <div class="chart-title">6. SCF 프로그램의 전략적 중요성</div>
+                    <div class="chart-title">7. SCF 프로그램의 전략적 중요성</div>
                     <div class="strategy-box">
                         <div class="strategy-title">P&G의 SCF 프로그램 추진 필요성</div>
                         <ul class="strategy-list">
@@ -275,9 +286,9 @@ class PGFinancialComponentGenerator:
                     </div>
                 </div>
                 
-                <!-- 차트 컨테이너 7: SCF 프로그램 도입 시점 및 효과 -->
+                <!-- 차트 컨테이너 8: SCF 프로그램 도입 시점 및 효과 -->
                 <div class="chart-container">
-                    <div class="chart-title">7. SCF 프로그램 도입 및 효과</div>
+                    <div class="chart-title">8. SCF 프로그램 도입 및 효과</div>
                     <div class="timeline-container">
                         <div style="text-align: center; margin-bottom: 20px;">
                             <div class="timeline-event">2013년 4월: P&G SCF 프로그램 도입 시점</div>
@@ -322,6 +333,7 @@ class PGFinancialComponentGenerator:
                 const grossProfits = pgFinancialData.map(item => item.grossProfit);
                 const operatingIncomes = pgFinancialData.map(item => item.operatingIncome);
                 const netIncomes = pgFinancialData.map(item => item.netIncome);
+                const sharesOutstanding = pgFinancialData.map(item => item.sharesOutstanding);
                 
                 const grossMargins = pgFinancialData.map(item => item.grossMargin);
                 const operatingMargins = pgFinancialData.map(item => item.operatingMargin);
@@ -777,6 +789,82 @@ class PGFinancialComponentGenerator:
                         interaction: {
                             intersect: false,
                             mode: 'index'
+                        }
+                    }
+                });
+
+                // 5. 평균 발행주식수 차트
+                new Chart(document.getElementById('sharesOutstandingChart').getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: years,
+                        datasets: [{
+                            label: '평균 발행주식수',
+                            data: sharesOutstanding,
+                            backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 3,
+                            pointRadius: 6,
+                            pointHoverRadius: 8,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    font: {
+                                        size: 14
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        label += context.raw.toLocaleString() + ' 백만주';
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: '연도',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold'
+                                    }
+                                }
+                            },
+                            y: {
+                                min: 2600,
+                                max: 2900,
+                                title: {
+                                    display: true,
+                                    text: '발행주식수 (백만주)',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold'
+                                    }
+                                },
+                                ticks: {
+                                    callback: function(value) {
+                                        return value.toLocaleString();
+                                    }
+                                }
+                            }
                         }
                     }
                 });
