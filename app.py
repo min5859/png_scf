@@ -37,48 +37,50 @@ class StreamlitApp:
         )
         #st.title("시장 금리 현황 분석")
     
-    def render_tabs(self):
-        """탭 렌더링"""
-        # 탭 생성 - Exhibit 1부터 Exhibit 8까지 생성
-        tab_titles = [f"Exhibit {i}" for i in range(1, 9)]
-        tabs = st.tabs(tab_titles)
+    def render_buttons(self):
+        """버튼 렌더링"""
+        # 버튼 생성 - Exhibit 1부터 Exhibit 8까지 생성
+        button_titles = [f"Exhibit {i}" for i in range(1, 9)]
+        
+        # 버튼을 가로로 배치하기 위한 컨테이너 생성
+        col1, col2, col3, col4, col5, col6, col7, col8 = st.columns(8)
         
         # Exhibit 1 - P&G 재무 지표 시각화
-        with tabs[0]:
+        if col1.button(button_titles[0]):
             st.header("P&G 재무 지표 시각화 (Exhibit 1)")
             self.render_exhibit_1()
         
         # Exhibit 2 - P&G 대차대조표 분석
-        with tabs[1]:
+        if col2.button(button_titles[1]):
             st.header("P&G 대차대조표 분석 (Exhibit 2)")
             self.render_exhibit_2()
         
         # Exhibit 3 - P&G 운전자본 분석
-        with tabs[2]:
+        if col3.button(button_titles[2]):
             st.header("P&G 운전자본 분석 (Exhibit 3)")
             self.render_exhibit_3()
         
         # Exhibit 4 - P&G SCF 경제적 효과 분석
-        with tabs[3]:
+        if col4.button("Example"):
             self.render_exhibit_4()
         
         # Exhibit 5 - Fibria 재무 분석
-        with tabs[4]:
+        if col5.button(button_titles[4]):
             st.header("Fibria 셀룰로즈 재무 분석 (Exhibit 5)")
             self.render_exhibit_5()
         
         # Exhibit 6 - Fibria 대차대조표 분석
-        with tabs[5]:
+        if col6.button(button_titles[5]):
             st.header("Fibria 셀룰로즈 대차대조표 분석 (Exhibit 6)")
             self.render_exhibit_6()
         
         # Exhibit 7 - Fibria 운전자본 분석
-        with tabs[6]:
+        if col7.button(button_titles[6]):
             st.header("Fibria 운전자본 분석 (Exhibit 7)")
             self.render_exhibit_7()
         
-        # Exhibit 8 탭
-        with tabs[7]:
+        # Exhibit 8 - 시장 금리 현황 분석
+        if col8.button(button_titles[7]):
             st.header("시장 금리 현황 분석 (Exhibit 8)")
             self.render_exhibit_8()
     
@@ -385,4 +387,4 @@ class StreamlitApp:
     def run(self):
         """애플리케이션 실행"""
         self.setup_page()
-        self.render_tabs()
+        self.render_buttons()
