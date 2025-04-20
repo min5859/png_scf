@@ -34,7 +34,7 @@ class PGFinancialComponentGenerator:
         <!DOCTYPE html>
         <html>
         <head>
-            <title>P&G 재무 지표 시각화</title>
+            <title>P&G Income Statement</title>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <!-- Chart.js 라이브러리 로드 -->
@@ -185,7 +185,7 @@ class PGFinancialComponentGenerator:
             <div id="root">
                 <!-- 메인 타이틀 -->
                 <div style="text-align: center; margin-bottom: 30px;">
-                    <h1 style="color: #003366; font-size: 28px; font-weight: 700;">P&G 재무 지표 시각화 (2011-2015)</h1>
+                    <h1 style="color: #003366; font-size: 28px; font-weight: 700;">P&G Income Statement (2011-2015)</h1>
                 </div>
                 
                 <!-- 차트 컨테이너 1: 주요 재무 지표 추이 -->
@@ -238,8 +238,8 @@ class PGFinancialComponentGenerator:
                     <div class="grid">
                         <div class="insight-box">
                             <div class="insight-title">매출 정체 및 하락</div>
-                            <div class="insight-content">2012년 이후 매출 성장이 정체되고 2015년에는 5.3% 감소</div>
-                            <div class="note">→ 비용 절감 및 운전자본 최적화 필요성 증가</div>
+                            <div class="insight-content">매출 성장이 정체되고 있음 (2012-2015년 사이 실질적 감소)</div>
+                            <div class="note">→ 성장이 없는 상황에서 이익을 유지하기 위해 비용 및 운전자본 효율화가 필수적</div>
                         </div>
                         <div class="insight-box">
                             <div class="insight-title">안정적인 이익률</div>
@@ -247,9 +247,10 @@ class PGFinancialComponentGenerator:
                             <div class="note">→ AA- 신용등급 유지에 기여</div>
                         </div>
                         <div class="insight-box">
-                            <div class="insight-title">2015년 순이익 급감</div>
-                            <div class="insight-content">순이익이 70억 달러로 감소 (전년 대비 -40%)</div>
-                            <div class="note">→ 운전자본 관리의 중요성 부각</div>
+                            <div class="insight-title">주주 수익률(TSR) 중시</div>
+                            <div class="insight-content">배당금 지급은 증가하는 추세 (주당 1.97달러에서 2.59달러로)</div>
+                            <div class="insight-content">2015년에는 수익 감소로 배당성향(Payout Ratio)이 104%로 급증</div>
+                            <div class="note">→ 현금 확보와 배당금 유지를 위해 운전자본 최적화가 중요한 전략</div>
                         </div>
                         <div class="insight-box">
                             <div class="insight-title">현금흐름 관리 필요성</div>
