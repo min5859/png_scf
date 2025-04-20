@@ -90,7 +90,7 @@ class StreamlitApp:
         html_code = self.pg_financial_generator.generate_html()
         
         # 디버깅 옵션 추가 - 고유 키 추가
-        debug_mode = st.sidebar.checkbox("디버깅 모드", value=False, key="debug_mode_exhibit1")
+        debug_mode = st.sidebar.checkbox("디버깅 모드", value=True, key="debug_mode_exhibit1")
         
         if debug_mode:
             st.sidebar.subheader("디버깅 정보")
@@ -127,7 +127,7 @@ class StreamlitApp:
             html_code = self.pg_balance_sheet_generator.generate_html()
             
             # 디버깅 옵션 추가 - 고유 키 추가
-            debug_mode = st.sidebar.checkbox("디버깅 모드", value=False, key="debug_mode_exhibit2")
+            debug_mode = st.sidebar.checkbox("디버깅 모드", value=True, key="debug_mode_exhibit2")
             
             if debug_mode:
                 st.sidebar.subheader("디버깅 정보")
@@ -165,7 +165,7 @@ class StreamlitApp:
             html_code = self.pg_working_capital_generator.generate_html()
             
             # 디버깅 옵션 추가 - 고유 키 추가
-            debug_mode = st.sidebar.checkbox("디버깅 모드", value=False, key="debug_mode_exhibit3")
+            debug_mode = st.sidebar.checkbox("디버깅 모드", value=True, key="debug_mode_exhibit3")
             
             if debug_mode:
                 st.sidebar.subheader("디버깅 정보")
@@ -205,7 +205,7 @@ class StreamlitApp:
             html_code = scf_economics_generator.generate_html()
             
             # 디버깅 옵션 추가
-            debug_mode = st.sidebar.checkbox("디버깅 모드", value=False, key="debug_mode_exhibit4")
+            debug_mode = st.sidebar.checkbox("디버깅 모드", value=True, key="debug_mode_exhibit4")
             
             if debug_mode:
                 st.sidebar.subheader("디버깅 정보")
@@ -234,7 +234,7 @@ class StreamlitApp:
             html_code = self.fibria_financial_generator.generate_html()
             
             # 디버깅 옵션 추가
-            debug_mode = st.sidebar.checkbox("디버깅 모드", value=False, key="debug_mode_exhibit5")
+            debug_mode = st.sidebar.checkbox("디버깅 모드", value=True, key="debug_mode_exhibit5")
             
             if debug_mode:
                 st.sidebar.subheader("디버깅 정보")
@@ -273,7 +273,7 @@ class StreamlitApp:
             html_code = self.fibria_balance_sheet_generator.generate_html()
             
             # 디버깅 옵션 추가
-            debug_mode = st.sidebar.checkbox("디버깅 모드", value=False, key="debug_mode_exhibit6")
+            debug_mode = st.sidebar.checkbox("디버깅 모드", value=True, key="debug_mode_exhibit6")
             
             if debug_mode:
                 st.sidebar.subheader("디버깅 정보")
@@ -314,7 +314,7 @@ class StreamlitApp:
             html_code = self.fibria_working_capital_generator.generate_html()
             
             # 디버깅 옵션 추가
-            debug_mode = st.sidebar.checkbox("디버깅 모드", value=False, key="debug_mode_exhibit7")
+            debug_mode = st.sidebar.checkbox("디버깅 모드", value=True, key="debug_mode_exhibit7")
             
             if debug_mode:
                 st.sidebar.subheader("디버깅 정보")
