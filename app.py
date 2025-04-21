@@ -12,6 +12,7 @@ from fibria_financial_component import FibriaFinancialComponentGenerator
 from fibria_balance_sheet_component import FibriaBalanceSheetComponentGenerator
 from fibria_working_capital_chart_component import FibriaWorkingCapitalComponentGenerator
 from pg_scf_economics import PGSCFEconomicsGenerator
+from pg_scf_economics_q4 import PGSCFEconomicsQ4Generator
 from PIL import Image
 import os
 import numpy as np
@@ -107,7 +108,6 @@ class StreamlitApp:
         
         # Q4 버튼
         if cols[11].button(q_button_titles[3]):
-            st.header("Q4 (SCF 프로그램의 Win-Win-Win 분석)")
             self.render_q4()
         
         # Q5 버튼
@@ -436,9 +436,33 @@ class StreamlitApp:
         
     def render_q4(self):
         """Q4 - 질문 4에 대한 응답"""
-        st.write("질문 4에 대한 응답 내용이 여기에 표시됩니다.")
-        # 여기에 Q4에 대한 구체적인 내용을 추가하세요
+        st.header("Q4: P&G는 SCF가 win-win-win 프로그램이라는 주장이 사실인가요? 손해를 보는 사람은 없나요?")
         
+        # Generator 객체 생성
+        scf_economics_generator = PGSCFEconomicsQ4Generator()
+        
+        # Chart.js를 사용한 HTML 코드 생성
+        html_code = scf_economics_generator.generate_html()
+        
+        # 디버깅 옵션 추가
+        debug_mode = st.sidebar.checkbox("디버깅 모드", value=True, key="debug_mode_q4")
+        
+        if debug_mode:
+            st.sidebar.subheader("디버깅 정보")
+            
+            # HTML 코드 길이 표시
+            st.sidebar.text(f"HTML 코드 길이: {len(html_code)} 문자")
+            
+            # HTML 코드 일부 표시
+            with st.sidebar.expander("HTML 코드 미리보기", expanded=False):
+                st.code(html_code[:1000] + "...", language="html")
+        
+        # HTML 렌더링 높이 설정
+        height = st.sidebar.slider("차트 영역 높이", 2000, 5000, 3000, 100, key="height_slider_q4") if debug_mode else 3000
+        
+        # HTML 렌더링
+        st.components.v1.html(html_code, height=height, scrolling=True)
+    
     def render_q5(self):
         """Q5 - 질문 5에 대한 응답"""
         st.write("질문 5에 대한 응답 내용이 여기에 표시됩니다.")
