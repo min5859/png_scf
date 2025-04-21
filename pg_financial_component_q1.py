@@ -102,12 +102,11 @@ class PGFinancialComponentGeneratorQ1:
             <div id="root">
                 <!-- 메인 타이틀 -->
                 <div style="text-align: center; margin-bottom: 30px;">
-                    <h1 style="color: #003366; font-size: 28px; font-weight: 700;">P&G Income Statement (Q1)</h1>
+                    <h1 style="color: #003366; font-size: 28px; font-weight: 700;">비용 절감 이니셔티브</h1>
                 </div>
                 
                 <!-- 차트 컨테이너 6: 주요 인사이트 -->
                 <div class="chart-container">
-                    <div class="chart-title">6. 주요 인사이트</div>
                     <div class="grid">
                         <div class="insight-box">
                             <div class="insight-title">매출 정체 및 하락</div>
