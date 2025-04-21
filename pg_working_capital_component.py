@@ -75,6 +75,38 @@ class PGWorkingCapitalComponentGenerator:
                     </div>
                 </div>
                 
+                <!-- 운전자본 수식 카드 추가 -->
+                <div class="mb-10">
+                    <h3 class="text-xl font-semibold mb-4 text-center text-blue-800">운전자본 관리 핵심 지표 계산식</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h4 class="font-bold text-blue-700 mb-3">매출채권회수기간 (DSO)</h4>
+                            <p class="text-lg text-gray-800 font-mono">DSO = AR / (Sales / 365)</p>
+                            <p class="text-sm text-gray-600 mt-2">AR: 매출채권</p>
+                            <p class="text-sm text-gray-600">Sales: 연간 매출액</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h4 class="font-bold text-green-700 mb-3">재고자산회전기간 (DSI)</h4>
+                            <p class="text-lg text-gray-800 font-mono">DSI = Inventory / (COGS / 365)</p>
+                            <p class="text-sm text-gray-600 mt-2">Inventory: 재고자산</p>
+                            <p class="text-sm text-gray-600">COGS: 매출원가</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h4 class="font-bold text-orange-700 mb-3">매입채무지급기간 (DPO)</h4>
+                            <p class="text-lg text-gray-800 font-mono">DPO = AP / (COGS / 365)</p>
+                            <p class="text-sm text-gray-600 mt-2">AP: 매입채무</p>
+                            <p class="text-sm text-gray-600">COGS: 매출원가</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="font-bold text-red-700 mb-3">현금전환주기 (CCC)</h4>
+                        <p class="text-lg text-gray-800 font-mono">CCC = DSO + DSI - DPO</p>
+                        <p class="text-sm text-gray-600 mt-2">DSO: 매출채권회수기간</p>
+                        <p class="text-sm text-gray-600">DSI: 재고자산회전기간</p>
+                        <p class="text-sm text-gray-600">DPO: 매입채무지급기간</p>
+                    </div>
+                </div>
+                
                 <!-- 현금전환주기 변화 -->
                 <div class="mb-10">
                     <h3 class="text-xl font-semibold mb-3 text-center">2. 현금전환주기 변화 (2000-2015)</h3>
