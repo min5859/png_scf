@@ -76,7 +76,7 @@ class PGWorkingCapitalComponentGenerator:
                 </div>
                 
                 <!-- 운전자본 수식 카드 추가 -->
-                <div class="mb-10">
+                <div class="mb-10 bg-yellow-50 p-6 rounded-lg">
                     <h3 class="text-xl font-semibold mb-4 text-center text-blue-800">운전자본 관리 핵심 지표 계산식</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                         <div class="bg-white p-6 rounded-lg shadow-md">
