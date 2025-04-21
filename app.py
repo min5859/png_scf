@@ -42,47 +42,80 @@ class StreamlitApp:
         # 버튼 생성 - Exhibit 1부터 Exhibit 8까지 생성
         button_titles = [f"Exhibit {i}" for i in range(1, 9)]
         
-        # 버튼을 가로로 배치하기 위한 컨테이너 생성
-        col1, col2, col3, col4, col5, col6, col7, col8 = st.columns(8)
+        # Q 버튼 생성 - Q1부터 Q6까지
+        q_button_titles = [f"Q{i}" for i in range(1, 7)]
+        
+        # 모든 버튼을 하나의 행에 배치하기 위한 컨테이너 생성 (14개 컬럼)
+        cols = st.columns(14)
         
         # Exhibit 1 - P&G 재무 지표 시각화
-        if col1.button(button_titles[0]):
+        if cols[0].button(button_titles[0]):
             st.header("P&G 재무 지표 시각화 (Exhibit 1)")
             self.render_exhibit_1()
         
         # Exhibit 2 - P&G 대차대조표 분석
-        if col2.button(button_titles[1]):
+        if cols[1].button(button_titles[1]):
             st.header("P&G 대차대조표 분석 (Exhibit 2)")
             self.render_exhibit_2()
         
         # Exhibit 3 - P&G 운전자본 분석
-        if col3.button(button_titles[2]):
+        if cols[2].button(button_titles[2]):
             st.header("P&G 운전자본 분석 (Exhibit 3)")
             self.render_exhibit_3()
         
         # Exhibit 4 - P&G SCF 경제적 효과 분석
-        if col4.button("Example"):
+        if cols[3].button("Example"):
             self.render_exhibit_4()
         
         # Exhibit 5 - Fibria 재무 분석
-        if col5.button(button_titles[4]):
+        if cols[4].button(button_titles[4]):
             st.header("Fibria 셀룰로즈 재무 분석 (Exhibit 5)")
             self.render_exhibit_5()
         
         # Exhibit 6 - Fibria 대차대조표 분석
-        if col6.button(button_titles[5]):
+        if cols[5].button(button_titles[5]):
             st.header("Fibria 셀룰로즈 대차대조표 분석 (Exhibit 6)")
             self.render_exhibit_6()
         
         # Exhibit 7 - Fibria 운전자본 분석
-        if col7.button(button_titles[6]):
+        if cols[6].button(button_titles[6]):
             st.header("Fibria 운전자본 분석 (Exhibit 7)")
             self.render_exhibit_7()
         
         # Exhibit 8 - 시장 금리 현황 분석
-        if col8.button(button_titles[7]):
+        if cols[7].button(button_titles[7]):
             st.header("시장 금리 현황 분석 (Exhibit 8)")
             self.render_exhibit_8()
+        
+        # Q1 버튼
+        if cols[8].button(q_button_titles[0]):
+            st.header("Q1 (P&G가 2013년 4월 공급업체 지불 기간을 연장한 이유)")
+            self.render_q1()
+        
+        # Q2 버튼
+        if cols[9].button(q_button_titles[1]):
+            st.header("Q2 (새로운 지불 조건이 P&G와 Fibria에 미친 영향)")
+            self.render_q2()
+        
+        # Q3 버튼
+        if cols[10].button(q_button_titles[2]):
+            st.header("Q3 (SCF 프로그램의 작동 방식과 혜택)")
+            self.render_q3()
+        
+        # Q4 버튼
+        if cols[11].button(q_button_titles[3]):
+            st.header("Q4 (SCF 프로그램의 Win-Win-Win 분석)")
+            self.render_q4()
+        
+        # Q5 버튼
+        if cols[12].button(q_button_titles[4]):
+            st.header("Q5 (Fibria가 SCF 프로그램을 계속 사용해야 하는지 여부)")
+            self.render_q5()
+        
+        # Q6 버튼
+        if cols[13].button(q_button_titles[5]):
+            st.header("Q6 (대기업이 중소 공급업체에 지불 기간을 연장해야 하는지 여부)")
+            self.render_q6()
     
     def render_exhibit_1(self):
         """Exhibit 1 - P&G 재무 지표 시각화 (Chart.js 사용)"""
@@ -383,6 +416,36 @@ class StreamlitApp:
         except Exception as e:
             st.error(f"컴포넌트 렌더링 중 오류가 발생했습니다: {str(e)}")
             st.exception(e)
+    
+    def render_q1(self):
+        """Q1 - 질문 1에 대한 응답"""
+        st.write("질문 1에 대한 응답 내용이 여기에 표시됩니다.")
+        # 여기에 Q1에 대한 구체적인 내용을 추가하세요
+        
+    def render_q2(self):
+        """Q2 - 질문 2에 대한 응답"""
+        st.write("질문 2에 대한 응답 내용이 여기에 표시됩니다.")
+        # 여기에 Q2에 대한 구체적인 내용을 추가하세요
+        
+    def render_q3(self):
+        """Q3 - 질문 3에 대한 응답"""
+        st.write("질문 3에 대한 응답 내용이 여기에 표시됩니다.")
+        # 여기에 Q3에 대한 구체적인 내용을 추가하세요
+        
+    def render_q4(self):
+        """Q4 - 질문 4에 대한 응답"""
+        st.write("질문 4에 대한 응답 내용이 여기에 표시됩니다.")
+        # 여기에 Q4에 대한 구체적인 내용을 추가하세요
+        
+    def render_q5(self):
+        """Q5 - 질문 5에 대한 응답"""
+        st.write("질문 5에 대한 응답 내용이 여기에 표시됩니다.")
+        # 여기에 Q5에 대한 구체적인 내용을 추가하세요
+        
+    def render_q6(self):
+        """Q6 - 질문 6에 대한 응답"""
+        st.write("질문 6에 대한 응답 내용이 여기에 표시됩니다.")
+        # 여기에 Q6에 대한 구체적인 내용을 추가하세요
     
     def run(self):
         """애플리케이션 실행"""
