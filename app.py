@@ -485,11 +485,11 @@ class StreamlitApp:
         
         with col1:
             st.subheader("늦게 지급한 경우")
-            st.image(negative_cycle_path, caption="부정적 순환", use_container_width=True)
+            st.image(negative_cycle_path, caption="부정적 순환")
             
         with col2:
             st.subheader("일찍 지급한 경우")
-            st.image(positive_cycle_path, caption="긍정적 순환", use_container_width=True)
+            st.image(positive_cycle_path, caption="긍정적 순환")
         
         # Chart.js를 사용한 분석 내용 표시
         html_code = f"""
