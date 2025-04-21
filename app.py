@@ -14,6 +14,7 @@ from fibria_working_capital_chart_component import FibriaWorkingCapitalComponent
 from pg_scf_economics import PGSCFEconomicsGenerator
 from pg_scf_economics_q4 import PGSCFEconomicsQ4Generator
 from pg_financial_component_q1 import PGFinancialComponentGeneratorQ1
+from pg_scf_economics_q3 import PGSCFEconomicsQ3Generator
 from PIL import Image
 import os
 import numpy as np
@@ -105,7 +106,6 @@ class StreamlitApp:
         
         # Q3 버튼
         if cols[10].button(q_button_titles[2]):
-            st.header("Q3 (SCF 프로그램의 작동 방식과 혜택)")
             self.render_q3()
         
         # Q4 버튼
@@ -458,9 +458,18 @@ class StreamlitApp:
         
     def render_q3(self):
         """Q3 - 질문 3에 대한 응답"""
-        st.write("질문 3에 대한 응답 내용이 여기에 표시됩니다.")
-        # 여기에 Q3에 대한 구체적인 내용을 추가하세요
+        st.header("Q3: P&G가 2013년 4월에 새로운 결제 조건과 함께 SCF 프로그램을 동시에 시작한 이유는 무엇인가요?")
+        st.header("SCF 프로그램은 어떻게 운영되며 누가 혜택을 받나요? SCF 융자 금리는 경쟁력이 있나요?")
         
+        # Generator 객체 생성
+        scf_economics_generator = PGSCFEconomicsQ3Generator()
+        
+        # HTML 코드 생성
+        html_code = scf_economics_generator.generate_html()
+        
+        # HTML 렌더링
+        st.components.v1.html(html_code, height=2500, scrolling=True)
+    
     def render_q4(self):
         """Q4 - 질문 4에 대한 응답"""
         st.header("Q4: P&G는 SCF가 win-win-win 프로그램이라는 주장이 사실인가요? 손해를 보는 사람은 없나요?")
