@@ -12,6 +12,9 @@ from fibria_financial_component import FibriaFinancialComponentGenerator
 from fibria_balance_sheet_component import FibriaBalanceSheetComponentGenerator
 from fibria_working_capital_chart_component import FibriaWorkingCapitalComponentGenerator
 from pg_scf_economics import PGSCFEconomicsGenerator
+from PIL import Image
+import os
+import numpy as np
 
 class StreamlitApp:
     """Streamlit 애플리케이션 클래스"""
@@ -114,7 +117,6 @@ class StreamlitApp:
         
         # Q6 버튼
         if cols[13].button(q_button_titles[5]):
-            st.header("Q6 (대기업이 중소 공급업체에 지불 기간을 연장해야 하는지 여부)")
             self.render_q6()
     
     def render_exhibit_1(self):
@@ -443,10 +445,256 @@ class StreamlitApp:
         # 여기에 Q5에 대한 구체적인 내용을 추가하세요
         
     def render_q6(self):
-        """Q6 - 질문 6에 대한 응답"""
-        st.write("질문 6에 대한 응답 내용이 여기에 표시됩니다.")
-        # 여기에 Q6에 대한 구체적인 내용을 추가하세요
-    
+        """Q6 - 대기업이 중소 공급업체에 지불 기간을 연장해야 하는지 여부"""
+        st.header("Q6: P&G가 A/P를 신속하게 지급해야 한다는 주장의 근거는 무엇인가요?")
+        
+        # 이미지 파일 경로
+        negative_cycle_path = "static/images/negative_cycle.png"
+        positive_cycle_path = "static/images/positive_cycle.png"
+        
+        # 이미지가 없으면 생성
+        if not os.path.exists(negative_cycle_path) or not os.path.exists(positive_cycle_path):
+            self.create_cycle_images()
+        
+        # 이미지를 나란히 표시
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.subheader("늦게 지급한 경우")
+            st.image(negative_cycle_path, caption="부정적 순환", use_container_width=True)
+            
+        with col2:
+            st.subheader("일찍 지급한 경우")
+            st.image(positive_cycle_path, caption="긍정적 순환", use_container_width=True)
+        
+        # Chart.js를 사용한 분석 내용 표시
+        html_code = f"""
+        <div style="padding: 20px;">
+            <style>
+                .analysis-container {{
+                    font-family: 'Helvetica Neue', Arial, sans-serif;
+                }}
+                .card {{
+                    background: white;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                    margin: 15px 0;
+                    padding: 20px;
+                    transition: transform 0.3s ease;
+                }}
+                .card:hover {{
+                    transform: translateY(-5px);
+                    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                }}
+                .impact-meter {{
+                    height: 10px;
+                    background: #f0f0f0;
+                    border-radius: 5px;
+                    margin: 10px 0;
+                    overflow: hidden;
+                }}
+                .impact-meter-fill {{
+                    height: 100%;
+                    transition: width 1s ease-in-out;
+                }}
+                .negative {{
+                    background: linear-gradient(to right, #ff6b6b, #ff8787);
+                }}
+                .positive {{
+                    background: linear-gradient(to right, #69db7c, #8ce99a);
+                }}
+                .key-point {{
+                    font-size: 1.1em;
+                    color: #333;
+                    margin: 10px 0;
+                    padding-left: 20px;
+                    position: relative;
+                }}
+                .key-point:before {{
+                    content: "•";
+                    position: absolute;
+                    left: 0;
+                    color: #4dabf7;
+                }}
+                .conclusion {{
+                    background: #e7f5ff;
+                    border-left: 4px solid #4dabf7;
+                    padding: 20px;
+                    margin-top: 30px;
+                    border-radius: 4px;
+                }}
+                .metric-container {{
+                    display: flex;
+                    justify-content: space-between;
+                    margin: 20px 0;
+                }}
+                .metric-box {{
+                    text-align: center;
+                    padding: 15px;
+                    background: #f8f9fa;
+                    border-radius: 8px;
+                    flex: 1;
+                    margin: 0 10px;
+                }}
+                .metric-value {{
+                    font-size: 24px;
+                    font-weight: bold;
+                    color: #495057;
+                }}
+                .metric-label {{
+                    font-size: 14px;
+                    color: #868e96;
+                    margin-top: 5px;
+                }}
+            </style>
+            
+            <div class="analysis-container">
+                <div class="card">
+                    <h3 style="color: #e03131;">늦게 지급한 경우의 영향</h3>
+                    <div class="impact-meter">
+                        <div class="impact-meter-fill negative" style="width: 80%;"></div>
+                    </div>
+                    <div class="key-point">결제 기간 연장으로 인한 공급업체 자금 부담 증가</div>
+                    <div class="key-point">공급업체 수익성 저하로 인한 품질 하락</div>
+                    <div class="key-point">P&G 제품 품질 저하 및 수익성 악화</div>
+                    <div class="key-point">결과적으로 가격 인상 압박 발생</div>
+                    
+                </div>
+                
+                <div class="card">
+                    <h3 style="color: #2f9e44;">일찍 지급한 경우의 영향</h3>
+                    <div class="impact-meter">
+                        <div class="impact-meter-fill positive" style="width: 90%;"></div>
+                    </div>
+                    <div class="key-point">SCF 프로그램을 통한 공급업체 유동성 확보</div>
+                    <div class="key-point">공급업체 관계 강화 및 수익성 개선</div>
+                    <div class="key-point">R&D 투자 증가로 인한 품질 향상</div>
+                    <div class="key-point">P&G 제품 품질 및 수익성 강화</div>
+                    <div class="key-point">운전자본 효율성 증가</div>
+                    
+                </div>
+                
+                <div class="conclusion">
+                    <h3 style="color: #1971c2; margin-top: 0;">결론</h3>
+                    <p style="line-height: 1.6;">
+                        대기업이 공급업체에 대한 지불 기간을 연장하는 것은 단기적인 현금흐름 개선에는 도움이 될 수 있으나, 
+                        장기적으로는 공급망 전체의 건강성을 해칠 수 있습니다.
+                    </p>
+                    <p style="line-height: 1.6;">
+                        SCF 프로그램과 같은 혁신적인 금융 솔루션을 활용하면, 대기업은 운전자본을 효율적으로 관리하면서도 
+                        공급업체와의 관계를 강화하고 전체 공급망의 경쟁력을 높일 수 있습니다.
+                    </p>
+                </div>
+            </div>
+            
+            <script>
+                // 애니메이션 효과 추가
+                document.addEventListener('DOMContentLoaded', function() {{
+                    const cards = document.querySelectorAll('.card');
+                    const meters = document.querySelectorAll('.impact-meter-fill');
+                    
+                    // 카드 애니메이션
+                    cards.forEach(card => {{
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                    }});
+                    
+                    // 미터 애니메이션
+                    meters.forEach(meter => {{
+                        meter.style.width = '0';
+                    }});
+                    
+                    // 순차적으로 애니메이션 실행
+                    setTimeout(() => {{
+                        cards.forEach((card, index) => {{
+                            setTimeout(() => {{
+                                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }}, index * 200);
+                        }});
+                        
+                        meters.forEach((meter, index) => {{
+                            setTimeout(() => {{
+                                meter.style.transition = 'width 1s ease-in-out';
+                                meter.style.width = meter.getAttribute('data-width') || '80%';
+                            }}, (index + 2) * 200);
+                        }});
+                    }}, 500);
+                }});
+            </script>
+        </div>
+        """
+        
+        # HTML 렌더링
+        st.components.v1.html(html_code, height=1000, scrolling=True)
+
+    def create_cycle_images(self):
+        """순환 다이어그램 이미지 생성"""
+        try:
+            import matplotlib.pyplot as plt
+            import numpy as np
+            
+            def create_cycle_diagram(items, is_negative=False):
+                # 새로운 figure 생성
+                plt.figure(figsize=(10, 10))
+                
+                # 원 그리기
+                circle = plt.Circle((0.5, 0.5), 0.4, fill=False, color='red' if is_negative else 'blue')
+                plt.gca().add_patch(circle)
+                
+                # 항목들을 원형으로 배치
+                n = len(items)
+                for i, item in enumerate(items):
+                    angle = 2 * np.pi * i / n
+                    x = 0.5 + 0.4 * np.cos(angle)
+                    y = 0.5 + 0.4 * np.sin(angle)
+                    plt.text(x, y, item, ha='center', va='center', bbox=dict(facecolor='white', alpha=0.7))
+                
+                # 중앙에 +/- 기호 추가
+                plt.text(0.5, 0.5, '-' if is_negative else '+', 
+                        ha='center', va='center', color='red' if is_negative else 'blue',
+                        fontsize=24, fontweight='bold')
+                
+                plt.axis('equal')
+                plt.axis('off')
+                
+                return plt.gcf()
+            
+            # 부정적 순환 다이어그램 생성
+            negative_items = [
+                '결제 기간 연장',
+                '공급업체 자금 부담',
+                '공급업체 수익성 저하',
+                '공급업체 품질저하',
+                'P&G 제품 품질저하',
+                'P&G 수익성 악화',
+                '가격인상'
+            ]
+            fig_negative = create_cycle_diagram(negative_items, True)
+            fig_negative.savefig('static/images/negative_cycle.png', bbox_inches='tight', dpi=300)
+            plt.close(fig_negative)
+            
+            # 긍정적 순환 다이어그램 생성
+            positive_items = [
+                '결제 기간 단축',
+                'SCF 프로그램',
+                '공급업체 유동성',
+                '공급업체 관계 강화',
+                '공급업체 수익성 강화',
+                'R&D 투자',
+                '공급업체 품질상승',
+                'P&G 제품 품질 상승',
+                'P&G 수익성 강화',
+                'P&G 운전 자본 강화'
+            ]
+            fig_positive = create_cycle_diagram(positive_items, False)
+            fig_positive.savefig('static/images/positive_cycle.png', bbox_inches='tight', dpi=300)
+            plt.close(fig_positive)
+            
+        except Exception as e:
+            st.error(f"이미지 생성 중 오류가 발생했습니다: {str(e)}")
+
     def run(self):
         """애플리케이션 실행"""
         self.setup_page()
