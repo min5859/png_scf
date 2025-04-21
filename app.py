@@ -13,6 +13,7 @@ from fibria_balance_sheet_component import FibriaBalanceSheetComponentGenerator
 from fibria_working_capital_chart_component import FibriaWorkingCapitalComponentGenerator
 from pg_scf_economics import PGSCFEconomicsGenerator
 from pg_scf_economics_q4 import PGSCFEconomicsQ4Generator
+from pg_financial_component_q1 import PGFinancialComponentGeneratorQ1
 from PIL import Image
 import os
 import numpy as np
@@ -30,6 +31,7 @@ class StreamlitApp:
         self.fibria_financial_generator = FibriaFinancialComponentGenerator(self.data_provider)
         self.fibria_balance_sheet_generator = FibriaBalanceSheetComponentGenerator(self.data_provider)
         self.fibria_working_capital_generator = FibriaWorkingCapitalComponentGenerator(self.data_provider)
+        self.pg_financial_generator_q1 = PGFinancialComponentGeneratorQ1(self.data_provider)
     
     def setup_page(self):
         """페이지 기본 설정"""
@@ -93,7 +95,7 @@ class StreamlitApp:
         
         # Q1 버튼
         if cols[8].button(q_button_titles[0]):
-            st.header("Q1 (P&G가 2013년 4월 공급업체 지불 기간을 연장한 이유)")
+            st.header("Q1 - P&G가 2013년 4월 공급업체 지불 기간을 연장한 이유")
             self.render_q1()
         
         # Q2 버튼
@@ -420,10 +422,35 @@ class StreamlitApp:
             st.exception(e)
     
     def render_q1(self):
-        """Q1 - 질문 1에 대한 응답"""
-        st.write("질문 1에 대한 응답 내용이 여기에 표시됩니다.")
-        # 여기에 Q1에 대한 구체적인 내용을 추가하세요
+        """Q1 - P&G가 2013년 4월 공급업체 지불 기간을 연장한 이유"""
         
+        # Q1 탭용 재무 컴포넌트 표시
+        st.components.v1.html(self.pg_financial_generator_q1.generate_html(), height=1000, scrolling=True)
+        
+        st.markdown("""
+        ### 주요 이유:
+        
+        1. **운전자본 최적화**: 
+           - P&G는 매출 성장이 정체되고 있는 상황에서 현금흐름을 개선하기 위해 운전자본 최적화가 필요했습니다.
+           - 공급업체 지불 기간을 45일에서 75일로 연장함으로써 현금 유출을 지연시켜 운전자본을 개선할 수 있었습니다.
+        
+        2. **신용등급 활용**: 
+           - P&G는 AA- 신용등급을 보유하고 있어 공급업체에 유리한 금리로 조기지불 옵션을 제공할 수 있었습니다.
+           - 이는 공급업체에게도 이점이 되는 윈-윈 솔루션이었습니다.
+        
+        3. **공급업체 관계 유지**: 
+           - 단순히 지불 기간을 연장하는 것이 아니라, 조기지불 옵션을 통해 공급업체의 자금 조달 비용을 절감할 수 있는 방안을 제시했습니다.
+           - 이를 통해 공급업체 관계를 해치지 않고도 운전자본을 개선할 수 있었습니다.
+        
+        4. **자본 효율성**: 
+           - 손익계산서에 직접적인 영향을 주지 않으면서 현금흐름을 개선할 수 있는 방법이었습니다.
+           - 특히 2015년 베네수엘라 사업 회계방식 변경으로 인한 일회성 비용 발생 전에 현금 버퍼를 확보하는 데 도움이 되었습니다.
+        
+        5. **산업 리더십**: 
+           - P&G는 공급망 금융에 대한 혁신적인 접근법을 통해 산업 내 리더십을 강화했습니다.
+           - 이는 경쟁사 대비 차별화된 전략이 되었습니다.
+        """)
+    
     def render_q2(self):
         """Q2 - 질문 2에 대한 응답"""
         st.write("질문 2에 대한 응답 내용이 여기에 표시됩니다.")
