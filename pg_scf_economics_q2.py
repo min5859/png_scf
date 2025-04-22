@@ -2,7 +2,7 @@ import json
 from typing import Dict, Any
 
 class PGSCFEconomicsQ2Generator:
-    """Q2 시각화를 위한 Chart.js 컴포넌트 생성기"""
+    """Q2 시각화를 위한 메시지 카드 컴포넌트 생성기"""
     
     def __init__(self):
         """초기화"""
@@ -48,239 +48,257 @@ class PGSCFEconomicsQ2Generator:
         }
     
     def generate_html(self) -> str:
-        """Chart.js를 사용한 HTML 코드 생성"""
-        # 데이터를 JSON 형식으로 변환
-        pg_positive_labels = json.dumps([item['title'] for item in self.data['pg_impact']['positive']])
-        pg_negative_labels = json.dumps([item['title'] for item in self.data['pg_impact']['negative']])
-        fibria_negative_labels = json.dumps([item['title'] for item in self.data['fibria_impact']['negative']])
-        fibria_considerations_labels = json.dumps([item['title'] for item in self.data['fibria_impact']['considerations']])
-        
+        """메시지 카드 형식의 HTML 코드 생성"""
         return f"""
-        <div class="container mx-auto p-4">
-            <h1 class="text-2xl font-bold text-center mb-8">Q2: P&G의 결제 조건 연장이 재무상태에 미치는 영향</h1>
+        <style>
+            .container {{
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 2rem;
+                font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            }}
+            
+            .title {{
+                color: #4263EB;
+                font-size: 2rem;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 2rem;
+            }}
+            
+            .card {{
+                background: #F8F9FF;
+                border-radius: 1rem;
+                padding: 2rem;
+                margin-bottom: 2rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }}
+            
+            .card-title {{
+                font-size: 1.5rem;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 1.5rem;
+            }}
+            
+            .payment-terms {{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                margin-bottom: 1.5rem;
+            }}
+            
+            .term-box {{
+                background: #F1F3F5;
+                padding: 1rem 2rem;
+                border-radius: 0.5rem;
+                text-align: center;
+            }}
+            
+            .term-label {{
+                font-weight: bold;
+                margin-bottom: 0.5rem;
+            }}
+            
+            .term-value {{
+                font-size: 2rem;
+                font-weight: bold;
+            }}
+            
+            .arrow {{
+                font-size: 2rem;
+                color: #4263EB;
+            }}
+            
+            .description {{
+                text-align: center;
+                font-size: 1.1rem;
+                color: #495057;
+                margin-top: 1rem;
+            }}
+            
+            .impact-grid {{
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 1.5rem;
+                margin-top: 1.5rem;
+            }}
+            
+            .impact-item {{
+                background: white;
+                padding: 1.5rem;
+                border-radius: 0.5rem;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            }}
+            
+            .impact-item.positive {{
+                border-left: 4px solid #40C057;
+            }}
+            
+            .impact-item.negative {{
+                border-left: 4px solid #FA5252;
+            }}
+            
+            .impact-item.consideration {{
+                border-left: 4px solid #FD7E14;
+            }}
+            
+            .impact-title {{
+                font-weight: bold;
+                margin-bottom: 0.5rem;
+            }}
+            
+            .impact-value {{
+                font-size: 1.2rem;
+                color: #4263EB;
+                margin-bottom: 0.5rem;
+            }}
+            
+            .impact-detail {{
+                color: #666;
+                font-size: 0.9rem;
+            }}
+            
+            .flex-container {{
+                display: flex;
+                gap: 2rem;
+                margin-top: 1.5rem;
+            }}
+            
+            .flex-half {{
+                flex: 1;
+            }}
+            
+            .comparison-box {{
+                background: #F8F9FA;
+                padding: 1.5rem;
+                border-radius: 0.5rem;
+                margin-bottom: 1rem;
+            }}
+            
+            .comparison-title {{
+                font-weight: bold;
+                color: #4263EB;
+                margin-bottom: 1rem;
+            }}
+            
+            .comparison-value {{
+                font-size: 1.5rem;
+                font-weight: bold;
+                margin-bottom: 0.5rem;
+            }}
+            
+            .comparison-detail {{
+                color: #666;
+                font-size: 0.9rem;
+            }}
+        </style>
+        
+        <div class="container">
+            <h1 class="title">SCF 프로그램 없는 결제 조건 연장의 영향</h1>
             
             <!-- 결제 조건 변경 -->
-            <div class="bg-white rounded-lg p-6 mb-8 shadow-md">
-                <h2 class="text-xl font-bold mb-4 text-blue-700">SCF 프로그램 없는 결제 조건 연장의 영향</h2>
-                <div class="flex justify-center mb-6">
-                    <div class="w-1/2">
-                        <canvas id="paymentTermsChart"></canvas>
+            <div class="card">
+                <h2 class="card-title">결제 조건 변경</h2>
+                <div class="payment-terms">
+                    <div class="term-box">
+                        <div class="term-label">기존</div>
+                        <div class="term-value">{self.data['payment_terms']['before']}일</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="term-box">
+                        <div class="term-label">변경</div>
+                        <div class="term-value">{self.data['payment_terms']['after']}일</div>
                     </div>
                 </div>
-                <p class="text-center">P&G는 공급업체에 대한 지급을 평균 30일 연장함으로써<br />약 40억 달러의 현금을 30일 더 보유할 수 있게 됨</p>
+                <div class="description">
+                    평균 지급 기간 {self.data['payment_terms']['change']}일 연장
+                </div>
+                <div class="description">
+                    P&G는 공급업체에 대한 지급을 평균 30일 연장함으로써<br>
+                    약 40억 달러의 현금을 30일 더 보유할 수 있게 됨
+                </div>
             </div>
             
             <!-- P&G 영향 -->
-            <div class="bg-white rounded-lg p-6 mb-8 shadow-md">
-                <h2 class="text-xl font-bold mb-4 text-blue-700">P&G에 미치는 영향</h2>
-                <div class="flex">
-                    <div class="w-1/2 pr-4">
-                        <canvas id="pgPositiveImpactChart"></canvas>
+            <div class="card">
+                <h2 class="card-title">P&G에 미치는 영향</h2>
+                <div class="flex-container">
+                    <div class="flex-half">
+                        <h3 class="card-title" style="color: #40C057">긍정적 영향</h3>
+                        <div class="impact-grid">
+                            {self._generate_impact_items(self.data['pg_impact']['positive'], 'positive')}
+                        </div>
                     </div>
-                    <div class="w-1/2 pl-4">
-                        <canvas id="pgNegativeImpactChart"></canvas>
+                    <div class="flex-half">
+                        <h3 class="card-title" style="color: #FA5252">부정적 영향</h3>
+                        <div class="impact-grid">
+                            {self._generate_impact_items(self.data['pg_impact']['negative'], 'negative')}
+                        </div>
                     </div>
                 </div>
             </div>
             
             <!-- Fibria 영향 -->
-            <div class="bg-white rounded-lg p-6 mb-8 shadow-md">
-                <h2 class="text-xl font-bold mb-4 text-blue-700">Fibria에 미치는 영향</h2>
-                <div class="flex">
-                    <div class="w-1/2 pr-4">
-                        <canvas id="fibriaNegativeImpactChart"></canvas>
+            <div class="card">
+                <h2 class="card-title">Fibria에 미치는 영향</h2>
+                <div class="flex-container">
+                    <div class="flex-half">
+                        <h3 class="card-title" style="color: #FA5252">부정적 영향</h3>
+                        <div class="impact-grid">
+                            {self._generate_impact_items(self.data['fibria_impact']['negative'], 'negative')}
+                        </div>
                     </div>
-                    <div class="w-1/2 pl-4">
-                        <canvas id="fibriaConsiderationsChart"></canvas>
+                    <div class="flex-half">
+                        <h3 class="card-title" style="color: #FD7E14">추가 고려사항</h3>
+                        <div class="impact-grid">
+                            {self._generate_impact_items(self.data['fibria_impact']['considerations'], 'consideration')}
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <!-- 이자비용 비교 -->
-            <div class="bg-white rounded-lg p-6 mb-8 shadow-md">
-                <h2 class="text-xl font-bold mb-4 text-blue-700">이자비용 차이의 불균형</h2>
-                <div class="flex justify-center">
-                    <div class="w-4/5">
-                        <canvas id="interestCostComparisonChart"></canvas>
+            <!-- 이자비용 차이의 불균형 -->
+            <div class="card">
+                <h2 class="card-title">이자비용 차이의 불균형</h2>
+                <div class="flex-container">
+                    <div class="flex-half">
+                        <div class="comparison-box">
+                            <div class="comparison-title">P&G 이자 절감</div>
+                            <div class="comparison-value">
+                                {self.data['interest_cost_comparison']['pg_savings']['min']}~
+                                {self.data['interest_cost_comparison']['pg_savings']['max']} 
+                                {self.data['interest_cost_comparison']['pg_savings']['unit']}
+                            </div>
+                            <div class="comparison-detail">AA등급 기준 0.25%~0.50% × 40억 달러</div>
+                        </div>
+                    </div>
+                    <div class="flex-half">
+                        <div class="comparison-box">
+                            <div class="comparison-title">Fibria 이자 부담</div>
+                            <div class="comparison-value">
+                                {self.data['interest_cost_comparison']['fibria_cost']['min']}~
+                                {self.data['interest_cost_comparison']['fibria_cost']['max']} 
+                                {self.data['interest_cost_comparison']['fibria_cost']['unit']}
+                            </div>
+                            <div class="comparison-detail">BBB- 등급 기준 2.0%~3.0% × 3,700만 달러</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
-            // 결제 조건 차트
-            const paymentTermsCtx = document.getElementById('paymentTermsChart').getContext('2d');
-            new Chart(paymentTermsCtx, {{
-                type: 'bar',
-                data: {{
-                    labels: ['기존', '변경'],
-                    datasets: [{{
-                        label: '결제 기간 (일)',
-                        data: [{self.data['payment_terms']['before']}, {self.data['payment_terms']['after']}],
-                        backgroundColor: ['rgba(54, 162, 235, 0.5)', 'rgba(255, 99, 132, 0.5)'],
-                        borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)'],
-                        borderWidth: 1
-                    }}]
-                }},
-                options: {{
-                    responsive: true,
-                    scales: {{
-                        y: {{
-                            beginAtZero: true,
-                            title: {{
-                                display: true,
-                                text: '일'
-                            }}
-                        }}
-                    }}
-                }}
-            }});
-
-            // P&G 긍정적 영향 차트
-            const pgPositiveCtx = document.getElementById('pgPositiveImpactChart').getContext('2d');
-            new Chart(pgPositiveCtx, {{
-                type: 'radar',
-                data: {{
-                    labels: {pg_positive_labels},
-                    datasets: [{{
-                        label: '긍정적 영향',
-                        data: [100, 100, 100, 100],
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        pointBackgroundColor: 'rgba(75, 192, 192, 1)',
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: 'rgba(75, 192, 192, 1)'
-                    }}]
-                }},
-                options: {{
-                    responsive: true,
-                    scales: {{
-                        r: {{
-                            beginAtZero: true,
-                            max: 100
-                        }}
-                    }}
-                }}
-            }});
-
-            // P&G 부정적 영향 차트
-            const pgNegativeCtx = document.getElementById('pgNegativeImpactChart').getContext('2d');
-            new Chart(pgNegativeCtx, {{
-                type: 'radar',
-                data: {{
-                    labels: {pg_negative_labels},
-                    datasets: [{{
-                        label: '부정적 영향',
-                        data: [80, 80, 80, 80],
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        pointBackgroundColor: 'rgba(255, 99, 132, 1)',
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: 'rgba(255, 99, 132, 1)'
-                    }}]
-                }},
-                options: {{
-                    responsive: true,
-                    scales: {{
-                        r: {{
-                            beginAtZero: true,
-                            max: 100
-                        }}
-                    }}
-                }}
-            }});
-
-            // Fibria 부정적 영향 차트
-            const fibriaNegativeCtx = document.getElementById('fibriaNegativeImpactChart').getContext('2d');
-            new Chart(fibriaNegativeCtx, {{
-                type: 'bar',
-                data: {{
-                    labels: {fibria_negative_labels},
-                    datasets: [{{
-                        label: '부정적 영향',
-                        data: [100, 100, 100, 100, 100],
-                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
-                    }}]
-                }},
-                options: {{
-                    responsive: true,
-                    scales: {{
-                        y: {{
-                            beginAtZero: true,
-                            max: 100
-                        }}
-                    }}
-                }}
-            }});
-
-            // Fibria 고려사항 차트
-            const fibriaConsiderationsCtx = document.getElementById('fibriaConsiderationsChart').getContext('2d');
-            new Chart(fibriaConsiderationsCtx, {{
-                type: 'doughnut',
-                data: {{
-                    labels: {fibria_considerations_labels},
-                    datasets: [{{
-                        data: [25, 25, 25, 25],
-                        backgroundColor: [
-                            'rgba(255, 206, 86, 0.5)',
-                            'rgba(75, 192, 192, 0.5)',
-                            'rgba(153, 102, 255, 0.5)',
-                            'rgba(255, 159, 64, 0.5)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }}]
-                }},
-                options: {{
-                    responsive: true
-                }}
-            }});
-
-            // 이자비용 비교 차트
-            const interestCostCtx = document.getElementById('interestCostComparisonChart').getContext('2d');
-            new Chart(interestCostCtx, {{
-                type: 'bar',
-                data: {{
-                    labels: ['P&G 이자 절감', 'Fibria 이자 부담'],
-                    datasets: [{{
-                        label: '연간 이자비용 (백만 달러)',
-                        data: [
-                            {self.data['interest_cost_comparison']['pg_savings']['max']},
-                            {self.data['interest_cost_comparison']['fibria_cost']['max']}
-                        ],
-                        backgroundColor: [
-                            'rgba(75, 192, 192, 0.5)',
-                            'rgba(255, 99, 132, 0.5)'
-                        ],
-                        borderColor: [
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(255, 99, 132, 1)'
-                        ],
-                        borderWidth: 1
-                    }}]
-                }},
-                options: {{
-                    responsive: true,
-                    scales: {{
-                        y: {{
-                            beginAtZero: true,
-                            title: {{
-                                display: true,
-                                text: '백만 달러/년'
-                            }}
-                        }}
-                    }}
-                }}
-            }});
-        </script>
-        """ 
+        """
+    
+    def _generate_impact_items(self, items: list, item_type: str) -> str:
+        """영향 항목들의 HTML 생성"""
+        html = ""
+        for item in items:
+            html += f"""
+                <div class="impact-item {item_type}">
+                    <div class="impact-title">{item['title']}</div>
+                    {'<div class="impact-value">' + item['value'] + '</div>' if 'value' in item else ''}
+                    <div class="impact-detail">{item['detail']}</div>
+                </div>
+            """
+        return html 
