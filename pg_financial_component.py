@@ -14,7 +14,100 @@ class PGFinancialComponentGenerator:
     def generate_html(self) -> str:
         """Chart.js 컴포넌트를 포함한 HTML 코드를 생성하여 반환"""
         html_template = self._get_html_template()
-        pg_financial_data = self.data_provider.pg_financial_data
+        
+        # 재무 데이터 정의
+        pg_financial_data = [
+            {
+                'year': 2011,
+                'revenue': 81104,
+                'cogs': 39859,
+                'grossProfit': 41245,
+                'sga': 25750,
+                'operatingIncome': 15495,
+                'netIncome': 11797,
+                'cogsRatio': round((39859 / 81104) * 100, 1),  # COGS/매출 비율
+                'sgaRatio': round((25750 / 81104) * 100, 1),   # SG&A/매출 비율
+                'grossMargin': round((41245 / 81104) * 100, 1),
+                'operatingMargin': round((15495 / 81104) * 100, 1),
+                'netMargin': round((11797 / 81104) * 100, 1),
+                'employees': 129000,
+                'eps': 4.04,
+                'dividend': 1.97,
+                'sharesOutstanding': 2804
+            },
+            {
+                'year': 2012,
+                'revenue': 82006,
+                'cogs': 41411,
+                'grossProfit': 40595,
+                'sga': 25984,
+                'operatingIncome': 14611,
+                'netIncome': 10756,
+                'cogsRatio': round((41411 / 82006) * 100, 1),
+                'sgaRatio': round((25984 / 82006) * 100, 1),
+                'grossMargin': round((40595 / 82006) * 100, 1),
+                'operatingMargin': round((14611 / 82006) * 100, 1),
+                'netMargin': round((10756 / 82006) * 100, 1),
+                'employees': 126000,
+                'eps': 3.66,
+                'dividend': 2.14,
+                'sharesOutstanding': 2780
+            },
+            {
+                'year': 2013,
+                'revenue': 80116,
+                'cogs': 39991,
+                'grossProfit': 40125,
+                'sga': 26000,
+                'operatingIncome': 14125,
+                'netIncome': 11312,
+                'cogsRatio': round((39991 / 80116) * 100, 1),
+                'sgaRatio': round((26000 / 80116) * 100, 1),
+                'grossMargin': round((40125 / 80116) * 100, 1),
+                'operatingMargin': round((14125 / 80116) * 100, 1),
+                'netMargin': round((11312 / 80116) * 100, 1),
+                'employees': 121000,
+                'eps': 3.86,
+                'dividend': 2.29,
+                'sharesOutstanding': 2742
+            },
+            {
+                'year': 2014,
+                'revenue': 80510,
+                'cogs': 40611,
+                'grossProfit': 39899,
+                'sga': 24402,
+                'operatingIncome': 15497,
+                'netIncome': 11643,
+                'cogsRatio': round((40611 / 80510) * 100, 1),
+                'sgaRatio': round((24402 / 80510) * 100, 1),
+                'grossMargin': round((39899 / 80510) * 100, 1),
+                'operatingMargin': round((15497 / 80510) * 100, 1),
+                'netMargin': round((11643 / 80510) * 100, 1),
+                'employees': 118000,
+                'eps': 4.01,
+                'dividend': 2.45,
+                'sharesOutstanding': 2730
+            },
+            {
+                'year': 2015,
+                'revenue': 76279,
+                'cogs': 38248,
+                'grossProfit': 38031,
+                'sga': 23158,
+                'operatingIncome': 14873,
+                'netIncome': 7036,
+                'cogsRatio': round((38248 / 76279) * 100, 1),
+                'sgaRatio': round((23158 / 76279) * 100, 1),
+                'grossMargin': round((38031 / 76279) * 100, 1),
+                'operatingMargin': round((14873 / 76279) * 100, 1),
+                'netMargin': round((7036 / 76279) * 100, 1),
+                'employees': 110000,
+                'eps': 2.44,
+                'dividend': 2.59,
+                'sharesOutstanding': 2712
+            }
+        ]
         
         # 데이터를 JSON 문자열로 변환하여 삽입
         try:
@@ -242,10 +335,21 @@ class PGFinancialComponentGenerator:
                         * 지속적인 자사주 매입으로 발행주식수 감소 (2011년 2,804백만주 → 2015년 2,712백만주)
                     </div>
                 </div>
-                
-                <!-- 차트 컨테이너 6: 주요 인사이트 -->
+
+                <!-- 차트 컨테이너 6: 매출 대비 비용 구조 -->
                 <div class="chart-container">
-                    <div class="chart-title">6. 주요 인사이트</div>
+                    <div class="chart-title">6. 매출 대비 비용 구조 (%)</div>
+                    <div style="height: 400px; width: 100%;">
+                        <canvas id="costStructureChart"></canvas>
+                    </div>
+                    <div class="chart-note">
+                        * COGS와 SG&A 비용이 매출의 약 80%를 차지하며, 2012년 이후 SG&A 비용이 지속적으로 감소
+                    </div>
+                </div>
+                
+                <!-- 차트 컨테이너 7: 주요 인사이트 -->
+                <div class="chart-container">
+                    <div class="chart-title">7. 주요 인사이트</div>
                     <div class="grid">
                         <div class="insight-box">
                             <div class="insight-title">매출 정체 및 하락</div>
@@ -271,9 +375,9 @@ class PGFinancialComponentGenerator:
                     </div>
                 </div>
                 
-                <!-- 차트 컨테이너 7: SCF 프로그램의 전략적 중요성 -->
+                <!-- 차트 컨테이너 8: SCF 프로그램의 전략적 중요성 -->
                 <div class="chart-container">
-                    <div class="chart-title">7. SCF 프로그램의 전략적 중요성</div>
+                    <div class="chart-title">8. SCF 프로그램의 전략적 중요성</div>
                     <div class="strategy-box">
                         <div class="strategy-title">P&G의 SCF 프로그램 추진 필요성</div>
                         <ul class="strategy-list">
@@ -286,9 +390,9 @@ class PGFinancialComponentGenerator:
                     </div>
                 </div>
                 
-                <!-- 차트 컨테이너 8: SCF 프로그램 도입 시점 및 효과 -->
+                <!-- 차트 컨테이너 9: SCF 프로그램 도입 시점 및 효과 -->
                 <div class="chart-container">
-                    <div class="chart-title">8. SCF 프로그램 도입 및 효과</div>
+                    <div class="chart-title">9. SCF 프로그램 도입 및 효과</div>
                     <div class="timeline-container">
                         <div style="text-align: center; margin-bottom: 20px;">
                             <div class="timeline-event">2013년 4월: P&G SCF 프로그램 도입 시점</div>
@@ -865,6 +969,129 @@ class PGFinancialComponentGenerator:
                                     }
                                 }
                             }
+                        }
+                    }
+                });
+
+                // 6. 매출 대비 비용 구조 차트
+                new Chart(document.getElementById('costStructureChart').getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: years,
+                        datasets: [
+                            {
+                                type: 'bar',
+                                label: '매출',
+                                data: pgFinancialData.map(item => 100),
+                                backgroundColor: 'rgba(54, 162, 235, 0.3)',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                borderWidth: 1,
+                                categoryPercentage: 0.8,
+                                barPercentage: 0.5
+                            },
+                            {
+                                type: 'bar',
+                                label: 'COGS/매출',
+                                data: pgFinancialData.map(item => item.cogsRatio),
+                                backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1,
+                                stack: 'Stack 0',
+                                categoryPercentage: 0.8,
+                                barPercentage: 0.5
+                            },
+                            {
+                                type: 'bar',
+                                label: 'SG&A/매출',
+                                data: pgFinancialData.map(item => item.sgaRatio),
+                                backgroundColor: 'rgba(255, 159, 64, 0.7)',
+                                borderColor: 'rgba(255, 159, 64, 1)',
+                                borderWidth: 1,
+                                stack: 'Stack 0',
+                                categoryPercentage: 0.8,
+                                barPercentage: 0.5
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    font: {
+                                        size: 14
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        let value = context.raw;
+                                        
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        
+                                        // 실제 데이터 값을 표시
+                                        if (label.includes('매출')) {
+                                            label += '100%';
+                                            const yearData = pgFinancialData[context.dataIndex];
+                                            label += ` ($${yearData.revenue.toLocaleString()} 백만)`;
+                                        } else {
+                                            label += value.toFixed(1) + '%';
+                                            
+                                            // COGS와 SG&A의 실제 금액도 표시
+                                            const yearData = pgFinancialData[context.dataIndex];
+                                            if (label.includes('COGS')) {
+                                                label += ` ($${yearData.cogs.toLocaleString()} 백만)`;
+                                            } else if (label.includes('SG&A')) {
+                                                label += ` ($${yearData.sga.toLocaleString()} 백만)`;
+                                            }
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: '연도',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold'
+                                    }
+                                }
+                            },
+                            y: {
+                                stacked: true,
+                                min: 0,
+                                max: 100,
+                                title: {
+                                    display: true,
+                                    text: '매출 대비 비율 (%)',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold'
+                                    }
+                                },
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%';
+                                    }
+                                }
+                            }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
                         }
                     }
                 });
