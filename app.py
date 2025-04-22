@@ -46,80 +46,80 @@ class StreamlitApp:
     
     def render_buttons(self):
         """버튼 렌더링"""
-        # 버튼 생성 - Exhibit 1부터 Exhibit 8까지 생성
-        button_titles = [f"Exhibit {i}" for i in range(1, 9)]
-        
         # Q 버튼 생성 - Q1부터 Q6까지
         q_button_titles = [f"Q{i}" for i in range(1, 7)]
+        
+        # Exhibit 버튼 생성 - Exhibit 1부터 Exhibit 8까지
+        button_titles = [f"Exhibit {i}" for i in range(1, 9)]
         
         # 모든 버튼을 하나의 행에 배치하기 위한 컨테이너 생성 (14개 컬럼)
         cols = st.columns(14)
         
-        # Exhibit 1 - P&G 재무 지표 시각화
-        if cols[0].button(button_titles[0]):
-            st.header("P&G 재무 지표 시각화 (Exhibit 1)")
-            self.render_exhibit_1()
-        
-        # Exhibit 2 - P&G 대차대조표 분석
-        if cols[1].button(button_titles[1]):
-            st.header("P&G 대차대조표 분석 (Exhibit 2)")
-            self.render_exhibit_2()
-        
-        # Exhibit 3 - P&G 운전자본 분석
-        if cols[2].button(button_titles[2]):
-            st.header("P&G 운전자본 분석 (Exhibit 3)")
-            self.render_exhibit_3()
-        
-        # Exhibit 4 - P&G SCF 경제적 효과 분석
-        if cols[3].button("Example"):
-            self.render_exhibit_4()
-        
-        # Exhibit 5 - Fibria 재무 분석
-        if cols[4].button(button_titles[4]):
-            st.header("Fibria 셀룰로즈 재무 분석 (Exhibit 5)")
-            self.render_exhibit_5()
-        
-        # Exhibit 6 - Fibria 대차대조표 분석
-        if cols[5].button(button_titles[5]):
-            st.header("Fibria 셀룰로즈 대차대조표 분석 (Exhibit 6)")
-            self.render_exhibit_6()
-        
-        # Exhibit 7 - Fibria 운전자본 분석
-        if cols[6].button(button_titles[6]):
-            st.header("Fibria 운전자본 분석 (Exhibit 7)")
-            self.render_exhibit_7()
-        
-        # Exhibit 8 - 시장 금리 현황 분석
-        if cols[7].button(button_titles[7]):
-            st.header("시장 금리 현황 분석 (Exhibit 8)")
-            self.render_exhibit_8()
-        
         # Q1 버튼
-        if cols[8].button(q_button_titles[0]):
+        if cols[0].button(q_button_titles[0]):
             st.header("Q1 - P&G가 2013년 4월 공급업체 지불 기간을 연장한 이유")
             self.render_q1()
         
         # Q2 버튼
-        if cols[9].button(q_button_titles[1]):
+        if cols[1].button(q_button_titles[1]):
             st.header("Q2 (새로운 지불 조건이 P&G와 Fibria에 미친 영향)")
             self.render_q2()
         
         # Q3 버튼
-        if cols[10].button(q_button_titles[2]):
+        if cols[2].button(q_button_titles[2]):
             self.render_q3()
         
         # Q4 버튼
-        if cols[11].button(q_button_titles[3]):
+        if cols[3].button(q_button_titles[3]):
             self.render_q4()
         
         # Q5 버튼
-        if cols[12].button(q_button_titles[4]):
+        if cols[4].button(q_button_titles[4]):
             st.header("Q5 (Fibria가 SCF 프로그램을 계속 사용해야 하는지 여부)")
             self.render_q5()
         
         # Q6 버튼
-        if cols[13].button(q_button_titles[5]):
+        if cols[5].button(q_button_titles[5]):
             self.render_q6()
+        
+        # Exhibit 1 - P&G 재무 지표 시각화
+        if cols[6].button(button_titles[0]):
+            st.header("P&G 재무 지표 시각화 (Exhibit 1)")
+            self.render_exhibit_1()
+        
+        # Exhibit 2 - P&G 대차대조표 분석
+        if cols[7].button(button_titles[1]):
+            st.header("P&G 대차대조표 분석 (Exhibit 2)")
+            self.render_exhibit_2()
+        
+        # Exhibit 3 - P&G 운전자본 분석
+        if cols[8].button(button_titles[2]):
+            st.header("P&G 운전자본 분석 (Exhibit 3)")
+            self.render_exhibit_3()
+        
+        # Exhibit 4 - P&G SCF 경제적 효과 분석
+        if cols[9].button("Example"):
+            self.render_exhibit_4()
+        
+        # Exhibit 5 - Fibria 재무 분석
+        if cols[10].button(button_titles[4]):
+            st.header("Fibria 셀룰로즈 재무 분석 (Exhibit 5)")
+            self.render_exhibit_5()
+        
+        # Exhibit 6 - Fibria 대차대조표 분석
+        if cols[11].button(button_titles[5]):
+            st.header("Fibria 셀룰로즈 대차대조표 분석 (Exhibit 6)")
+            self.render_exhibit_6()
+        
+        # Exhibit 7 - Fibria 운전자본 분석
+        if cols[12].button(button_titles[6]):
+            st.header("Fibria 운전자본 분석 (Exhibit 7)")
+            self.render_exhibit_7()
+        
+        # Exhibit 8 - 시장 금리 현황 분석
+        if cols[13].button(button_titles[7]):
+            st.header("시장 금리 현황 분석 (Exhibit 8)")
+            self.render_exhibit_8()
     
     def render_exhibit_1(self):
         """Exhibit 1 - P&G 재무 지표 시각화 (Chart.js 사용)"""
