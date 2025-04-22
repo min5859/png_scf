@@ -303,42 +303,9 @@ class PGFinancialComponentGenerator:
                     </div>
                 </div>
                 
-                <!-- 차트 컨테이너 3: 임직원 수 추이 -->
+                <!-- 차트 컨테이너 3: 매출 대비 비용 구조 -->
                 <div class="chart-container">
-                    <div class="chart-title">3. 임직원 수 및 매출 추이</div>
-                    <div style="height: 450px; width: 100%;">
-                        <canvas id="employeesChart"></canvas>
-                    </div>
-                    <div class="chart-note">
-                        * 2011-2015년 사이 임직원 수 15% 감소 (129,000명 → 110,000명)
-                    </div>
-                </div>
-
-                <!-- 차트 컨테이너 4: 주주 가치 지표 -->
-                <div class="chart-container">
-                    <div class="chart-title">4. 주주 가치 지표</div>
-                    <div style="height: 450px; width: 100%;">
-                        <canvas id="shareholderValueChart"></canvas>
-                    </div>
-                    <div class="chart-note">
-                        * 순이익 감소에도 불구하고 배당금은 꾸준히 증가 (주주 가치 유지 노력)
-                    </div>
-                </div>
-
-                <!-- 차트 컨테이너 5: 평균 발행주식수 -->
-                <div class="chart-container">
-                    <div class="chart-title">5. 평균 발행주식수 추이</div>
-                    <div style="height: 400px; width: 100%;">
-                        <canvas id="sharesOutstandingChart"></canvas>
-                    </div>
-                    <div class="chart-note">
-                        * 지속적인 자사주 매입으로 발행주식수 감소 (2011년 2,804백만주 → 2015년 2,712백만주)
-                    </div>
-                </div>
-
-                <!-- 차트 컨테이너 6: 매출 대비 비용 구조 -->
-                <div class="chart-container">
-                    <div class="chart-title">6. 매출 대비 비용 구조 (%)</div>
+                    <div class="chart-title">3. 매출 대비 비용 구조 (%)</div>
                     <div style="height: 400px; width: 100%;">
                         <canvas id="costStructureChart"></canvas>
                     </div>
@@ -347,6 +314,39 @@ class PGFinancialComponentGenerator:
                     </div>
                 </div>
                 
+                <!-- 차트 컨테이너 4: 임직원 수 추이 -->
+                <div class="chart-container">
+                    <div class="chart-title">4. 임직원 수 및 매출 추이</div>
+                    <div style="height: 450px; width: 100%;">
+                        <canvas id="employeesChart"></canvas>
+                    </div>
+                    <div class="chart-note">
+                        * 2011-2015년 사이 임직원 수 15% 감소 (129,000명 → 110,000명)
+                    </div>
+                </div>
+
+                <!-- 차트 컨테이너 5: 주주 가치 지표 -->
+                <div class="chart-container">
+                    <div class="chart-title">5. 주주 가치 지표</div>
+                    <div style="height: 450px; width: 100%;">
+                        <canvas id="shareholderValueChart"></canvas>
+                    </div>
+                    <div class="chart-note">
+                        * 순이익 감소에도 불구하고 배당금은 꾸준히 증가 (주주 가치 유지 노력)
+                    </div>
+                </div>
+
+                <!-- 차트 컨테이너 6: 평균 발행주식수 -->
+                <div class="chart-container">
+                    <div class="chart-title">6. 평균 발행주식수 추이</div>
+                    <div style="height: 400px; width: 100%;">
+                        <canvas id="sharesOutstandingChart"></canvas>
+                    </div>
+                    <div class="chart-note">
+                        * 지속적인 자사주 매입으로 발행주식수 감소 (2011년 2,804백만주 → 2015년 2,712백만주)
+                    </div>
+                </div>
+
                 <!-- 차트 컨테이너 7: 주요 인사이트 -->
                 <div class="chart-container">
                     <div class="chart-title">7. 주요 인사이트</div>
