@@ -15,6 +15,7 @@ from pg_scf_economics import PGSCFEconomicsGenerator
 from pg_scf_economics_q4 import PGSCFEconomicsQ4Generator
 from pg_financial_component_q1 import PGFinancialComponentGeneratorQ1
 from pg_scf_economics_q3 import PGSCFEconomicsQ3Generator
+from pg_scf_economics_q2 import PGSCFEconomicsQ2Generator
 from PIL import Image
 import os
 import numpy as np
@@ -453,9 +454,33 @@ class StreamlitApp:
     
     def render_q2(self):
         """Q2 - 질문 2에 대한 응답"""
-        st.write("질문 2에 대한 응답 내용이 여기에 표시됩니다.")
-        # 여기에 Q2에 대한 구체적인 내용을 추가하세요
+        st.header("Q2 (새로운 지불 조건이 P&G와 Fibria에 미친 영향)")
         
+        # Generator 객체 생성
+        scf_economics_generator = PGSCFEconomicsQ2Generator()
+        
+        # Chart.js를 사용한 HTML 코드 생성
+        html_code = scf_economics_generator.generate_html()
+        
+        # 디버깅 옵션 추가
+        debug_mode = st.sidebar.checkbox("디버깅 모드", value=True, key="debug_mode_q2")
+        
+        if debug_mode:
+            st.sidebar.subheader("디버깅 정보")
+            
+            # HTML 코드 길이 표시
+            st.sidebar.text(f"HTML 코드 길이: {len(html_code)} 문자")
+            
+            # HTML 코드 일부 표시
+            with st.sidebar.expander("HTML 코드 미리보기", expanded=False):
+                st.code(html_code[:1000] + "...", language="html")
+        
+        # HTML 렌더링 높이 설정
+        height = st.sidebar.slider("차트 영역 높이", 2000, 5000, 3000, 100, key="height_slider_q2") if debug_mode else 3000
+        
+        # HTML 렌더링
+        st.components.v1.html(html_code, height=height, scrolling=True)
+    
     def render_q3(self):
         """Q3 - 질문 3에 대한 응답"""
         st.header("Q3: P&G가 2013년 4월에 새로운 결제 조건과 함께 SCF 프로그램을 동시에 시작한 이유는 무엇인가요?")
