@@ -75,6 +75,25 @@ class PGFinancialComponentGeneratorQ1:
                     margin-bottom: 20px;
                     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
                 }
+                .quote-box {
+                    background-color: #fff5f5;
+                    border-radius: 8px;
+                    border-left: 4px solid #ff6b6b;
+                    padding: 15px;
+                    margin-bottom: 20px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+                }
+                .quote {
+                    font-style: italic;
+                    color: #c92a2a;
+                    margin-bottom: 10px;
+                    line-height: 1.6;
+                }
+                .quote-author {
+                    text-align: right;
+                    font-weight: bold;
+                    color: #666;
+                }
                 .insight-title {
                     font-weight: bold;
                     color: #003366;
@@ -90,6 +109,20 @@ class PGFinancialComponentGeneratorQ1:
                     color: #666;
                     font-style: italic;
                     margin-top: 5px;
+                }
+                .formula-box {
+                    background-color: #fff5f5;
+                    border-radius: 8px;
+                    padding: 15px;
+                    margin: 20px 0;
+                    border-left: 4px solid #ff6b6b;
+                }
+                .formula {
+                    font-family: 'Courier New', monospace;
+                    font-size: 16px;
+                    color: #c92a2a;
+                    text-align: center;
+                    margin: 10px 0;
                 }
                 @media (max-width: 768px) {
                     .grid {
@@ -109,25 +142,39 @@ class PGFinancialComponentGeneratorQ1:
                 <div class="chart-container">
                     <div class="grid">
                         <div class="insight-box">
-                            <div class="insight-title">매출 정체 및 하락</div>
-                            <div class="insight-content">매출 성장이 정체되고 있음 (2012-2015년 사이 실질적 감소)</div>
-                            <div class="note">→ 성장이 없는 상황에서 이익을 유지하기 위해 비용 및 운전자본 효율화가 필수적</div>
+                            <div class="insight-title">금융 위기 이후 성장 둔화</div>
+                            <div class="insight-content">2008년 금융 위기 이후 P&G의 성장이 둔화되면서 $10 billion 비용 절감 계획 수립</div>
+                            <div class="note">→ 대규모 비용 절감이 필요한 상황에서 운전자본 최적화가 중요한 전략</div>
                         </div>
                         <div class="insight-box">
-                            <div class="insight-title">안정적인 이익률</div>
-                            <div class="insight-content">영업이익률은 17-19% 대를 안정적으로 유지</div>
-                            <div class="note">→ AA- 신용등급 유지에 기여</div>
+                            <div class="insight-title">벤치마킹 분석 결과</div>
+                            <div class="insight-content">P&G의 평균 지불 기간: 45일</div>
+                            <div class="insight-content">경쟁사 평균 지불 기간: 75-100일</div>
+                            <div class="note">→ 경쟁사 대비 빠른 지불로 인한 현금흐름 압박</div>
                         </div>
                         <div class="insight-box">
-                            <div class="insight-title">주주 수익률(TSR) 중시</div>
+                            <div class="insight-title">TSR (Total Shareholder Return)</div>
+                            <div class="formula-box">
+                                <div class="formula">TSR = (기말 주가 - 기초 주가 + 배당금) ÷ 기초 주가</div>
+                            </div>
                             <div class="insight-content">배당금 지급은 증가하는 추세 (주당 1.97달러에서 2.59달러로)</div>
                             <div class="insight-content">2015년에는 수익 감소로 배당성향(Payout Ratio)이 104%로 급증</div>
-                            <div class="note">→ 현금 확보와 배당금 유지를 위해 운전자본 최적화가 중요한 전략</div>
+                            <div class="note">→ 높은 TSR 유지를 위해 현금흐름 개선이 필수적</div>
                         </div>
                         <div class="insight-box">
                             <div class="insight-title">현금흐름 관리 필요성</div>
                             <div class="insight-content">매출의 약 80%가 비용 관련 (COGS + SG&A)</div>
+                            <div class="insight-content">배당금 지급을 위한 충분한 현금흐름 확보 필요</div>
                             <div class="note">→ 공급망 금융으로 현금흐름 개선 가능</div>
+                        </div>
+                        <div class="quote-box">
+                            <div class="quote">
+                                "우리의 지불 조건이 이렇게 다른 이유는 우리 구매 담당자들이 항상 가격, 품질, 배송, 서비스, 대응성, 혁신에 초점을 맞추었기 때문입니다."
+                            </div>
+                            <div class="quote-author">- Doug Gerstle, P&G 부사장 겸 재무보조</div>
+                            <div class="insight-content" style="margin-top: 15px;">
+                                P&G의 구매 부서는 공급업체와의 협상에서 결제 조건보다 제품과 서비스의 품질적 측면에 더 중점을 두었습니다.
+                            </div>
                         </div>
                     </div>
                 </div>
