@@ -593,6 +593,7 @@ class PGSCFEconomicsQ2Generator:
                     </div>
                     {'<div class="impact-item-value">' + item['value'] + '</div>' if 'value' in item else ''}
                     <div class="impact-item-detail">{item['detail']}</div>
+                    {'<div class="text-xs text-gray-500 mt-1">(' + item['note'] + ')</div>' if 'note' in item else ''}
                 </div>
             """
         return html 
