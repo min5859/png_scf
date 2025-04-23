@@ -96,7 +96,17 @@ class FibriaSCFAnalysisComponent:
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-white rounded-lg shadow p-6">
                     <h3 class="text-lg font-semibold mb-4 text-gray-800">헤알/달러 환율 변동 추이</h3>
-                    <div id="exchange-rate-chart" style="height: 200px;"></div>
+                    <div id="exchange-rate-chart" style="height: 300px;"></div>
+                    <div class="mt-3 p-3 bg-blue-50 rounded-md">
+                        <div class="flex items-center">
+                            <svg class="h-5 w-5 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                            <p class="text-sm">
+                                <span class="font-bold">환율 상승 의미:</span> 헤알화 가치 하락, 달러 표시 부채 부담 증가
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="bg-white rounded-lg shadow p-6">
@@ -138,7 +148,7 @@ class FibriaSCFAnalysisComponent:
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-white rounded-lg shadow p-6">
                     <h3 class="text-lg font-semibold mb-4 text-gray-800">신용등급별 이자율 비교 (1년 만기)</h3>
-                    <div id="credit-rate-chart" style="height: 200px;"></div>
+                    <div id="credit-rate-chart" style="height: 300px;"></div>
                     <div class="mt-4 grid grid-cols-2 gap-2">
                         <div class="p-3 bg-green-50 rounded-md">
                             <p class="text-sm text-center">
@@ -255,9 +265,23 @@ class FibriaSCFAnalysisComponent:
             // 환율 차트
             const exchangeRateData = {self.exchange_rate_data};
             const layout = {{
-                height: 200,
-                margin: {{ t: 10, r: 30, l: 20, b: 5 }},
-                showlegend: false
+                height: 300,
+                margin: {{ t: 20, r: 30, l: 40, b: 40 }},
+                showlegend: false,
+                xaxis: {{
+                    title: '연도',
+                    showgrid: true,
+                    gridcolor: '#e5e7eb',
+                    zeroline: false
+                }},
+                yaxis: {{
+                    title: '환율',
+                    showgrid: true,
+                    gridcolor: '#e5e7eb',
+                    zeroline: false
+                }},
+                plot_bgcolor: 'white',
+                paper_bgcolor: 'white'
             }};
             Plotly.newPlot('exchange-rate-chart', [{{
                 x: exchangeRateData.map(d => d.year),
@@ -265,22 +289,43 @@ class FibriaSCFAnalysisComponent:
                 type: 'scatter',
                 mode: 'lines+markers',
                 line: {{ color: '#3b82f6', width: 2 }},
-                marker: {{ size: 8 }},
+                marker: {{ 
+                    size: 8,
+                    color: '#3b82f6',
+                    line: {{ color: 'white', width: 1 }}
+                }},
                 name: '헤알/달러 환율'
             }}], layout);
 
             // 신용등급별 이자율 차트
             const creditRateData = {self.credit_rate_data};
             const creditRateLayout = {{
-                height: 200,
-                margin: {{ t: 10, r: 30, l: 20, b: 5 }},
-                showlegend: false
+                height: 300,
+                margin: {{ t: 20, r: 30, l: 40, b: 60 }},
+                showlegend: false,
+                xaxis: {{
+                    title: '신용등급',
+                    showgrid: true,
+                    gridcolor: '#e5e7eb',
+                    zeroline: false
+                }},
+                yaxis: {{
+                    title: '이자율 (%)',
+                    showgrid: true,
+                    gridcolor: '#e5e7eb',
+                    zeroline: false
+                }},
+                plot_bgcolor: 'white',
+                paper_bgcolor: 'white'
             }};
             Plotly.newPlot('credit-rate-chart', [{{
                 x: creditRateData.map(d => d.rating),
                 y: creditRateData.map(d => d.rate),
                 type: 'bar',
-                marker: {{ color: '#10b981' }},
+                marker: {{ 
+                    color: '#10b981',
+                    line: {{ color: 'white', width: 1 }}
+                }},
                 name: '이자율 (%)'
             }}], creditRateLayout);
         </script>
