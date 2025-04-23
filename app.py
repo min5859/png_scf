@@ -64,7 +64,6 @@ class StreamlitApp:
         
         # Q2 버튼
         if cols[1].button(q_button_titles[1]):
-            st.header("Q2 (새로운 지불 조건이 P&G와 Fibria에 미친 영향)")
             self.render_q2()
         
         # Q3 버튼
@@ -77,7 +76,6 @@ class StreamlitApp:
         
         # Q5 버튼
         if cols[4].button(q_button_titles[4]):
-            st.header("Q5 (Fibria가 SCF 프로그램을 계속 사용해야 하는지 여부)")
             self.render_q5()
         
         # Q6 버튼
@@ -455,8 +453,6 @@ class StreamlitApp:
     
     def render_q2(self):
         """Q2 - 질문 2에 대한 응답"""
-        st.header("Q2 (새로운 지불 조건이 P&G와 Fibria에 미친 영향)")
-        
         # Generator 객체 생성
         scf_economics_generator = PGSCFEconomicsQ2Generator()
         
@@ -527,8 +523,6 @@ class StreamlitApp:
     
     def render_q5(self):
         """Q5 - 질문 5에 대한 응답"""
-        st.header("Q5 (Fibria가 SCF 프로그램을 계속 사용해야 하는지 여부)")
-        
         # Generator 객체 생성
         fibria_scf_analysis = FibriaSCFAnalysisComponent()
         
