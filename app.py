@@ -19,6 +19,7 @@ from pg_scf_economics_q2 import PGSCFEconomicsQ2Generator
 from PIL import Image
 import os
 import numpy as np
+from fibria_scf_analysis_component import FibriaSCFAnalysisComponent
 
 class StreamlitApp:
     """Streamlit 애플리케이션 클래스"""
@@ -526,9 +527,17 @@ class StreamlitApp:
     
     def render_q5(self):
         """Q5 - 질문 5에 대한 응답"""
-        st.write("질문 5에 대한 응답 내용이 여기에 표시됩니다.")
-        # 여기에 Q5에 대한 구체적인 내용을 추가하세요
+        st.header("Q5 (Fibria가 SCF 프로그램을 계속 사용해야 하는지 여부)")
         
+        # Generator 객체 생성
+        fibria_scf_analysis = FibriaSCFAnalysisComponent()
+        
+        # HTML 코드 생성
+        html_code = fibria_scf_analysis.generate_html()
+        
+        # HTML 렌더링
+        st.components.v1.html(html_code, height=2500, scrolling=True)
+    
     def render_q6(self):
         """Q6 - 대기업이 중소 공급업체에 지불 기간을 연장해야 하는지 여부"""
         st.header("Q6: P&G가 A/P를 신속하게 지급해야 한다는 주장의 근거는 무엇인가요?")
