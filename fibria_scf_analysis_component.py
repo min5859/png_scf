@@ -96,7 +96,9 @@ class FibriaSCFAnalysisComponent:
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-white rounded-lg shadow p-6">
                     <h3 class="text-lg font-semibold mb-4 text-gray-800">헤알/달러 환율 변동 추이</h3>
-                    <div id="exchange-rate-chart" style="height: 300px;"></div>
+                    <div class="relative" style="height: 300px;">
+                        <canvas id="exchange-rate-chart"></canvas>
+                    </div>
                     <div class="mt-3 p-3 bg-blue-50 rounded-md">
                         <div class="flex items-center">
                             <svg class="h-5 w-5 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -148,7 +150,9 @@ class FibriaSCFAnalysisComponent:
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-white rounded-lg shadow p-6">
                     <h3 class="text-lg font-semibold mb-4 text-gray-800">신용등급별 이자율 비교 (1년 만기)</h3>
-                    <div id="credit-rate-chart" style="height: 300px;"></div>
+                    <div class="relative" style="height: 300px;">
+                        <canvas id="credit-rate-chart"></canvas>
+                    </div>
                     <div class="mt-4 grid grid-cols-2 gap-2">
                         <div class="p-3 bg-green-50 rounded-md">
                             <p class="text-sm text-center">
@@ -260,74 +264,106 @@ class FibriaSCFAnalysisComponent:
         </div>
 
         <script src="https://cdn.tailwindcss.com"></script>
-        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
             // 환율 차트
             const exchangeRateData = {self.exchange_rate_data};
-            const layout = {{
-                height: 300,
-                margin: {{ t: 20, r: 30, l: 40, b: 40 }},
-                showlegend: false,
-                xaxis: {{
-                    title: '연도',
-                    showgrid: true,
-                    gridcolor: '#e5e7eb',
-                    zeroline: false
+            const exchangeRateCtx = document.getElementById('exchange-rate-chart').getContext('2d');
+            new Chart(exchangeRateCtx, {{
+                type: 'line',
+                data: {{
+                    labels: exchangeRateData.map(d => d.year),
+                    datasets: [{{
+                        label: '헤알/달러 환율',
+                        data: exchangeRateData.map(d => d.rate),
+                        borderColor: '#3b82f6',
+                        backgroundColor: '#3b82f6',
+                        borderWidth: 2,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#3b82f6',
+                        pointBorderColor: 'white',
+                        pointBorderWidth: 1,
+                        tension: 0.1
+                    }}]
                 }},
-                yaxis: {{
-                    title: '환율',
-                    showgrid: true,
-                    gridcolor: '#e5e7eb',
-                    zeroline: false
-                }},
-                plot_bgcolor: 'white',
-                paper_bgcolor: 'white'
-            }};
-            Plotly.newPlot('exchange-rate-chart', [{{
-                x: exchangeRateData.map(d => d.year),
-                y: exchangeRateData.map(d => d.rate),
-                type: 'scatter',
-                mode: 'lines+markers',
-                line: {{ color: '#3b82f6', width: 2 }},
-                marker: {{ 
-                    size: 8,
-                    color: '#3b82f6',
-                    line: {{ color: 'white', width: 1 }}
-                }},
-                name: '헤알/달러 환율'
-            }}], layout);
+                options: {{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {{
+                        legend: {{
+                            display: false
+                        }}
+                    }},
+                    scales: {{
+                        x: {{
+                            title: {{
+                                display: true,
+                                text: '연도'
+                            }},
+                            grid: {{
+                                color: '#e5e7eb'
+                            }}
+                        }},
+                        y: {{
+                            title: {{
+                                display: true,
+                                text: '환율'
+                            }},
+                            grid: {{
+                                color: '#e5e7eb'
+                            }},
+                            beginAtZero: true,
+                            min: 0
+                        }}
+                    }}
+                }}
+            }});
 
             // 신용등급별 이자율 차트
             const creditRateData = {self.credit_rate_data};
-            const creditRateLayout = {{
-                height: 300,
-                margin: {{ t: 20, r: 30, l: 40, b: 60 }},
-                showlegend: false,
-                xaxis: {{
-                    title: '신용등급',
-                    showgrid: true,
-                    gridcolor: '#e5e7eb',
-                    zeroline: false
-                }},
-                yaxis: {{
-                    title: '이자율 (%)',
-                    showgrid: true,
-                    gridcolor: '#e5e7eb',
-                    zeroline: false
-                }},
-                plot_bgcolor: 'white',
-                paper_bgcolor: 'white'
-            }};
-            Plotly.newPlot('credit-rate-chart', [{{
-                x: creditRateData.map(d => d.rating),
-                y: creditRateData.map(d => d.rate),
+            const creditRateCtx = document.getElementById('credit-rate-chart').getContext('2d');
+            new Chart(creditRateCtx, {{
                 type: 'bar',
-                marker: {{ 
-                    color: '#10b981',
-                    line: {{ color: 'white', width: 1 }}
+                data: {{
+                    labels: creditRateData.map(d => d.rating),
+                    datasets: [{{
+                        label: '이자율 (%)',
+                        data: creditRateData.map(d => d.rate),
+                        backgroundColor: '#10b981',
+                        borderColor: 'white',
+                        borderWidth: 1
+                    }}]
                 }},
-                name: '이자율 (%)'
-            }}], creditRateLayout);
+                options: {{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {{
+                        legend: {{
+                            display: false
+                        }}
+                    }},
+                    scales: {{
+                        x: {{
+                            title: {{
+                                display: true,
+                                text: '신용등급'
+                            }},
+                            grid: {{
+                                color: '#e5e7eb'
+                            }}
+                        }},
+                        y: {{
+                            title: {{
+                                display: true,
+                                text: '이자율 (%)'
+                            }},
+                            grid: {{
+                                color: '#e5e7eb'
+                            }}
+                        }}
+                    }}
+                }}
+            }});
         </script>
         """
         return html 
