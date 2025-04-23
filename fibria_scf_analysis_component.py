@@ -134,6 +134,93 @@ class FibriaSCFAnalysisComponent:
                 </div>
             </div>
 
+            <!-- 금리 비교와 운전자본 관리 섹션 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4 text-gray-800">신용등급별 이자율 비교 (1년 만기)</h3>
+                    <div id="credit-rate-chart" style="height: 200px;"></div>
+                    <div class="mt-4 grid grid-cols-2 gap-2">
+                        <div class="p-3 bg-green-50 rounded-md">
+                            <p class="text-sm text-center">
+                                <span class="font-bold text-green-700">P&G 신용등급:</span><br />AA- (0.63% 수준)
+                            </p>
+                        </div>
+                        <div class="p-3 bg-amber-50 rounded-md">
+                            <p class="text-sm text-center">
+                                <span class="font-bold text-amber-700">Fibria 신용등급:</span><br />BBB- (1.13% 수준)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4 text-gray-800">Fibria의 운전자본 관리 개선</h3>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <p class="font-semibold text-center mb-2">현금 전환 주기 (Cash Conversion Cycle)</p>
+                            <div class="flex items-center justify-center space-x-6">
+                                <div class="text-center">
+                                    <p class="text-xs text-gray-600">기존</p>
+                                    <p class="font-bold text-3xl text-red-600">140일</p>
+                                    <p class="text-xs">(80일 재고 + 60일 미수금)</p>
+                                </div>
+                                <div class="font-bold text-xl">→</div>
+                                <div class="text-center">
+                                    <p class="text-xs text-gray-600">SCF 활용</p>
+                                    <p class="font-bold text-3xl text-green-600">40일</p>
+                                    <p class="text-xs">(80일 재고 - 40일 미지급금)</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <p class="font-semibold text-center mb-2">빠른 현금화의 장점</p>
+                            <ul class="text-sm">
+                                <li class="flex items-center mb-1">
+                                    <span class="h-2 w-2 bg-green-500 rounded-full mr-2"></span>
+                                    <span>달러 부채 직접 상환으로 환위험 관리</span>
+                                </li>
+                                <li class="flex items-center mb-1">
+                                    <span class="h-2 w-2 bg-green-500 rounded-full mr-2"></span>
+                                    <span>자본 지출 및 전략적 투자 자금 확보</span>
+                                </li>
+                                <li class="flex items-center mb-1">
+                                    <span class="h-2 w-2 bg-green-500 rounded-full mr-2"></span>
+                                    <span>배당금 지급 등 주주가치 증대</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="h-2 w-2 bg-green-500 rounded-full mr-2"></span>
+                                    <span>금융위기 시 유동성 버퍼 확보</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCF 작동 방식 설명 -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-lg font-semibold mb-4 text-gray-800">SCF 프로그램 작동 방식</h3>
+                <div class="flex flex-col md:flex-row bg-blue-50 rounded-lg p-4 space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="flex-1 p-3 bg-white rounded shadow">
+                        <p class="font-semibold text-blue-800 mb-2">1. 송장 발행</p>
+                        <p class="text-sm">Fibria가 P&G에 상품 배송 후 송장 발행</p>
+                    </div>
+                    <div class="flex-1 p-3 bg-white rounded shadow">
+                        <p class="font-semibold text-blue-800 mb-2">2. 송장 승인</p>
+                        <p class="text-sm">P&G가 송장 승인 및 지불 약속 확인</p>
+                    </div>
+                    <div class="flex-1 p-3 bg-white rounded shadow">
+                        <p class="font-semibold text-blue-800 mb-2">3. 조기 지불</p>
+                        <p class="text-sm">SCF 은행이 승인 후 5일 내 Fibria에 할인된 금액 지불</p>
+                    </div>
+                    <div class="flex-1 p-3 bg-white rounded shadow">
+                        <p class="font-semibold text-blue-800 mb-2">4. 만기 지불</p>
+                        <p class="text-sm">P&G가 105일 후 SCF 은행에 전체 금액 지불</p>
+                    </div>
+                </div>
+            </div>
+
             <!-- 결론 섹션 -->
             <div class="bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg shadow-lg p-6 text-white">
                 <h2 class="text-xl font-bold mb-4">결론: Fibria는 SCF 프로그램을 계속 사용해야 합니다</h2>
@@ -181,6 +268,21 @@ class FibriaSCFAnalysisComponent:
                 marker: {{ size: 8 }},
                 name: '헤알/달러 환율'
             }}], layout);
+
+            // 신용등급별 이자율 차트
+            const creditRateData = {self.credit_rate_data};
+            const creditRateLayout = {{
+                height: 200,
+                margin: {{ t: 10, r: 30, l: 20, b: 5 }},
+                showlegend: false
+            }};
+            Plotly.newPlot('credit-rate-chart', [{{
+                x: creditRateData.map(d => d.rating),
+                y: creditRateData.map(d => d.rate),
+                type: 'bar',
+                marker: {{ color: '#10b981' }},
+                name: '이자율 (%)'
+            }}], creditRateLayout);
         </script>
         """
         return html 
