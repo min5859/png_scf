@@ -146,6 +146,13 @@ class FibriaWorkingCapitalComponentGenerator:
                     <div style="height: 300px; position: relative;">
                         <canvas id="cccTrendChart"></canvas>
                     </div>
+                    <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                        <p class="text-center text-sm text-blue-800">
+                            <strong>계산식:</strong> 현금전환주기(CCC) = DSO + DSI - DPO<br/>
+                            <strong>2012년:</strong> 57일 + 85일 - 38일 = 104일<br/>
+                            <strong>2014년:</strong> 40일 + 85일 - 38일 = 87일 (17일 감소)
+                        </p>
+                    </div>
                     <div class="event-legend">
                         <div>
                             <div class="color-box" style="background-color: rgba(255,0,0,0.3);"></div>
@@ -164,6 +171,13 @@ class FibriaWorkingCapitalComponentGenerator:
                     <div style="height: 300px; position: relative;">
                         <canvas id="componentsChart"></canvas>
                     </div>
+                    <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                        <p class="text-center text-sm text-blue-800">
+                            <strong>DSO (매출채권회수기간):</strong> 2012년 57일 → 2014년 40일 (17일 감소)<br/>
+                            <strong>DSI (재고자산회전기간):</strong> 85일로 일정 유지<br/>
+                            <strong>DPO (매입채무지급기간):</strong> 38일로 일정 유지
+                        </p>
+                    </div>
                 </div>
                 
                 <!-- 3. SCF 프로그램 도입 전후 비교 -->
@@ -180,6 +194,13 @@ class FibriaWorkingCapitalComponentGenerator:
                                 <canvas id="scfImprovementChart"></canvas>
                             </div>
                         </div>
+                    </div>
+                    <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                        <p class="text-center text-sm text-blue-800">
+                            <strong>핵심 변화:</strong> DSO가 57일에서 40일로 17일 감소 (SCF의 직접적 효과)<br/>
+                            <strong>DSI와 DPO:</strong> SCF와 직접적인 관련이 없으며 큰 변화 없음<br/>
+                            <strong>총 효과:</strong> CCC가 104일에서 87일로 17일 감소
+                        </p>
                     </div>
                 </div>
                 
@@ -198,6 +219,13 @@ class FibriaWorkingCapitalComponentGenerator:
                             </div>
                         </div>
                     </div>
+                    <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                        <p class="text-center text-sm text-blue-800">
+                            <strong>효과:</strong> P&G SCF 사용 시 필요 운전자본 $82.2M → $37.0M으로 $45.2M 감소<br/>
+                            <strong>계산:</strong> $300M × (CCC ÷ 365일) = 필요 운전자본<br/>
+                            <strong>비교:</strong> 일반 결제(100일) → SCF 사용(45일) = 55일 감소
+                        </p>
+                    </div>
                 </div>
                 
                 <!-- 5. 운전자본 부담 변화 -->
@@ -206,6 +234,30 @@ class FibriaWorkingCapitalComponentGenerator:
                     <div style="height: 300px; position: relative;">
                         <canvas id="workingCapitalBurdenChart"></canvas>
                     </div>
+                    <div class="mt-4 p-4 bg-yellow-50 rounded-lg">
+                        <p class="text-center text-sm text-yellow-800">
+                            <strong>SCF 효과 가정:</strong> 2013년(10일 감소), 2014-2015년(17일 감소)<br/>
+                            <strong>운전자본 계산식:</strong> 현금전환주기 × (연간 매출 ÷ 365일)<br/>
+                            <strong>환율 영향:</strong><br/>
+                            - 유리한 점: 달러 기반 매출의 레알화 가치 증가 → 레알화 기준 수익 증가<br/>
+                            - 불리한 점: 달러 기반 부채의 레알화 가치 증가 → 부채 부담 증가 (Fibria 부채의 90% 이상이 달러 표시)
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 6. 자금조달 옵션 비교 -->
+                <div class="chart-container">
+                    <h3>6. 자금조달 옵션 비교</h3>
+                    <div style="height: 300px; position: relative;">
+                        <canvas id="financingRatesChart"></canvas>
+                    </div>
+                    <div class="mt-4 p-4 bg-green-50 rounded-lg">
+                        <p class="text-center text-sm text-green-800">
+                            <strong>할인율 0.1%p 차이의 영향 계산:</strong><br/>
+                            $300M × 0.001 × (100일 ÷ 365일) ≈ $82,192<br/>
+                            자금 회전 효과 고려 시 약 $30만/연간 비용 영향 추정
+                        </p>
+                    </div>
                 </div>
                 
                 <!-- 핵심 인사이트 -->
@@ -213,24 +265,24 @@ class FibriaWorkingCapitalComponentGenerator:
                     <h3>핵심 인사이트</h3>
                     <div class="insights-container">
                         <div class="card">
-                            <h4>금융위기의 영향</h4>
-                            <p>2009-2010년 현금전환주기 100일 이상으로 급증</p>
-                            <p style="color: #7f8c8d;">→ 외부 환경에 대한 취약성 확인</p>
+                            <h4>SCF의 직접적인 효과</h4>
+                            <p>DSO(매출채권회수기간) 57일 → 40일 (17일 감소)</p>
+                            <p style="color: #7f8c8d;">→ SCF의 핵심 효과는 매출채권 회수기간 단축</p>
                         </div>
                         <div class="card">
-                            <h4>SCF 도입 효과</h4>
-                            <p>2012년 대비 2014년 현금전환주기 31.3일 감소</p>
-                            <p style="color: #7f8c8d;">→ 주로 매출채권 회수기간(DSO) 개선에 기인</p>
+                            <h4>P&G 거래의 효과</h4>
+                            <p>결제 기간 105일에도 SCF로 5일 내 현금화</p>
+                            <p style="color: #7f8c8d;">→ 현금흐름 크게 개선</p>
                         </div>
                         <div class="card">
-                            <h4>재고 부담 지속</h4>
-                            <p>재고자산회전기간(DSI)은 여전히 80일 이상 유지</p>
-                            <p style="color: #7f8c8d;">→ 장거리 운송 및 글로벌 공급망의 특성</p>
+                            <h4>금융 혁신의 가치</h4>
+                            <p>물리적 공급망은 유지(DSI 변화 없음)하면서 금융 흐름만 최적화</p>
+                            <p style="color: #7f8c8d;">→ 혁신적 접근법의 사례</p>
                         </div>
                         <div class="card">
-                            <h4>P&G 거래의 긍정적 영향</h4>
-                            <p>SCF 통해 결제 기간 105일에도 15일 내 현금화 가능</p>
-                            <p style="color: #7f8c8d;">→ 현금 흐름 및 유동성 크게 개선</p>
+                            <h4>운전자본 감소</h4>
+                            <p>2014년 기준 약 $146M의 운전자본 감소 효과</p>
+                            <p style="color: #7f8c8d;">→ 부채 상환, 투자 등에 활용 가능</p>
                         </div>
                     </div>
                 </div>
@@ -302,12 +354,12 @@ class FibriaWorkingCapitalComponentGenerator:
         
         // 차트 색상 정의
         const colors = {{
-            ccc: 'rgba(136, 132, 216, 0.8)',
-            dso: 'rgba(136, 132, 216, 1)',
-            dsi: 'rgba(130, 202, 157, 1)',
-            dpo: 'rgba(255, 128, 66, 1)',
-            positive: 'rgba(255, 128, 66, 1)',
-            negative: 'rgba(130, 202, 157, 1)',
+            ccc: 'rgba(0, 0, 0, 0.8)',
+            dso: 'rgba(153, 153, 153, 1)',
+            dsi: 'rgba(204, 204, 204, 1)',
+            dpo: 'rgba(0, 0, 0, 1)',
+            positive: 'rgba(130, 202, 157, 1)',
+            negative: 'rgba(255, 128, 66, 1)',
             withoutSCF: 'rgba(255, 128, 66, 1)',
             withSCF: 'rgba(130, 202, 157, 1)'
         }};
@@ -318,21 +370,47 @@ class FibriaWorkingCapitalComponentGenerator:
             type: 'line',
             data: {{
                 labels: workingCapitalData.map(d => d.year),
-                datasets: [{{
-                    label: '현금전환주기(CCC)',
-                    data: workingCapitalData.map(d => d.ccc),
-                    backgroundColor: 'rgba(136, 132, 216, 0.2)',
-                    borderColor: colors.ccc,
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.4
-                }}]
+                datasets: [
+                    {{
+                        label: '현금전환주기(CCC)',
+                        data: workingCapitalData.map(d => d.ccc),
+                        borderColor: colors.ccc,
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4
+                    }},
+                    {{
+                        label: '매출채권회수기간(DSO)',
+                        data: workingCapitalData.map(d => d.dso),
+                        borderColor: colors.dso,
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.3
+                    }},
+                    {{
+                        label: '재고자산회전기간(DSI)',
+                        data: workingCapitalData.map(d => d.dsi),
+                        borderColor: colors.dsi,
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        fill: false,
+                        tension: 0.3
+                    }},
+                    {{
+                        label: '매입채무지급기간(DPO)',
+                        data: workingCapitalData.map(d => d.dpo),
+                        borderColor: colors.dpo,
+                        borderWidth: 1,
+                        borderDash: [2, 2],
+                        fill: false,
+                        tension: 0.3
+                    }}
+                ]
             }},
             options: {{
                 plugins: {{
                     annotation: {{
                         annotations: financialCrisisPeriods.map((period, index) => {{
-                            // 연도를 인덱스로 변환
                             const startIndex = workingCapitalData.findIndex(d => d.year === period.startYear);
                             const endIndex = workingCapitalData.findIndex(d => d.year === period.endYear);
                             
@@ -342,7 +420,7 @@ class FibriaWorkingCapitalComponentGenerator:
                                 xMax: period.event === '금융위기' ?
                                     endIndex + 0.5 : workingCapitalData.length,
                                 backgroundColor: period.event === '금융위기' ? 
-                                    'rgba(255, 0, 0, 0.2)' : 'rgba(0, 255, 0, 0.2)',
+                                    'rgba(255, 0, 0, 0.1)' : 'rgba(0, 128, 0, 0.1)',
                                 borderWidth: 0
                             }};
                         }})
@@ -386,6 +464,7 @@ class FibriaWorkingCapitalComponentGenerator:
                         data: workingCapitalData.map(d => d.dsi),
                         borderColor: colors.dsi,
                         borderWidth: 2,
+                        borderDash: [5, 5],
                         tension: 0.3,
                         fill: false
                     }},
@@ -393,7 +472,8 @@ class FibriaWorkingCapitalComponentGenerator:
                         label: '매입채무지급기간(DPO)',
                         data: workingCapitalData.map(d => d.dpo),
                         borderColor: colors.dpo,
-                        borderWidth: 2,
+                        borderWidth: 1,
+                        borderDash: [2, 2],
                         tension: 0.3,
                         fill: false
                     }}
@@ -419,7 +499,6 @@ class FibriaWorkingCapitalComponentGenerator:
         }});
         
         // 3. SCF 프로그램 도입 전후 비교 (2012 vs 2014)
-        // 데이터 추출
         const data2012 = workingCapitalData.find(d => d.year === '2012');
         const data2014 = workingCapitalData.find(d => d.year === '2014');
         
@@ -612,6 +691,74 @@ class FibriaWorkingCapitalComponentGenerator:
                         title: {{
                             display: true,
                             text: '백만 달러'
+                        }}
+                    }}
+                }},
+                interaction: {{
+                    intersect: false,
+                    mode: 'index'
+                }},
+                responsive: true,
+                maintainAspectRatio: false
+            }}
+        }});
+
+        // 6. 자금조달 옵션 비교 차트
+        const financingRatesData = [
+            {{
+                'scenario': 'SCF 프로그램',
+                'rate': 1.3,
+                'ratingBase': 'P&G AA- 등급',
+                'calcBase': 'LIBOR + 1% 스프레드',
+                'annualSavings': '약 $30만 (연간)'
+            }},
+            {{
+                'scenario': 'Fibria 일반 자금조달',
+                'rate': 2.5,
+                'ratingBase': 'Fibria BBB- 등급',
+                'calcBase': '미 달러화 3% 내외',
+                'annualSavings': '-'
+            }},
+            {{
+                'scenario': '일반 팩토링',
+                'rate': 3.5,
+                'ratingBase': '-',
+                'calcBase': '투자등급 고객 기준',
+                'annualSavings': '-'
+            }}
+        ];
+
+        const financingRatesCtx = document.getElementById('financingRatesChart').getContext('2d');
+        new Chart(financingRatesCtx, {{
+            type: 'bar',
+            data: {{
+                labels: financingRatesData.map(d => d.scenario),
+                datasets: [{{
+                    label: '자금조달 이자율 (%)',
+                    data: financingRatesData.map(d => d.rate),
+                    backgroundColor: 'rgba(136, 132, 216, 0.7)'
+                }}]
+            }},
+            options: {{
+                plugins: {{
+                    tooltip: {{
+                        callbacks: {{
+                            label: function(context) {{
+                                const data = financingRatesData[context.dataIndex];
+                                return [
+                                    context.raw + '%',
+                                    '기준: ' + data.calcBase,
+                                    '연간 절감: ' + data.annualSavings
+                                ];
+                            }}
+                        }}
+                    }}
+                }},
+                scales: {{
+                    y: {{
+                        title: {{
+                            display: true,
+                            text: '이자율 (%)'
                         }}
                     }}
                 }},
