@@ -141,82 +141,82 @@ class PGBalanceSheetComponentGenerator:
     <div class="container">
         <h2>P&G 대차대조표 분석 (2011-2015)</h2>
         
-        <!-- 자산, 부채, 자본 추이 -->
+        <!-- 자산 구조 변화 -->
         <div class="chart-container">
-            <h3>1. 자산, 부채, 자본 추이 (단위: 백만 달러)</h3>
+            <h3>1. P&G 자산 구조 변화 (백만 달러)</h3>
             <div style="height: 400px; width: 100%;">
-                <canvas id="assetsLiabilitiesChart"></canvas>
+                <canvas id="assetStructureChart"></canvas>
             </div>
         </div>
         
-        <!-- 유동자산 vs 유동부채 -->
+        <!-- 부채 및 자본 구조 -->
         <div class="chart-container">
-            <h3>2. 유동자산 vs 유동부채 (단위: 백만 달러)</h3>
+            <h3>2. P&G 부채 및 자본 구조 (백만 달러)</h3>
             <div style="height: 400px; width: 100%;">
-                <canvas id="currentAssetsLiabilitiesChart"></canvas>
+                <canvas id="liabEquityStructureChart"></canvas>
             </div>
         </div>
         
         <!-- 운전자본 관련 항목 -->
         <div class="chart-container">
-            <h3>3. 운전자본 관련 항목 추이 (단위: 백만 달러)</h3>
+            <h3>3. P&G 운전자본 관련 항목 변화</h3>
             <div style="height: 400px; width: 100%;">
-                <canvas id="workingCapitalComponentsChart"></canvas>
+                <canvas id="workingCapitalChart"></canvas>
             </div>
         </div>
         
-        <!-- 현금전환주기 -->
+        <!-- 현금 및 부채 추이 -->
         <div class="chart-container">
-            <h3>4. 현금전환주기(CCC) 추이 (단위: 일)</h3>
-            <div style="height: 300px; width: 100%;">
-                <canvas id="cashConversionCycleChart"></canvas>
-            </div>
-        </div>
-        
-        <!-- 현금 보유량과 부채 -->
-        <div class="chart-container">
-            <h3>5. 현금 보유량과 부채 (단위: 백만 달러)</h3>
+            <h3>4. P&G 현금 및 부채 추이</h3>
             <div style="height: 400px; width: 100%;">
                 <canvas id="cashDebtChart"></canvas>
             </div>
         </div>
         
-        <!-- 인사이트 요약 -->
+        <!-- SCF 도입 전후 비교 -->
+        <div class="chart-container">
+            <h3>5. SCF 도입 전후 비교 (2012 vs 2014, 백만 달러)</h3>
+            <div style="height: 400px; width: 100%;">
+                <canvas id="scfComparisonChart"></canvas>
+            </div>
+        </div>
+        
+        <!-- 핵심 인사이트 -->
         <div class="box-blue">
             <h3 style="color: #1e40af;">핵심 인사이트</h3>
             <div class="insight-grid">
                 <div class="insight-card">
-                    <h4 class="insight-title">현금 보유량 증가</h4>
-                    <p>2011년 27억 달러에서 2015년 116억 달러로 4배 이상 증가</p>
-                    <p class="insight-note">→ 유동성 관리 강화 및 불확실성 대비</p>
+                    <h4 class="insight-title">운전자본 개선</h4>
+                    <p>유동비율 0.80(2011) → 1.00(2015)으로 개선</p>
+                    <p class="insight-note">→ SCF 프로그램이 운전자본 개선에 기여</p>
                 </div>
                 <div class="insight-card">
-                    <h4 class="insight-title">현금전환주기 개선</h4>
-                    <p>2011년 22.4일에서 2015년 -3.5일로 대폭 개선</p>
-                    <p class="insight-note">→ 공급망 금융의 효과 입증</p>
+                    <h4 class="insight-title">현금보유 증가</h4>
+                    <p>현금 및 투자자산이 4배 이상 증가 ($2.8B → $11.6B)</p>
+                    <p class="insight-note">→ 금융 유연성 및 위기 대응력 강화</p>
                 </div>
                 <div class="insight-card">
-                    <h4 class="insight-title">매출채권 감소</h4>
-                    <p>2014년 대비 2015년 매출채권 15억 달러 감소</p>
-                    <p class="insight-note">→ 매출채권 회수 효율성 향상</p>
+                    <h4 class="insight-title">매출채권 관리 개선</h4>
+                    <p>2015년 매출채권 $4,861백만, 2014년 대비 24% 감소</p>
+                    <p class="insight-note">→ 효율적인 현금회수 체계 구축</p>
                 </div>
                 <div class="insight-card">
-                    <h4 class="insight-title">유동비율 개선</h4>
-                    <p>2011년 0.80에서 2015년 1.00으로 개선</p>
-                    <p class="insight-note">→ 단기 재무 건전성 강화</p>
+                    <h4 class="insight-title">순부채 감소</h4>
+                    <p>순부채가 $29.2B(2011) → $18.7B(2015)로 크게 감소</p>
+                    <p class="insight-note">→ 재무 건전성 강화 및 이자비용 절감</p>
                 </div>
             </div>
         </div>
         
-        <!-- SCF 프로그램과의 연결성 -->
+        <!-- SCF와 대차대조표의 연관성 -->
         <div class="box-yellow">
-            <h3 style="color: #854d0e;">공급망 금융(SCF) 프로그램과의 연관성</h3>
+            <h3 style="color: #854d0e;">SCF와 대차대조표의 연관성</h3>
             <ul class="list-disc">
-                <li class="list-item-space"><span class="font-semibold">매입채무 유지</span>: 결제 기간 연장에도 매입채무 금액 유지 (약 82-83억 달러)</li>
-                <li class="list-item-space"><span class="font-semibold">현금 증가</span>: 운전자본 최적화로 2014-2015년 현금 보유량 증가</li>
-                <li class="list-item-space"><span class="font-semibold">재고자산 관리</span>: 2015년 재고자산 감소로 운전자본 추가 개선</li>
-                <li class="list-item-space"><span class="font-semibold">부채비율 안정성</span>: 부채비율(32.5%)을 유지하며 신용등급(AA-) 보호</li>
-                <li class="list-item-space"><span class="font-semibold">가시적 효과</span>: 현금전환주기 마이너스로 전환 - 공급업체 자금으로 운영 가능</li>
+                <li class="list-item-space"><span class="font-semibold">매입채무 관리</span>: SCF를 통해 매입채무 지급 기간 연장(45일→75일)하면서도 공급업체와의 관계 유지</li>
+                <li class="list-item-space"><span class="font-semibold">현금 관리 최적화</span>: 향상된 현금 보유력이 더 큰 재무적 유연성 제공</li>
+                <li class="list-item-space"><span class="font-semibold">AA- 신용등급 유지</span>: 안정적인 부채구조 및 레버리지(~2.0)가 높은 신용등급 유지에 기여</li>
+                <li class="list-item-space"><span class="font-semibold">운전자본 효율성</span>: 유동자산 대비 유동부채 비율 개선으로 자금 운용 효율성 향상</li>
+                <li class="list-item-space"><span class="font-semibold">장기적 재무 구조 강화</span>: SCF는 단기적 현금흐름을 넘어 장기적 재무 건전성에 기여</li>
             </ul>
         </div>
     </div>
@@ -224,15 +224,12 @@ class PGBalanceSheetComponentGenerator:
     <script>
         // JSON 데이터 파싱
         let balanceSheetData;
-        let workingCapitalData;
         
         try {
             balanceSheetData = JSON.parse('__BALANCE_SHEET_DATA__');
-            workingCapitalData = JSON.parse('__WORKING_CAPITAL_DATA__');
         } catch (e) {
             console.error('데이터 파싱 오류:', e);
             balanceSheetData = [];
-            workingCapitalData = [];
         }
         
         // 금액 포맷팅 함수
@@ -240,82 +237,9 @@ class PGBalanceSheetComponentGenerator:
             return '$' + value.toLocaleString() + ' 백만';
         }
         
-        function formatBillions(value) {
-            return '$' + (value / 1000).toFixed(1) + 'B';
-        }
-        
-        // 자산, 부채, 자본 추이 차트
-        const assetsLiabilitiesCtx = document.getElementById('assetsLiabilitiesChart').getContext('2d');
-        new Chart(assetsLiabilitiesCtx, {
-            type: 'bar',
-            data: {
-                labels: balanceSheetData.map(item => item.year),
-                datasets: [
-                    {
-                        label: '총자산',
-                        data: balanceSheetData.map(item => item.totalAssets),
-                        backgroundColor: '#8884d8',
-                        borderColor: '#8884d8',
-                        borderWidth: 1
-                    },
-                    {
-                        label: '총부채',
-                        data: balanceSheetData.map(item => item.totalLiabilities),
-                        backgroundColor: '#ff8042',
-                        borderColor: '#ff8042',
-                        borderWidth: 1
-                    },
-                    {
-                        label: '자본',
-                        data: balanceSheetData.map(item => item.totalEquity),
-                        backgroundColor: '#82ca9d',
-                        borderColor: '#82ca9d',
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return '$' + (value / 1000) + 'B';
-                            }
-                        }
-                    }
-                },
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                let label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                label += formatCurrency(context.raw);
-                                return label;
-                            }
-                        }
-                    }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index'
-                }
-            }
-        });
-        
-        // 유동자산 vs 유동부채 차트
-        const currentAssetsLiabilitiesCtx = document.getElementById('currentAssetsLiabilitiesChart').getContext('2d');
-        new Chart(currentAssetsLiabilitiesCtx, {
+        // 자산 구조 차트
+        const assetStructureCtx = document.getElementById('assetStructureChart').getContext('2d');
+        new Chart(assetStructureCtx, {
             type: 'bar',
             data: {
                 labels: balanceSheetData.map(item => item.year),
@@ -323,16 +247,22 @@ class PGBalanceSheetComponentGenerator:
                     {
                         label: '유동자산',
                         data: balanceSheetData.map(item => item.currentAssets),
-                        backgroundColor: '#8884d8',
-                        borderColor: '#8884d8',
-                        borderWidth: 1
+                        backgroundColor: '#90caf9',
+                        stack: 'a'
                     },
                     {
-                        label: '유동부채',
-                        data: balanceSheetData.map(item => item.currentLiabilities),
-                        backgroundColor: '#ff8042',
-                        borderColor: '#ff8042',
-                        borderWidth: 1
+                        label: '비유동자산',
+                        data: balanceSheetData.map(item => item.totalAssets - item.currentAssets),
+                        backgroundColor: '#2196f3',
+                        stack: 'a'
+                    },
+                    {
+                        label: '유동자산 비율',
+                        data: balanceSheetData.map(item => Math.round(item.currentAssets / item.totalAssets * 100)),
+                        type: 'line',
+                        borderColor: '#ff9800',
+                        borderWidth: 3,
+                        yAxisID: 'y1'
                     }
                 ]
             },
@@ -340,17 +270,20 @@ class PGBalanceSheetComponentGenerator:
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    },
                     y: {
                         beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return '$' + (value / 1000) + 'B';
-                            }
+                        title: {
+                            display: true,
+                            text: '백만 달러'
+                        }
+                    },
+                    y1: {
+                        position: 'right',
+                        beginAtZero: true,
+                        max: 30,
+                        title: {
+                            display: true,
+                            text: '비율 (%)'
                         }
                     }
                 },
@@ -359,171 +292,104 @@ class PGBalanceSheetComponentGenerator:
                         callbacks: {
                             label: function(context) {
                                 let label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
+                                if (label.includes('비율')) {
+                                    return label + ': ' + context.raw + '%';
                                 }
-                                label += formatCurrency(context.raw);
-                                return label;
+                                return label + ': ' + formatCurrency(context.raw);
                             }
                         }
                     }
+                }
+            }
+        });
+        
+        // 부채 및 자본 구조 차트
+        const liabEquityStructureCtx = document.getElementById('liabEquityStructureChart').getContext('2d');
+        new Chart(liabEquityStructureCtx, {
+            type: 'bar',
+            data: {
+                labels: balanceSheetData.map(item => item.year),
+                datasets: [
+                    {
+                        label: '유동부채',
+                        data: balanceSheetData.map(item => item.currentLiabilities),
+                        backgroundColor: '#f44336',
+                        stack: 'a'
+                    },
+                    {
+                        label: '비유동부채',
+                        data: balanceSheetData.map(item => item.totalLiabilities - item.currentLiabilities),
+                        backgroundColor: '#ff9800',
+                        stack: 'a'
+                    },
+                    {
+                        label: '자본',
+                        data: balanceSheetData.map(item => item.totalEquity),
+                        backgroundColor: '#4caf50',
+                        stack: 'a'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '백만 달러'
+                        }
+                    }
                 },
-                interaction: {
-                    intersect: false,
-                    mode: 'index'
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + formatCurrency(context.raw);
+                            }
+                        }
+                    }
                 }
             }
         });
         
         // 운전자본 관련 항목 차트
-        const workingCapitalComponentsCtx = document.getElementById('workingCapitalComponentsChart').getContext('2d');
-        new Chart(workingCapitalComponentsCtx, {
+        const workingCapitalCtx = document.getElementById('workingCapitalChart').getContext('2d');
+        new Chart(workingCapitalCtx, {
             type: 'bar',
-            data: {
-                labels: workingCapitalData.map(item => item.year),
-                datasets: [
-                    {
-                        label: '매출채권',
-                        data: workingCapitalData.map(item => item.accountsReceivable),
-                        backgroundColor: '#8884d8',
-                        borderColor: '#8884d8',
-                        borderWidth: 1
-                    },
-                    {
-                        label: '재고자산',
-                        data: workingCapitalData.map(item => item.inventory),
-                        backgroundColor: '#82ca9d',
-                        borderColor: '#82ca9d',
-                        borderWidth: 1
-                    },
-                    {
-                        label: '매입채무',
-                        data: workingCapitalData.map(item => item.accountsPayable),
-                        backgroundColor: '#ff8042',
-                        borderColor: '#ff8042',
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return '$' + (value / 1000) + 'B';
-                            }
-                        }
-                    }
-                },
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                let label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                label += formatCurrency(context.raw);
-                                return label;
-                            }
-                        }
-                    }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index'
-                }
-            }
-        });
-        
-        // 현금전환주기 차트
-        const cashConversionCycleCtx = document.getElementById('cashConversionCycleChart').getContext('2d');
-        new Chart(cashConversionCycleCtx, {
-            type: 'line',
-            data: {
-                labels: workingCapitalData.map(item => item.year),
-                datasets: [
-                    {
-                        label: '현금전환주기',
-                        data: workingCapitalData.map(item => item.cashConversionCycle),
-                        backgroundColor: 'rgba(136, 132, 216, 0.2)',
-                        borderColor: '#8884d8',
-                        borderWidth: 2,
-                        pointRadius: 6,
-                        pointHoverRadius: 8,
-                        tension: 0.1
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    },
-                    y: {
-                        min: -5,
-                        max: 25
-                    }
-                },
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                let label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                label += context.raw + ' 일';
-                                return label;
-                            }
-                        }
-                    }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index'
-                }
-            }
-        });
-        
-        // 현금 보유량과 부채 차트
-        const cashDebtCtx = document.getElementById('cashDebtChart').getContext('2d');
-        new Chart(cashDebtCtx, {
-            type: 'line',
             data: {
                 labels: balanceSheetData.map(item => item.year),
                 datasets: [
                     {
-                        label: '현금 및 단기투자',
-                        data: balanceSheetData.map(item => item.cash),
-                        backgroundColor: 'rgba(130, 202, 157, 0.2)',
-                        borderColor: '#82ca9d',
-                        borderWidth: 2,
-                        pointRadius: 6,
-                        pointHoverRadius: 8,
-                        tension: 0.1
+                        label: '매출채권',
+                        data: balanceSheetData.map(item => item.accountsReceivable),
+                        backgroundColor: '#90caf9'
                     },
                     {
-                        label: '총부채',
-                        data: balanceSheetData.map(item => item.totalDebt),
-                        backgroundColor: 'rgba(255, 128, 66, 0.2)',
-                        borderColor: '#ff8042',
-                        borderWidth: 2,
-                        pointRadius: 6,
-                        pointHoverRadius: 8,
-                        tension: 0.1
+                        label: '재고자산',
+                        data: balanceSheetData.map(item => item.inventory),
+                        backgroundColor: '#c8e6c9'
+                    },
+                    {
+                        label: '매입채무',
+                        data: balanceSheetData.map(item => item.accountsPayable),
+                        backgroundColor: '#f44336'
+                    },
+                    {
+                        label: '순운전자본',
+                        data: balanceSheetData.map(item => item.currentAssets - item.currentLiabilities),
+                        type: 'line',
+                        borderColor: '#9c27b0',
+                        borderWidth: 2
+                    },
+                    {
+                        label: '유동비율',
+                        data: balanceSheetData.map(item => item.currentRatio),
+                        type: 'line',
+                        borderColor: '#ff9800',
+                        borderWidth: 3,
+                        yAxisID: 'y1'
                     }
                 ]
             },
@@ -531,17 +397,20 @@ class PGBalanceSheetComponentGenerator:
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
-                    x: {
-                        grid: {
-                            display: false
-                        }
-                    },
                     y: {
                         beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return '$' + (value / 1000) + 'B';
-                            }
+                        title: {
+                            display: true,
+                            text: '백만 달러'
+                        }
+                    },
+                    y1: {
+                        position: 'right',
+                        beginAtZero: true,
+                        max: 1.2,
+                        title: {
+                            display: true,
+                            text: '유동비율'
                         }
                     }
                 },
@@ -550,18 +419,147 @@ class PGBalanceSheetComponentGenerator:
                         callbacks: {
                             label: function(context) {
                                 let label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
+                                if (label === '유동비율') {
+                                    return label + ': ' + context.raw.toFixed(2);
                                 }
-                                label += formatCurrency(context.raw);
-                                return label;
+                                return label + ': ' + formatCurrency(context.raw);
                             }
                         }
                     }
+                }
+            }
+        });
+        
+        // 현금 및 부채 추이 차트
+        const cashDebtCtx = document.getElementById('cashDebtChart').getContext('2d');
+        new Chart(cashDebtCtx, {
+            type: 'bar',
+            data: {
+                labels: balanceSheetData.map(item => item.year),
+                datasets: [
+                    {
+                        label: '현금 및 투자자산',
+                        data: balanceSheetData.map(item => item.cashAndInvestments),
+                        backgroundColor: '#4caf50'
+                    },
+                    {
+                        label: '총부채',
+                        data: balanceSheetData.map(item => item.totalDebt),
+                        backgroundColor: '#f44336'
+                    },
+                    {
+                        label: '순부채',
+                        data: balanceSheetData.map(item => item.netDebt),
+                        type: 'line',
+                        borderColor: '#9c27b0',
+                        borderWidth: 2
+                    },
+                    {
+                        label: '현금자산 비율',
+                        data: balanceSheetData.map(item => Math.round(item.cashAndInvestments / item.totalAssets * 100)),
+                        type: 'line',
+                        borderColor: '#2196f3',
+                        borderWidth: 2,
+                        yAxisID: 'y1'
+                    },
+                    {
+                        label: '부채자본비율',
+                        data: balanceSheetData.map(item => item.debtToTotalCapital),
+                        type: 'line',
+                        borderColor: '#ff9800',
+                        borderWidth: 2,
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '백만 달러'
+                        }
+                    },
+                    y1: {
+                        position: 'right',
+                        beginAtZero: true,
+                        max: 40,
+                        title: {
+                            display: true,
+                            text: '비율 (%)'
+                        }
+                    }
                 },
-                interaction: {
-                    intersect: false,
-                    mode: 'index'
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label.includes('비율')) {
+                                    return label + ': ' + context.raw + '%';
+                                }
+                                return label + ': ' + formatCurrency(context.raw);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // SCF 도입 전후 비교 차트
+        const scfComparisonData = [
+            { name: '매출채권', before: 6068, after: 6386, change: 318 },
+            { name: '재고', before: 6721, after: 6759, change: 38 },
+            { name: '매입채무', before: 7920, after: 8461, change: 541 },
+            { name: '운전자본', before: -2997, after: -2109, change: 888 }
+        ];
+        
+        const scfComparisonCtx = document.getElementById('scfComparisonChart').getContext('2d');
+        new Chart(scfComparisonCtx, {
+            type: 'bar',
+            data: {
+                labels: scfComparisonData.map(item => item.name),
+                datasets: [
+                    {
+                        label: 'SCF 도입 전 (2012)',
+                        data: scfComparisonData.map(item => item.before),
+                        backgroundColor: '#90caf9'
+                    },
+                    {
+                        label: 'SCF 도입 후 (2014)',
+                        data: scfComparisonData.map(item => item.after),
+                        backgroundColor: '#2196f3'
+                    },
+                    {
+                        label: '변화',
+                        data: scfComparisonData.map(item => item.change),
+                        backgroundColor: '#4caf50'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '백만 달러'
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + formatCurrency(context.raw);
+                            }
+                        }
+                    }
                 }
             }
         });
