@@ -278,7 +278,7 @@ class FibriaBalanceSheetComponentGenerator:
                         maintainAspectRatio: false,
                         scales: {
                             y: {
-                                beginAtZero: false,
+                                beginAtZero: true,
                                 title: {
                                     display: true,
                                     text: '백만 레알'
