@@ -46,7 +46,7 @@ class FibriaBalanceSheetComponentGenerator:
         <!DOCTYPE html>
         <html>
         <head>
-            <title>피브리아 셀룰로즈 대차대조표 분석</title>
+            <title>Fibria Cellulose Balance Sheet</title>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <!-- Chart.js 라이브러리 로드 -->
@@ -115,7 +115,7 @@ class FibriaBalanceSheetComponentGenerator:
         </head>
         <body>
             <div style="padding: 20px;">
-                <h2 class="section-title">피브리아 셀룰로즈 대차대조표 분석 (2012-2015)</h2>
+                <h2 class="section-title">Fibria Cellulose Balance Sheet (2012-2015)</h2>
                 
                 <!-- 자산, 부채, 자본 추이 -->
                 <div class="chart-container">

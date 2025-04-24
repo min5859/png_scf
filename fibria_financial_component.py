@@ -46,7 +46,7 @@ class FibriaFinancialComponentGenerator:
         <!DOCTYPE html>
         <html>
         <head>
-            <title>피브리아 셀룰로즈 재무 분석</title>
+            <title>Fibria Cellulose Income Statement</title>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <!-- Chart.js 라이브러리 로드 -->
@@ -113,7 +113,7 @@ class FibriaFinancialComponentGenerator:
         </head>
         <body>
             <div style="padding: 20px;">
-                <h2 class="section-title">피브리아 셀룰로즈 재무 분석 (2012-2015)</h2>
+                <h2 class="section-title">Fibria Cellulose Income Statement (2012-2015)</h2>
                 
                 <!-- 매출 및 이익 추이 -->
                 <div class="chart-container">

@@ -84,17 +84,17 @@ class StreamlitApp:
         
         # Exhibit 1 - P&G 재무 지표 시각화
         if cols[6].button(button_titles[0]):
-            st.header("P&G 재무 지표 시각화 (Exhibit 1)")
+            #st.header("P&G Income Statement (Exhibit 1)")
             self.render_exhibit_1()
         
         # Exhibit 2 - P&G 대차대조표 분석
         if cols[7].button(button_titles[1]):
-            st.header("P&G 대차대조표 분석 (Exhibit 2)")
+            #st.header("P&G 대차대조표 분석 (Exhibit 2)")
             self.render_exhibit_2()
         
         # Exhibit 3 - P&G 운전자본 분석
         if cols[8].button(button_titles[2]):
-            st.header("P&G 운전자본 분석 (Exhibit 3)")
+            #st.header("P&G 운전자본 분석 (Exhibit 3)")
             self.render_exhibit_3()
         
         # Exhibit 4 - P&G SCF 경제적 효과 분석
@@ -103,22 +103,22 @@ class StreamlitApp:
         
         # Exhibit 5 - Fibria 재무 분석
         if cols[10].button(button_titles[4]):
-            st.header("Fibria 셀룰로즈 재무 분석 (Exhibit 5)")
+            #st.header("Fibria 셀룰로즈 재무 분석 (Exhibit 5)")
             self.render_exhibit_5()
         
         # Exhibit 6 - Fibria 대차대조표 분석
         if cols[11].button(button_titles[5]):
-            st.header("Fibria 셀룰로즈 대차대조표 분석 (Exhibit 6)")
+            #st.header("Fibria 셀룰로즈 대차대조표 분석 (Exhibit 6)")
             self.render_exhibit_6()
         
         # Exhibit 7 - Fibria 운전자본 분석
         if cols[12].button(button_titles[6]):
-            st.header("Fibria 운전자본 분석 (Exhibit 7)")
+            #st.header("Fibria 운전자본 분석 (Exhibit 7)")
             self.render_exhibit_7()
         
         # Exhibit 8 - 시장 금리 현황 분석
         if cols[13].button(button_titles[7]):
-            st.header("시장 금리 현황 분석 (Exhibit 8)")
+            #st.header("시장 금리 현황 분석 (Exhibit 8)")
             self.render_exhibit_8()
     
     def render_exhibit_1(self):
@@ -233,7 +233,7 @@ class StreamlitApp:
     def render_exhibit_4(self):
         """Exhibit 4 - P&G SCF 경제적 효과 분석"""
         try:
-            st.header("P&G SCF 프로그램의 경제적 효과 분석 (Exhibit 4)")
+            #st.header("P&G SCF 프로그램의 경제적 효과 분석 (Exhibit 4)")
             
             # Generator 객체 생성
             scf_economics_generator = PGSCFEconomicsGenerator()
@@ -293,11 +293,11 @@ class StreamlitApp:
             st.components.v1.html(html_code, height=height, scrolling=True)
             
             # 데이터 테이블 표시 (디버깅 모드에서만)
-            if debug_mode:
-                with st.expander("Fibria 재무 데이터", expanded=False):
-                    st.dataframe(pd.DataFrame(self.data_provider.fibria_financial_data))
-                with st.expander("Fibria SCF 영향 데이터", expanded=False):
-                    st.dataframe(pd.DataFrame(self.data_provider.fibria_scf_impact_data))
+            #if debug_mode:
+            #    with st.expander("Fibria 재무 데이터", expanded=False):
+            #        st.dataframe(pd.DataFrame(self.data_provider.fibria_financial_data))
+            #    with st.expander("Fibria SCF 영향 데이터", expanded=False):
+            #        st.dataframe(pd.DataFrame(self.data_provider.fibria_scf_impact_data))
             
             # Fibria 재무 분석 내용 추가
             with st.expander("Fibria Celulose 재무 분석 상세", expanded=False):
@@ -380,13 +380,13 @@ class StreamlitApp:
             st.components.v1.html(html_code, height=height, scrolling=True)
             
             # 데이터 테이블 표시 (디버깅 모드에서만)
-            if debug_mode:
-                with st.expander("Fibria 대차대조표 데이터", expanded=False):
-                    st.dataframe(pd.DataFrame(self.data_provider.fibria_balance_sheet_data))
-                with st.expander("Fibria 운전자본 데이터", expanded=False):
-                    st.dataframe(pd.DataFrame(self.data_provider.fibria_working_capital_data))
-                with st.expander("Fibria SCF 영향 분석 데이터", expanded=False):
-                    st.dataframe(pd.DataFrame(self.data_provider.fibria_scf_analysis_data))
+            #if debug_mode:
+            #    with st.expander("Fibria 대차대조표 데이터", expanded=False):
+            #        st.dataframe(pd.DataFrame(self.data_provider.fibria_balance_sheet_data))
+            #    with st.expander("Fibria 운전자본 데이터", expanded=False):
+            #        st.dataframe(pd.DataFrame(self.data_provider.fibria_working_capital_data))
+            #    with st.expander("Fibria SCF 영향 분석 데이터", expanded=False):
+            #        st.dataframe(pd.DataFrame(self.data_provider.fibria_scf_analysis_data))
             
             # Fibria 재무상태표 분석 내용 추가
             with st.expander("Fibria Celulose 재무상태표 상세 분석", expanded=False):
@@ -513,7 +513,7 @@ class StreamlitApp:
     def render_exhibit_8(self):
         """Exhibit 8 - 시장 금리 현황 분석"""
         
-        st.subheader("Market Analysis")
+        #st.subheader("Market Analysis")
         
         # React 컴포넌트 생성
         html_code = self.react_generator.generate_html()

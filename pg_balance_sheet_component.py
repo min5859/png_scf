@@ -139,7 +139,7 @@ class PGBalanceSheetComponentGenerator:
 </head>
 <body>
     <div class="container">
-        <h2>P&G 대차대조표 분석 (2011-2015)</h2>
+        <h2>P&G Balance Sheet (2011-2015)</h2>
         
         <!-- 자산 구조 변화 -->
         <div class="chart-container">
