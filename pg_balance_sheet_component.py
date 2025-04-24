@@ -237,6 +237,22 @@ class PGBalanceSheetComponentGenerator:
             return '$' + value.toLocaleString() + ' 백만';
         }
         
+        // 데이터 전처리
+        const processedData = balanceSheetData.map(item => ({
+            ...item,
+            // netDebt는 이미 데이터에 있으므로 계산 불필요
+            currentRatio: item.currentRatio || (item.currentAssets / item.currentLiabilities)
+        }));
+
+        // 데이터 확인 로그
+        console.log('Working Capital Data:', processedData.map(item => ({
+            year: item.year,
+            receivable: item.accountsReceivable,
+            inventory: item.inventory,
+            payable: item.accountsPayable,
+            currentRatio: item.currentRatio
+        })));
+        
         // 자산 구조 차트
         const assetStructureCtx = document.getElementById('assetStructureChart').getContext('2d');
         new Chart(assetStructureCtx, {
@@ -375,49 +391,54 @@ class PGBalanceSheetComponentGenerator:
         new Chart(workingCapitalCtx, {
             type: 'bar',
             data: {
-                labels: balanceSheetData.map(item => item.year),
+                labels: processedData.map(item => item.year),
                 datasets: [
                     {
                         label: '매출채권',
-                        data: balanceSheetData.map(item => item.accountsReceivable),
+                        data: processedData.map(item => item.accountsReceivable),
                         backgroundColor: '#90caf9',
-                        order: 2
+                        order: 2,
+                        yAxisID: 'y'
                     },
                     {
                         label: '재고자산',
-                        data: balanceSheetData.map(item => item.inventory),
+                        data: processedData.map(item => item.inventory),
                         backgroundColor: '#c8e6c9',
-                        order: 2
+                        order: 2,
+                        yAxisID: 'y'
                     },
                     {
                         label: '매입채무',
-                        data: balanceSheetData.map(item => item.accountsPayable),
+                        data: processedData.map(item => item.accountsPayable),
                         backgroundColor: '#f44336',
-                        order: 2
+                        order: 2,
+                        yAxisID: 'y'
                     },
                     {
                         label: '순운전자본',
-                        data: balanceSheetData.map(item => item.currentAssets - item.currentLiabilities),
+                        data: processedData.map(item => item.currentAssets - item.currentLiabilities),
                         type: 'line',
                         borderColor: '#9c27b0',
                         borderWidth: 2,
                         fill: false,
+                        tension: 0.4,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        yAxisID: 'y',
                         order: 1
                     },
                     {
                         label: '유동비율',
-                        data: balanceSheetData.map(item => item.currentRatio),
+                        data: processedData.map(item => item.currentRatio),
                         type: 'line',
                         borderColor: '#ff9800',
                         borderWidth: 3,
                         yAxisID: 'y1',
                         fill: false,
-                        order: 0,
-                        pointRadius: 6,
-                        pointHoverRadius: 8,
-                        pointBackgroundColor: '#ff9800',
-                        pointBorderColor: '#ffffff',
-                        pointBorderWidth: 2
+                        tension: 0.4,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        order: 0
                     }
                 ]
             },
@@ -425,13 +446,27 @@ class PGBalanceSheetComponentGenerator:
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
+                    x: {
+                        grid: {
+                            display: true,
+                            drawBorder: true
+                        }
+                    },
                     y: {
+                        position: 'left',
                         beginAtZero: true,
-                        min: -8000,
-                        max: 10000,
+                        grid: {
+                            display: true,
+                            drawBorder: true
+                        },
                         title: {
                             display: true,
                             text: '백만 달러'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return value.toLocaleString();
+                            }
                         }
                     },
                     y1: {
@@ -439,6 +474,9 @@ class PGBalanceSheetComponentGenerator:
                         beginAtZero: true,
                         min: 0,
                         max: 1.2,
+                        grid: {
+                            display: false
+                        },
                         title: {
                             display: true,
                             text: '유동비율'
@@ -447,6 +485,8 @@ class PGBalanceSheetComponentGenerator:
                 },
                 plugins: {
                     tooltip: {
+                        mode: 'index',
+                        intersect: false,
                         callbacks: {
                             label: function(context) {
                                 let label = context.dataset.label || '';
@@ -456,11 +496,11 @@ class PGBalanceSheetComponentGenerator:
                                 return label + ': ' + formatCurrency(context.raw);
                             }
                         }
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top'
                     }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index'
                 }
             }
         });
@@ -470,40 +510,51 @@ class PGBalanceSheetComponentGenerator:
         new Chart(cashDebtCtx, {
             type: 'bar',
             data: {
-                labels: balanceSheetData.map(item => item.year),
+                labels: processedData.map(item => item.year),
                 datasets: [
                     {
                         label: '현금 및 투자자산',
-                        data: balanceSheetData.map(item => item.cashAndInvestments),
-                        backgroundColor: '#4caf50'
+                        data: processedData.map(item => item.cashAndInvestments),
+                        backgroundColor: '#4caf50',
+                        order: 1
                     },
                     {
                         label: '총부채',
-                        data: balanceSheetData.map(item => item.totalDebt),
-                        backgroundColor: '#f44336'
+                        data: processedData.map(item => item.totalDebt),
+                        backgroundColor: '#f44336',
+                        order: 1
                     },
                     {
                         label: '순부채',
-                        data: balanceSheetData.map(item => item.netDebt),
+                        data: processedData.map(item => item.netDebt),
                         type: 'line',
                         borderColor: '#9c27b0',
-                        borderWidth: 2
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.4,
+                        order: 0
                     },
                     {
                         label: '현금자산 비율',
-                        data: balanceSheetData.map(item => Math.round(item.cashAndInvestments / item.totalAssets * 100)),
+                        data: processedData.map(item => (item.cashAndInvestments / item.totalAssets * 100).toFixed(1)),
                         type: 'line',
                         borderColor: '#2196f3',
                         borderWidth: 2,
-                        yAxisID: 'y1'
+                        yAxisID: 'y1',
+                        fill: false,
+                        tension: 0.4,
+                        order: 0
                     },
                     {
                         label: '부채자본비율',
-                        data: balanceSheetData.map(item => item.debtToTotalCapital),
+                        data: processedData.map(item => item.debtToTotalCapital),
                         type: 'line',
                         borderColor: '#ff9800',
                         borderWidth: 2,
-                        yAxisID: 'y1'
+                        yAxisID: 'y1',
+                        fill: false,
+                        tension: 0.4,
+                        order: 0
                     }
                 ]
             },
@@ -511,17 +562,37 @@ class PGBalanceSheetComponentGenerator:
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
+                    x: {
+                        grid: {
+                            display: true,
+                            drawBorder: true
+                        }
+                    },
                     y: {
-                        beginAtZero: true,
+                        position: 'left',
+                        min: 0,
+                        max: 35000,
+                        grid: {
+                            display: true,
+                            drawBorder: true
+                        },
                         title: {
                             display: true,
                             text: '백만 달러'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return value.toLocaleString();
+                            }
                         }
                     },
                     y1: {
                         position: 'right',
-                        beginAtZero: true,
+                        min: 0,
                         max: 40,
+                        grid: {
+                            display: false
+                        },
                         title: {
                             display: true,
                             text: '비율 (%)'
@@ -530,6 +601,8 @@ class PGBalanceSheetComponentGenerator:
                 },
                 plugins: {
                     tooltip: {
+                        mode: 'index',
+                        intersect: false,
                         callbacks: {
                             label: function(context) {
                                 let label = context.dataset.label || '';
@@ -539,11 +612,11 @@ class PGBalanceSheetComponentGenerator:
                                 return label + ': ' + formatCurrency(context.raw);
                             }
                         }
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top'
                     }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index'
                 }
             }
         });
