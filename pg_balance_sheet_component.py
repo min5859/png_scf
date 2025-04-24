@@ -245,24 +245,32 @@ class PGBalanceSheetComponentGenerator:
                 labels: balanceSheetData.map(item => item.year),
                 datasets: [
                     {
-                        label: '유동자산',
-                        data: balanceSheetData.map(item => item.currentAssets),
-                        backgroundColor: '#90caf9',
-                        stack: 'a'
-                    },
-                    {
-                        label: '비유동자산',
-                        data: balanceSheetData.map(item => item.totalAssets - item.currentAssets),
-                        backgroundColor: '#2196f3',
-                        stack: 'a'
-                    },
-                    {
                         label: '유동자산 비율',
                         data: balanceSheetData.map(item => Math.round(item.currentAssets / item.totalAssets * 100)),
                         type: 'line',
                         borderColor: '#ff9800',
                         borderWidth: 3,
-                        yAxisID: 'y1'
+                        yAxisID: 'y1',
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        pointBackgroundColor: '#ff9800',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 2,
+                        zIndex: 2
+                    },
+                    {
+                        label: '유동자산',
+                        data: balanceSheetData.map(item => item.currentAssets),
+                        backgroundColor: '#90caf9',
+                        stack: 'a',
+                        zIndex: 1
+                    },
+                    {
+                        label: '비유동자산',
+                        data: balanceSheetData.map(item => item.totalAssets - item.currentAssets),
+                        backgroundColor: '#2196f3',
+                        stack: 'a',
+                        zIndex: 1
                     }
                 ]
             },
@@ -299,6 +307,10 @@ class PGBalanceSheetComponentGenerator:
                             }
                         }
                     }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
                 }
             }
         });
@@ -350,6 +362,10 @@ class PGBalanceSheetComponentGenerator:
                             }
                         }
                     }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
                 }
             }
         });
@@ -364,24 +380,29 @@ class PGBalanceSheetComponentGenerator:
                     {
                         label: '매출채권',
                         data: balanceSheetData.map(item => item.accountsReceivable),
-                        backgroundColor: '#90caf9'
+                        backgroundColor: '#90caf9',
+                        order: 2
                     },
                     {
                         label: '재고자산',
                         data: balanceSheetData.map(item => item.inventory),
-                        backgroundColor: '#c8e6c9'
+                        backgroundColor: '#c8e6c9',
+                        order: 2
                     },
                     {
                         label: '매입채무',
                         data: balanceSheetData.map(item => item.accountsPayable),
-                        backgroundColor: '#f44336'
+                        backgroundColor: '#f44336',
+                        order: 2
                     },
                     {
                         label: '순운전자본',
                         data: balanceSheetData.map(item => item.currentAssets - item.currentLiabilities),
                         type: 'line',
                         borderColor: '#9c27b0',
-                        borderWidth: 2
+                        borderWidth: 2,
+                        fill: false,
+                        order: 1
                     },
                     {
                         label: '유동비율',
@@ -389,7 +410,14 @@ class PGBalanceSheetComponentGenerator:
                         type: 'line',
                         borderColor: '#ff9800',
                         borderWidth: 3,
-                        yAxisID: 'y1'
+                        yAxisID: 'y1',
+                        fill: false,
+                        order: 0,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        pointBackgroundColor: '#ff9800',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 2
                     }
                 ]
             },
@@ -399,6 +427,8 @@ class PGBalanceSheetComponentGenerator:
                 scales: {
                     y: {
                         beginAtZero: true,
+                        min: -8000,
+                        max: 10000,
                         title: {
                             display: true,
                             text: '백만 달러'
@@ -407,6 +437,7 @@ class PGBalanceSheetComponentGenerator:
                     y1: {
                         position: 'right',
                         beginAtZero: true,
+                        min: 0,
                         max: 1.2,
                         title: {
                             display: true,
@@ -426,6 +457,10 @@ class PGBalanceSheetComponentGenerator:
                             }
                         }
                     }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
                 }
             }
         });
@@ -505,6 +540,10 @@ class PGBalanceSheetComponentGenerator:
                             }
                         }
                     }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
                 }
             }
         });
@@ -560,6 +599,10 @@ class PGBalanceSheetComponentGenerator:
                             }
                         }
                     }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
                 }
             }
         });
