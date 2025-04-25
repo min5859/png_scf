@@ -175,14 +175,14 @@ class FibriaSCFAnalysisComponent:
                             <div class="flex items-center justify-center space-x-6">
                                 <div class="text-center">
                                     <p class="text-xs text-gray-600">기존</p>
-                                    <p class="font-bold text-3xl text-red-600">140일</p>
-                                    <p class="text-xs">(80일 재고 + 60일 미수금)</p>
+                                    <p class="font-bold text-3xl text-red-600">100일</p>
+                                    <p class="text-xs">(80일 재고 + 60일 미수금 - 40일 미지급금)</p>
                                 </div>
                                 <div class="font-bold text-xl">→</div>
                                 <div class="text-center">
                                     <p class="text-xs text-gray-600">SCF 활용</p>
-                                    <p class="font-bold text-3xl text-green-600">40일</p>
-                                    <p class="text-xs">(80일 재고 - 40일 미지급금)</p>
+                                    <p class="font-bold text-3xl text-green-600">45일</p>
+                                    <p class="text-xs">(80일 재고 + 5일 미수금 - 40일 미지급금)</p>
                                 </div>
                             </div>
                         </div>
