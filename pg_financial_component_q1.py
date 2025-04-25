@@ -140,33 +140,44 @@ class PGFinancialComponentGeneratorQ1:
                 
                 <!-- 차트 컨테이너 6: 주요 인사이트 -->
                 <div class="chart-container">
-                    <div class="grid">
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
                         <div class="insight-box">
                             <div class="insight-title">금융 위기 이후 성장 둔화</div>
                             <div class="insight-content">2008년 금융 위기 이후 P&G의 성장이 둔화되면서 $10 billion 비용 절감 계획 수립</div>
                             <div class="note">→ 대규모 비용 절감이 필요한 상황에서 운전자본 최적화가 중요한 전략</div>
                         </div>
+
+                        <!-- 100억 달러 비용 절감 프로그램 내역 -->
+                        <div class="chart-container">
+                            <h2 class="chart-title">100억 달러 비용 절감 프로그램 내역</h2>
+                            <div class="grid">
+                                <div style="width: 100%; height: 300px;">
+                                    <canvas id="costCuttingChart"></canvas>
+                                </div>
+                                <div>
+                                    <div class="insight-box" style="background-color: #e6f3ff;">
+                                        <div class="insight-title">간접비 절감</div>
+                                        <div class="insight-content" style="font-size: 24px; font-weight: bold; color: #0066cc;">30억 달러</div>
+                                    </div>
+                                    <div class="insight-box" style="background-color: #e6ffe6;">
+                                        <div class="insight-title">상품 제조원가 절감</div>
+                                        <div class="insight-content" style="font-size: 24px; font-weight: bold; color: #009933;">60억 달러</div>
+                                    </div>
+                                    <div class="insight-box" style="background-color: #fff5e6;">
+                                        <div class="insight-title">마케팅 효율성 절감</div>
+                                        <div class="insight-content" style="font-size: 24px; font-weight: bold; color: #ff9900;">10억 달러</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="insight-box">
                             <div class="insight-title">벤치마킹 분석 결과</div>
                             <div class="insight-content">P&G의 평균 지불 기간: 45일</div>
                             <div class="insight-content">경쟁사 평균 지불 기간: 75-100일</div>
                             <div class="note">→ 경쟁사 대비 빠른 지불로 인한 현금흐름 압박</div>
                         </div>
-                        <div class="insight-box">
-                            <div class="insight-title">TSR (Total Shareholder Return)</div>
-                            <div class="formula-box">
-                                <div class="formula">TSR = (기말 주가 - 기초 주가 + 배당금) ÷ 기초 주가</div>
-                            </div>
-                            <div class="insight-content">배당금 지급은 증가하는 추세 (주당 1.97달러에서 2.59달러로)</div>
-                            <div class="insight-content">2015년에는 수익 감소로 배당성향(Payout Ratio)이 104%로 급증</div>
-                            <div class="note">→ 높은 TSR 유지를 위해 현금흐름 개선이 필수적</div>
-                        </div>
-                        <div class="insight-box">
-                            <div class="insight-title">현금흐름 관리 필요성</div>
-                            <div class="insight-content">매출의 약 80%가 비용 관련 (COGS + SG&A)</div>
-                            <div class="insight-content">배당금 지급을 위한 충분한 현금흐름 확보 필요</div>
-                            <div class="note">→ 공급망 금융으로 현금흐름 개선 가능</div>
-                        </div>
+
                         <div class="quote-box">
                             <div class="quote">
                                 "우리의 지불 조건이 이렇게 다른 이유는 우리 구매 담당자들이 항상 가격, 품질, 배송, 서비스, 대응성, 혁신에 초점을 맞추었기 때문입니다."
@@ -176,6 +187,23 @@ class PGFinancialComponentGeneratorQ1:
                                 P&G의 구매 부서는 공급업체와의 협상에서 결제 조건보다 제품과 서비스의 품질적 측면에 더 중점을 두었습니다.
                             </div>
                         </div>
+
+                        <div class="insight-box">
+                            <div class="insight-title">TSR (Total Shareholder Return)</div>
+                            <div class="formula-box">
+                                <div class="formula">TSR = (기말 주가 - 기초 주가 + 배당금) ÷ 기초 주가</div>
+                            </div>
+                            <div class="insight-content">배당금 지급은 증가하는 추세 (주당 1.97달러에서 2.59달러로)</div>
+                            <div class="insight-content">2015년에는 수익 감소로 배당성향(Payout Ratio)이 104%로 급증</div>
+                            <div class="note">→ 높은 TSR 유지를 위해 현금흐름 개선이 필수적</div>
+                        </div>
+
+                        <div class="insight-box">
+                            <div class="insight-title">현금흐름 관리 필요성</div>
+                            <div class="insight-content">매출의 약 80%가 비용 관련 (COGS + SG&A)</div>
+                            <div class="insight-content">배당금 지급을 위한 충분한 현금흐름 확보 필요</div>
+                            <div class="note">→ 공급망 금융으로 현금흐름 개선 가능</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -183,6 +211,36 @@ class PGFinancialComponentGeneratorQ1:
             <script>
                 // JSON 데이터 파싱
                 const pgFinancialData = PG_FINANCIAL_DATA_PLACEHOLDER;
+
+                // 100억 달러 비용 절감 차트
+                const costCuttingData = {
+                    labels: ['간접비 절감', '상품 제조원가 절감', '마케팅 효율성 절감'],
+                    datasets: [{
+                        data: [30, 60, 10],
+                        backgroundColor: ['#0088FE', '#00C49F', '#FFBB28']
+                    }]
+                };
+
+                const costCuttingCtx = document.getElementById('costCuttingChart').getContext('2d');
+                new Chart(costCuttingCtx, {
+                    type: 'pie',
+                    data: costCuttingData,
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.label}: ${context.raw}억 달러`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
             </script>
         </body>
         </html>
