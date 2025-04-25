@@ -189,12 +189,12 @@ class PGSCFEconomicsQ4Generator:
                     <!-- P&G Financial Impact -->
                     <div class="bg-white rounded-xl p-5 shadow-md hover:shadow-xl transition-shadow flex flex-col items-center">
                         <h3 class="text-lg font-semibold text-blue-800 mb-4">P&G 연간 구매 금액</h3>
-                        <div class="text-4xl font-bold text-blue-600 mb-2">$60억</div>
+                        <div class="text-4xl font-bold text-blue-600 mb-2">$600억</div>
                         <div class="flex items-center justify-center bg-blue-50 w-full p-3 rounded-lg">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                             </svg>
-                            <span class="text-gray-700 font-medium">지급 기간 30일 연장 시 약 <span class="text-blue-600 font-bold">$4.9억</span> 운전자본 개선</span>
+                            <span class="text-gray-700 font-medium">지급 기간 30일 연장 시 약 <span class="text-blue-600 font-bold">$50억</span> 운전자본 개선</span>
                         </div>
                     </div>
 
