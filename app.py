@@ -327,6 +327,10 @@ class StreamlitApp:
         try:
             #st.header("P&G SCF 프로그램의 경제적 효과 분석 (Exhibit 4)")
             
+            # SCF 다이어그램 이미지 표시
+            #st.subheader("SCF 다이어그램")
+            st.image("static/images/SCF.png", caption="Operational Flows in the SCF Program")
+                    
             # Generator 객체 생성
             scf_economics_generator = PGSCFEconomicsGenerator()
             
@@ -351,7 +355,7 @@ class StreamlitApp:
             
             # HTML 렌더링
             st.components.v1.html(html_code, height=height, scrolling=True)
-                    
+            
         except Exception as e:
             st.error(f"P&G SCF 경제적 효과 분석 렌더링 중 오류가 발생했습니다: {str(e)}")
             st.exception(e)
