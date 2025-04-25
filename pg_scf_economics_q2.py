@@ -59,6 +59,19 @@ class PGSCFEconomicsQ2Generator:
                     "fibria": "P&G의 신용등급(AA-)을 활용한 저비용 자금조달로 부담 경감 (0.35% 비용 vs 기존 2~3% 팩토링 비용)",
                     "bank": "안정적인 수수료 수입 확보 및 신규 고객 관계 구축"
                 }
+            },
+            "design_principles": {
+                "principles": [
+                    {"title": "저비용 구조 유지", "detail": "프로그램 운영 비용 최소화"},
+                    {"title": "가격 인상 방지", "detail": "경쟁사 대비 이미 짧은 결제 기간에서 시작했으므로 연장에 따른 공급업체의 가격 인상 불가"},
+                    {"title": "현지 팀 중심 구현", "detail": "본사가 아닌 현지 팀이 구현을 주도하도록 설계"},
+                    {"title": "자금 조달 경쟁 보장", "detail": "각 공급업체에 최소 두 개의 참여 은행 확보로 경쟁적 금융 조건 제공"}
+                ],
+                "bank_partners": [
+                    {"name": "Citigroup", "role": "글로벌 SCF 서비스 제공 (P&G와 장기적 관계)"},
+                    {"name": "JPMorgan Chase", "role": "북미, 남미, 중국 지역 담당"},
+                    {"name": "Deutsche Bank", "role": "유럽 및 아시아 기타 지역 담당"}
+                ]
             }
         }
     
@@ -580,6 +593,23 @@ class PGSCFEconomicsQ2Generator:
                     </ul>
                 </div>
             </div>
+            
+            <!-- 설계 원칙 -->
+            <div class="card">
+                <h2 class="card-title">SCF 프로그램 설계 원칙</h2>
+                <div class="impact-section">
+                    <div class="impact-section-title consideration-title">4가지 핵심 설계 원칙</div>
+                    {self._generate_impact_items(self.data['design_principles']['principles'], 'consideration')}
+                </div>
+                
+                <div class="impact-section" style="margin-top: 1rem;">
+                    <div class="impact-section-title positive-title">은행 파트너 선정</div>
+                    <div class="description" style="text-align: left; margin-bottom: 1rem;">
+                        각 지역에 두 개의 은행 파트너 확보로 경쟁적 금융 조건 유도
+                    </div>
+                    {self._generate_impact_items(self.data['design_principles']['bank_partners'], 'positive')}
+                </div>
+            </div>
         </div>
         """
     
@@ -588,14 +618,16 @@ class PGSCFEconomicsQ2Generator:
         icon_symbol = "+" if item_type == "positive" else "!" if item_type == "consideration" else "-"
         html = ""
         for item in items:
+            title = item.get('title', item.get('name', ''))  # title 또는 name 필드 사용
+            detail = item.get('detail', item.get('role', ''))  # detail 또는 role 필드 사용
             html += f"""
                 <div class="impact-item">
                     <div class="impact-item-title">
                         <span class="icon icon-{item_type}">{icon_symbol}</span>
-                        {item['title']}
+                        {title}
                     </div>
                     {'<div class="impact-item-value">' + item['value'] + '</div>' if 'value' in item else ''}
-                    <div class="impact-item-detail">{item['detail']}</div>
+                    <div class="impact-item-detail">{detail}</div>
                     {'<div class="text-xs text-gray-500 mt-1">(' + item['note'] + ')</div>' if 'note' in item else ''}
                 </div>
             """
