@@ -134,6 +134,22 @@ class FibriaWorkingCapitalComponentGenerator:
                     height: 16px;
                     margin-right: 8px;
                 }}
+                .chart-title {{
+                    font-size: 2.2rem;
+                    font-weight: bold;
+                    color: #111827;
+                    margin-bottom: 1.5rem;
+                }}
+                .chart-description {{
+                    font-size: 1.3rem;
+                    color: #4B5563;
+                    margin-bottom: 1rem;
+                }}
+                .chart-value {{
+                    font-size: 1.8rem;
+                    font-weight: bold;
+                    color: #2563EB;
+                }}
             </style>
         </head>
         <body>

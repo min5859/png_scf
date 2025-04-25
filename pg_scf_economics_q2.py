@@ -77,11 +77,12 @@ class PGSCFEconomicsQ2Generator:
                 margin: 0 auto;
                 padding: 2rem;
                 font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+                font-size: 1.3rem;
             }}
             
             .title {{
                 color: #111827;
-                font-size: 2rem;
+                font-size: 2.5rem;
                 font-weight: bold;
                 text-align: center;
                 margin-bottom: 2rem;
@@ -96,7 +97,7 @@ class PGSCFEconomicsQ2Generator:
             }}
             
             .card-title {{
-                font-size: 1.25rem;
+                font-size: 1.8rem;
                 font-weight: bold;
                 color: #2563EB;
                 margin-bottom: 1rem;
@@ -138,7 +139,7 @@ class PGSCFEconomicsQ2Generator:
             
             .description {{
                 text-align: center;
-                font-size: 1rem;
+                font-size: 1.3rem;
                 color: #4B5563;
                 margin-top: 1rem;
                 line-height: 1.5;
@@ -161,7 +162,7 @@ class PGSCFEconomicsQ2Generator:
             }}
             
             .impact-section-title {{
-                font-size: 1.1rem;
+                font-size: 1.4rem;
                 font-weight: bold;
                 margin-bottom: 1rem;
                 padding: 0.5rem;
@@ -198,17 +199,19 @@ class PGSCFEconomicsQ2Generator:
                 margin-bottom: 0.25rem;
                 display: flex;
                 align-items: center;
+                font-size: 1.3rem;
             }}
             
             .impact-item-value {{
                 color: #2563EB;
                 font-weight: 600;
                 margin: 0.25rem 0;
+                font-size: 1.3rem;
             }}
             
             .impact-item-detail {{
                 color: #6B7280;
-                font-size: 0.875rem;
+                font-size: 1.2rem;
             }}
             
             .icon {{

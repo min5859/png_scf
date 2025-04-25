@@ -58,6 +58,25 @@ class PGBalanceSheetComponentGenerator:
             background-color: white;
         }
         
+        .balance-sheet-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #111827;
+            margin-bottom: 1.5rem;
+        }
+        
+        .balance-sheet-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2563EB;
+        }
+        
+        .balance-sheet-description {
+            font-size: 1.3rem;
+            color: #4B5563;
+            line-height: 1.5;
+        }
+        
         h2 {
             font-size: 1.5rem;
             font-weight: 700;

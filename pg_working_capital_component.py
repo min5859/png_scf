@@ -61,6 +61,22 @@ class PGWorkingCapitalComponentGenerator:
                 .timeline-item:last-child:after {{ display: none; }}
                 .timeline-number {{ position: absolute; left: 0; top: 0.25rem; width: 1.5rem; height: 1.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }}
                 @media (max-width: 768px) {{ .chart-half {{ min-width: 100%; }} }}
+                .working-capital-title {{
+                    font-size: 2.5rem;
+                    font-weight: bold;
+                    color: #111827;
+                    margin-bottom: 1.5rem;
+                }}
+                .working-capital-value {{
+                    font-size: 1.8rem;
+                    font-weight: bold;
+                    color: #2563EB;
+                }}
+                .working-capital-description {{
+                    font-size: 1.3rem;
+                    color: #4B5563;
+                    line-height: 1.5;
+                }}
             </style>
         </head>
         <body class="bg-white p-6">

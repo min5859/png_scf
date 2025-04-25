@@ -112,6 +112,22 @@ class ReactComponentGenerator:
                         grid-template-columns: 1fr;
                     }
                 }
+                .react-title {
+                    font-size: 2.5rem;
+                    font-weight: bold;
+                    color: #111827;
+                    margin-bottom: 1.5rem;
+                }
+                .react-value {
+                    font-size: 1.8rem;
+                    font-weight: bold;
+                    color: #2563EB;
+                }
+                .react-description {
+                    font-size: 1.3rem;
+                    color: #4B5563;
+                    line-height: 1.5;
+                }
             </style>
         </head>
         <body>

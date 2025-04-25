@@ -54,13 +54,10 @@ class PGFinancialComponentGeneratorQ1:
                     margin-bottom: 30px;
                 }
                 .chart-title {
-                    color: #003366;
-                    font-size: 22px;
-                    font-weight: 700;
-                    text-align: center;
-                    margin-bottom: 20px;
-                    border-bottom: 2px solid #e0e0e0;
-                    padding-bottom: 10px;
+                    font-size: 2.2rem;
+                    font-weight: bold;
+                    color: #111827;
+                    margin-bottom: 1.5rem;
                 }
                 .grid {
                     display: grid;
@@ -95,13 +92,14 @@ class PGFinancialComponentGeneratorQ1:
                     color: #666;
                 }
                 .insight-title {
+                    font-size: 1.8rem;
                     font-weight: bold;
-                    color: #003366;
-                    font-size: 17px;
-                    margin-bottom: 10px;
+                    color: #111827;
+                    margin-bottom: 1rem;
                 }
                 .insight-content {
-                    font-size: 15px;
+                    font-size: 1.3rem;
+                    color: #4B5563;
                     line-height: 1.5;
                 }
                 .note {

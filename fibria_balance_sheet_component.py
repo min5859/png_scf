@@ -139,29 +139,23 @@ class FibriaBalanceSheetComponentGenerator:
                     border-left-color: #667eea;
                 }
                 .message-card-title {
-                    font-size: 1.1rem;
-                    font-weight: 600;
-                    margin-bottom: 10px;
-                    color: #2d3748;
+                    font-size: 1.8rem;
+                    font-weight: bold;
+                    color: #2563EB;
+                    margin-bottom: 1rem;
                 }
                 .message-card-content {
-                    color: #4a5568;
-                    line-height: 1.6;
+                    font-size: 1.3rem;
+                    line-height: 1.5;
+                    color: #4B5563;
                 }
                 .message-card-points {
-                    margin-top: 15px;
-                    padding-left: 20px;
+                    font-size: 1.3rem;
+                    line-height: 1.5;
+                    color: #4B5563;
                 }
                 .message-card-points li {
-                    margin-bottom: 8px;
-                    position: relative;
-                }
-                .message-card-points li::before {
-                    content: "•";
-                    color: #4299e1;
-                    font-weight: bold;
-                    position: absolute;
-                    left: -15px;
+                    margin-bottom: 0.5rem;
                 }
                 .message-card-calc {
                     background: #f7fafc;

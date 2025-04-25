@@ -53,6 +53,24 @@ class PGSCFEconomicsQ4Generator:
                     left: 0;
                     color: #4dabf7;
                 }
+                .text-3xl {
+                    font-size: 2.5rem;
+                }
+                .text-2xl {
+                    font-size: 2.2rem;
+                }
+                .text-xl {
+                    font-size: 1.8rem;
+                }
+                .text-lg {
+                    font-size: 1.6rem;
+                }
+                .text-base {
+                    font-size: 1.3rem;
+                }
+                .text-sm {
+                    font-size: 1.2rem;
+                }
             </style>
         </head>
         <body class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6">
