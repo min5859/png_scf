@@ -149,7 +149,7 @@ class PGFinancialComponentGeneratorQ1:
                         <div class="chart-container">
                             <h2 class="chart-title">100억 달러 비용 절감 프로그램 내역</h2>
                             <div class="grid">
-                                <div style="width: 100%; height: 300px;">
+                                <div style="width: 100%; height: 250px;">
                                     <canvas id="costCuttingChart"></canvas>
                                 </div>
                                 <div>
@@ -225,6 +225,16 @@ class PGFinancialComponentGeneratorQ1:
                     data: costCuttingData,
                     options: {
                         responsive: true,
+                        maintainAspectRatio: true,
+                        layout: {
+                            padding: {
+                                left: 10,
+                                right: 10,
+                                top: 10,
+                                bottom: 10
+                            }
+                        },
+                        aspectRatio: 2.0,
                         plugins: {
                             legend: {
                                 position: 'bottom'
